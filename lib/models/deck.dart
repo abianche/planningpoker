@@ -4,14 +4,16 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'deck.freezed.dart';
 part 'deck.g.dart';
 
+enum DeckType { standard, tshirt, fibonacci, risk, custom }
+
 @freezed
 abstract class Deck with _$Deck {
   const factory Deck({
-    String name,
-    String image,
-    String color,
-    String colorDark,
-    List<String> values,
+    final String name,
+    final String image,
+    final String color,
+    final String colorDark,
+    final List<String> values,
   }) = _Deck;
 
   factory Deck.fromJson(Map<String, dynamic> json) => _$DeckFromJson(json);
