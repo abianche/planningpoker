@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'settings.dart';
+part of 'settings.model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Settings _$_$_SettingsFromJson(Map<String, dynamic> json) {
-  return _$_Settings(
+Settings _$SettingsFromJson(Map<String, dynamic> json) {
+  return Settings(
     darkTheme: json['darkTheme'] as bool,
     tapToReveal: json['tapToReveal'] as bool,
     eggTimer: (json['eggTimer'] as num)?.toDouble(),
@@ -18,8 +18,7 @@ _$_Settings _$_$_SettingsFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$_$_SettingsToJson(_$_Settings instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$SettingsToJson(Settings instance) => <String, dynamic>{
       'darkTheme': instance.darkTheme,
       'tapToReveal': instance.tapToReveal,
       'eggTimer': instance.eggTimer,
