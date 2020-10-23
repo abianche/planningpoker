@@ -1,7 +1,4 @@
 {
-  "greeting": "Hello, world!",
-  "@greeting": {
-    "type": "text",
-    "description": "A friendly greeting."
-  }
+  "@@locale": "en",
+  "greeting": "Hello, world!"
 }
