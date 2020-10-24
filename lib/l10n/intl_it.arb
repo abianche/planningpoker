@@ -1,5 +1,26 @@
 {
   "@@locale": "it",
   "greeting": "Ciao, mondo!",
-  "title": "Planning Poker Online"
+  "title": "Planning Poker Online",
+  "selectDeck": "Select deck",
+  "selectDeckInfo": "Pick from pre-configured decks or customize one",
+  "tapToReveal": "Tap to reveal",
+  "tapToRevealInfo": "The picked card require an extra tap to be revelead",
+  "darkMode": "Dark mode",
+  "darkModeInfo": "Enable dark mode",
+  "vibration": "Vibration",
+  "vibrationInfo": "Enable vibration",
+  "whatIsPlanningPoker": "What is Planning Poker ®?",
+  "instructions": "Instructions",
+  "about": "About",
+  "error": "Error",
+  "loading": "Loading",
+  "pageNotFound": "Page not found",
+  "showTheIntro": "Show the intro",
+  "rateThisApp": "Rate this app!",
+  "rateThisAppInfo": "Take a moment to rate this app! It means a lot!",
+  "shareThisApp": "Share this app!",
+  "shareThisAppInfo": "Share this app with your colleagues!",
+  "followMe": "Follow me!",
+  "followMeInfo": "Head over to my profile page, follow and support me!"
 }
