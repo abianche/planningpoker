@@ -8,7 +8,7 @@ part of 'settings.model.dart';
 
 Settings _$SettingsFromJson(Map<String, dynamic> json) {
   return Settings(
-    darkTheme: json['darkTheme'] as bool,
+    darkMode: json['darkMode'] as bool,
     tapToReveal: json['tapToReveal'] as bool,
     eggTimer: (json['eggTimer'] as num)?.toDouble(),
     vibration: json['vibration'] as bool,
@@ -19,7 +19,7 @@ Settings _$SettingsFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$SettingsToJson(Settings instance) => <String, dynamic>{
-      'darkTheme': instance.darkTheme,
+      'darkMode': instance.darkMode,
       'tapToReveal': instance.tapToReveal,
       'eggTimer': instance.eggTimer,
       'vibration': instance.vibration,
@@ -38,9 +38,7 @@ T _$enumDecode<T>(
         '${enumValues.values.join(', ')}');
   }
 
-  final value = enumValues.entries
-      .singleWhere((e) => e.value == source, orElse: () => null)
-      ?.key;
+  final value = enumValues.entries.singleWhere((e) => e.value == source, orElse: () => null)?.key;
 
   if (value == null && unknownValue == null) {
     throw ArgumentError('`$source` is not one of the supported values: '

@@ -7,7 +7,7 @@ part 'settings.model.g.dart';
 
 @JsonSerializable()
 class Settings {
-  final bool darkTheme;
+  final bool darkMode;
   final bool tapToReveal;
   final double eggTimer;
   final bool vibration;
@@ -16,7 +16,7 @@ class Settings {
   final bool seenIntro;
 
   const Settings({
-    this.darkTheme,
+    this.darkMode,
     this.tapToReveal,
     this.eggTimer,
     this.vibration,
@@ -30,7 +30,7 @@ class Settings {
   Map<String, dynamic> toJson() => _$SettingsToJson(this);
 
   Settings.initialState()
-      : darkTheme = false,
+      : darkMode = false,
         tapToReveal = true,
         eggTimer = 5.0,
         vibration = true,
@@ -39,7 +39,7 @@ class Settings {
         seenIntro = false;
 
   Settings copyWith({
-    bool darkTheme,
+    bool darkMode,
     bool tapToReveal,
     double eggTimer,
     bool vibration,
@@ -48,7 +48,7 @@ class Settings {
     bool seenIntro,
   }) {
     return Settings(
-      darkTheme: darkTheme ?? this.darkTheme,
+      darkMode: darkMode ?? this.darkMode,
       tapToReveal: tapToReveal ?? this.tapToReveal,
       eggTimer: eggTimer ?? this.eggTimer,
       vibration: vibration ?? this.vibration,
@@ -60,7 +60,7 @@ class Settings {
 
   @override
   String toString() {
-    return 'Settings(darkTheme: $darkTheme, tapToReveal: $tapToReveal, eggTimer: $eggTimer, vibration: $vibration, selectedDeck: $selectedDeck, customDeck: $customDeck, seenIntro: $seenIntro)';
+    return 'Settings(darkMode: $darkMode, tapToReveal: $tapToReveal, eggTimer: $eggTimer, vibration: $vibration, selectedDeck: $selectedDeck, customDeck: $customDeck, seenIntro: $seenIntro)';
   }
 
   @override
@@ -68,7 +68,7 @@ class Settings {
     if (identical(this, o)) return true;
 
     return o is Settings &&
-        o.darkTheme == darkTheme &&
+        o.darkMode == darkMode &&
         o.tapToReveal == tapToReveal &&
         o.eggTimer == eggTimer &&
         o.vibration == vibration &&
@@ -79,7 +79,7 @@ class Settings {
 
   @override
   int get hashCode {
-    return darkTheme.hashCode ^
+    return darkMode.hashCode ^
         tapToReveal.hashCode ^
         eggTimer.hashCode ^
         vibration.hashCode ^
