@@ -1,0 +1,18 @@
+import 'package:planningpoker/redux/actions/settings_actions.dart';
+import 'package:planningpoker/redux/middlewares/settings.middleware.dart';
+import 'package:planningpoker/redux/states/app_state.dart';
+import 'package:planningpoker/repository.dart';
+import 'package:redux/redux.dart';
+
+List<Middleware<AppState>> createAppMiddleware(
+  Repository repository,
+) {
+  final saveSettings = createSaveSettings(repository);
+  final loadSettings = createLoadSettings(repository);
+
+  return [
+    TypedMiddleware<AppState, SetSettingsAction>(saveSettings),
+    TypedMiddleware<AppState, ClearSettingsAction>(saveSettings),
+    TypedMiddleware<AppState, LoadSettingsAction>(loadSettings),
+  ];
+}
