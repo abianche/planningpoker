@@ -5,14 +5,13 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:launch_review/launch_review.dart';
 import 'package:package_info/package_info.dart';
 import 'package:planningpoker/constants.dart';
-import 'package:planningpoker/router.dart';
-import 'package:redux/redux.dart';
-
 import 'package:planningpoker/generated/l10n.dart';
 import 'package:planningpoker/models/settings.model.dart';
 import 'package:planningpoker/redux/actions/settings_actions.dart';
 import 'package:planningpoker/redux/selectors/selectors.dart';
 import 'package:planningpoker/redux/states/app_state.dart';
+import 'package:planningpoker/router.dart';
+import 'package:redux/redux.dart';
 import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:vibration/vibration.dart';
