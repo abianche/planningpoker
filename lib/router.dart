@@ -1,0 +1,31 @@
+import 'package:flutter/material.dart';
+import 'package:planningpoker/views/home.screen.dart';
+import 'package:planningpoker/views/settings.screen.dart';
+import 'package:planningpoker/views/splash.screen.dart';
+
+class Routes {
+  static const root = '/';
+  static const home = '/home';
+  static const settings = '/home/settings';
+  static const settings_decks = '/home/settings/selectdecks';
+  static const settings_custom_deck = '/home/settings/customdeck';
+  static const settings_info = '/settings/info';
+  static const settings_intro = '/settings/intro';
+}
+
+Map<String, WidgetBuilder> getRoutes() {
+  return {
+    Routes.root: (context) => SplashScreen(
+        // onInit: () {
+        // StoreProvider.of<AppState>(context).dispatch(LoadSettingsAction());
+        // StoreProvider.of<AppState>(context).dispatch(LoadRoomAction());
+        // },
+        ),
+    Routes.home: (context) => HomeScreen(),
+    Routes.settings: (context) => SettingsScreen(),
+    // Routes.settings_decks: (context) => SelectDecks(),
+    // Routes.settings_custom_deck: (context) => CustomDeckSetup(),
+    // Routes.settings_info: (context) => InfoScreen(),
+    // Routes.settings_intro: (context) => IntroScreen(),
+  };
+}
