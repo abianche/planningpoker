@@ -9,7 +9,6 @@ part 'settings.model.g.dart';
 class Settings {
   final bool darkMode;
   final bool tapToReveal;
-  final double eggTimer;
   final bool vibration;
   final DeckType selectedDeck;
   final List<String> customDeck;
@@ -18,7 +17,6 @@ class Settings {
   const Settings({
     this.darkMode,
     this.tapToReveal,
-    this.eggTimer,
     this.vibration,
     this.selectedDeck,
     this.customDeck,
@@ -32,7 +30,6 @@ class Settings {
   Settings.initialState()
       : darkMode = false,
         tapToReveal = true,
-        eggTimer = 5.0,
         vibration = true,
         selectedDeck = DeckType.standard,
         customDeck = null,
@@ -41,7 +38,6 @@ class Settings {
   Settings copyWith({
     bool darkMode,
     bool tapToReveal,
-    double eggTimer,
     bool vibration,
     DeckType selectedDeck,
     List<String> customDeck,
@@ -50,7 +46,6 @@ class Settings {
     return Settings(
       darkMode: darkMode ?? this.darkMode,
       tapToReveal: tapToReveal ?? this.tapToReveal,
-      eggTimer: eggTimer ?? this.eggTimer,
       vibration: vibration ?? this.vibration,
       selectedDeck: selectedDeck ?? this.selectedDeck,
       customDeck: customDeck ?? this.customDeck,
@@ -60,7 +55,7 @@ class Settings {
 
   @override
   String toString() {
-    return 'Settings(darkMode: $darkMode, tapToReveal: $tapToReveal, eggTimer: $eggTimer, vibration: $vibration, selectedDeck: $selectedDeck, customDeck: $customDeck, seenIntro: $seenIntro)';
+    return 'Settings(darkMode: $darkMode, tapToReveal: $tapToReveal, vibration: $vibration, selectedDeck: $selectedDeck, customDeck: $customDeck, seenIntro: $seenIntro)';
   }
 
   @override
@@ -70,7 +65,6 @@ class Settings {
     return o is Settings &&
         o.darkMode == darkMode &&
         o.tapToReveal == tapToReveal &&
-        o.eggTimer == eggTimer &&
         o.vibration == vibration &&
         o.selectedDeck == selectedDeck &&
         listEquals(o.customDeck, customDeck) &&
@@ -81,7 +75,6 @@ class Settings {
   int get hashCode {
     return darkMode.hashCode ^
         tapToReveal.hashCode ^
-        eggTimer.hashCode ^
         vibration.hashCode ^
         selectedDeck.hashCode ^
         customDeck.hashCode ^

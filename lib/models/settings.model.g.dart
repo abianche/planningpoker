@@ -10,7 +10,6 @@ Settings _$SettingsFromJson(Map<String, dynamic> json) {
   return Settings(
     darkMode: json['darkMode'] as bool,
     tapToReveal: json['tapToReveal'] as bool,
-    eggTimer: (json['eggTimer'] as num)?.toDouble(),
     vibration: json['vibration'] as bool,
     selectedDeck: _$enumDecodeNullable(_$DeckTypeEnumMap, json['selectedDeck']),
     customDeck: (json['customDeck'] as List)?.map((e) => e as String)?.toList(),
@@ -21,7 +20,6 @@ Settings _$SettingsFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$SettingsToJson(Settings instance) => <String, dynamic>{
       'darkMode': instance.darkMode,
       'tapToReveal': instance.tapToReveal,
-      'eggTimer': instance.eggTimer,
       'vibration': instance.vibration,
       'selectedDeck': _$DeckTypeEnumMap[instance.selectedDeck],
       'customDeck': instance.customDeck,
@@ -38,7 +36,9 @@ T _$enumDecode<T>(
         '${enumValues.values.join(', ')}');
   }
 
-  final value = enumValues.entries.singleWhere((e) => e.value == source, orElse: () => null)?.key;
+  final value = enumValues.entries
+      .singleWhere((e) => e.value == source, orElse: () => null)
+      ?.key;
 
   if (value == null && unknownValue == null) {
     throw ArgumentError('`$source` is not one of the supported values: '

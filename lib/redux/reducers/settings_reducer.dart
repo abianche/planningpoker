@@ -11,7 +11,6 @@ Settings _setSettings(Settings settings, SetSettingsAction action) {
   return settings.copyWith(
     darkMode: action.settings.darkMode,
     tapToReveal: action.settings.tapToReveal,
-    eggTimer: action.settings.eggTimer,
     vibration: action.settings.vibration,
     selectedDeck: action.settings.selectedDeck,
     customDeck: action.settings.customDeck,
