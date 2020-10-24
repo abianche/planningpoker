@@ -9,7 +9,6 @@ FirebaseAuth auth = FirebaseAuth.instance;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  FirestoreService();
 
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
@@ -17,6 +16,7 @@ void main() async {
   ]);
 
   await Firebase.initializeApp();
+  FirestoreService();
 
   runApp(const App());
 }
