@@ -44,6 +44,16 @@ class L {
       args: [],
     );
   }
+
+  /// `Planning Poker Online`
+  String get title {
+    return Intl.message(
+      'Planning Poker Online',
+      name: 'title',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<L> {

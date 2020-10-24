@@ -1,4 +1,5 @@
 {
   "@@locale": "en",
-  "greeting": "Hello, world!"
+  "greeting": "Hello, world!",
+  "title": "Planning Poker Online"
 }
