@@ -7,6 +7,7 @@ import 'package:planningpoker/router.dart';
 import 'package:planningpoker/views/404.screen.dart';
 import 'package:redux/redux.dart';
 
+/// First widget of the application. It provides the [Store] and the [Routes] configuration.
 class App extends StatelessWidget {
   final Store<AppState> store;
   const App({

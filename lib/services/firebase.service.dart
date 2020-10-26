@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 class FirebaseService {
   final auth = FirebaseAuth.instance;
 
+  /// Sign-in anonymously to Firebase.
   Future<User> signInAnonymously(AuthCredential credential) async {
     final result = await auth.signInAnonymously().catchError((error) {
       print(error);

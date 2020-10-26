@@ -3,14 +3,26 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'deck.model.g.dart';
 
+/// List of deck types.
 enum DeckType { standard, tshirt, fibonacci, risk, custom }
 
 @JsonSerializable()
+
+/// Deck model.
 class Deck {
+  /// The name of deck.
   final String deckName;
+
+  /// The background image of back side of the deck.
   final String deckImage;
+
+  /// The color of the deck.
   final int deckColor;
+
+  /// The color of the deck for the dark theme.
   final int deckColorDark;
+
+  /// The configruation of the deck.
   final List<String> deckValues;
 
   const Deck({

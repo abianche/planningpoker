@@ -12,6 +12,7 @@ class Prefs {
 }
 
 class Repository {
+  /// Save the settings to [SharedPreferences]. Only non-null settings are considered.
   Future<void> saveSettings(Settings settings) async {
     final prefs = await SharedPreferences.getInstance();
 
@@ -35,17 +36,24 @@ class Repository {
     }
   }
 
+  /// Load the settings from [SharedPreferences].
   Future<Settings> loadSettings() async {
     final prefs = await SharedPreferences.getInstance();
 
-    final darkMode = prefs.getBool(Prefs.darkMode) ?? false;
-    final tapToReveal = prefs.getBool(Prefs.tapToReveal) ?? true;
-    final vibration = prefs.getBool(Prefs.vibration) ?? true;
-    final selectedDeck = DeckType.values[prefs.getInt(Prefs.selectedDeck) ?? 0];
-    final customDeck = prefs.getStringList(Prefs.customDeck) ?? null; //CustomDeck.custom_deck_default;
-    final seenIntro = prefs.getBool(Prefs.seenIntro) ?? false;
+    final defaultSettings = Settings.initialState();
 
-    return Settings(
+    final darkMode = prefs.getBool(Prefs.darkMode);
+    final tapToReveal = prefs.getBool(Prefs.tapToReveal);
+    final vibration = prefs.getBool(Prefs.vibration);
+    final selectedDeckIndex = prefs.getInt(Prefs.selectedDeck);
+    var selectedDeck = defaultSettings.selectedDeck;
+    if (selectedDeckIndex != null && selectedDeckIndex.isBetween(0, DeckType.values.length - 1)) {
+      selectedDeck = DeckType.values[selectedDeckIndex];
+    }
+    final customDeck = prefs.getStringList(Prefs.customDeck);
+    final seenIntro = prefs.getBool(Prefs.seenIntro);
+
+    return defaultSettings.copyWith(
       darkMode: darkMode,
       tapToReveal: tapToReveal,
       vibration: vibration,
@@ -53,5 +61,13 @@ class Repository {
       customDeck: customDeck,
       seenIntro: seenIntro,
     );
+  }
+}
+
+/// Range method extension.
+extension Range on num {
+  /// Checks whether a [num] is between [from] and [to] inclusive.
+  bool isBetween(num from, num to) {
+    return from <= this && this <= to;
   }
 }

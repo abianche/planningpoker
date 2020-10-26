@@ -4,6 +4,7 @@ import 'package:planningpoker/redux/states/app_state.dart';
 import 'package:planningpoker/repository.dart';
 import 'package:redux/redux.dart';
 
+/// Returns all the app middlewares to be used in the [Store] declaration.
 List<Middleware<AppState>> createAppMiddleware(
   Repository repository,
 ) {

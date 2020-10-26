@@ -15,14 +15,17 @@ FirebaseAuth auth = FirebaseAuth.instance;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  /// Setup allowed orientation modes
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
 
+  /// Initialize Firebase and Firestore
   await Firebase.initializeApp();
   FirestoreService();
 
+  /// Initialize Redux store
   final store = Store<AppState>(
     appReducer,
     distinct: true,

@@ -13,6 +13,7 @@ class Routes {
   static const settings_intro = '/home/settings/intro';
 }
 
+/// Route builder.
 Map<String, WidgetBuilder> getRoutes() {
   return {
     Routes.root: (context) => SplashScreen(

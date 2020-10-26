@@ -1,5 +1,6 @@
 import 'package:planningpoker/models/deck.model.dart';
 
+/// Standard deck.
 const standard_deck = Deck(
   deckName: 'Standard',
   deckImage: 'deck_back_blue.png',
@@ -23,6 +24,7 @@ const standard_deck = Deck(
   ],
 );
 
+/// T-Shirt deck.
 const tshirt_deck = Deck(
   deckName: 'T-Shirt',
   deckImage: 'deck_back_red.png',
@@ -41,6 +43,7 @@ const tshirt_deck = Deck(
   ],
 );
 
+/// Fibonacci deck.
 const fibonacci_deck = Deck(
   deckName: 'Fibonacci',
   deckImage: 'deck_back_green.png',
@@ -65,6 +68,7 @@ const fibonacci_deck = Deck(
   ],
 );
 
+/// Risk deck.
 const risk_deck = Deck(
   deckName: 'Risk planning',
   deckImage: 'deck_back_orange.png',
@@ -81,13 +85,49 @@ const risk_deck = Deck(
   ],
 );
 
+/// Custom deck.
 const custom_deck = Deck(
   deckName: 'Custom deck',
   deckImage: 'deck_back_black.png',
   deckColor: 0xFF000000,
   deckColorDark: 0xFFFFFFFF,
+
+  /// if the [Settings] contains a custom deck definition, that will be used instead.
+  deckValues: [
+    '0',
+    '_½',
+    '1',
+    '2',
+    '_3',
+    '5',
+    '8',
+    '13',
+    '_20',
+    '_21',
+    '_34',
+    '_40',
+    '_55',
+    '_89',
+    '_100',
+    '_144',
+    '_∞',
+    '_?',
+    'local_cafe',
+    '_XS',
+    '_S',
+    '_M',
+    '_L',
+    '_XL',
+    '_XXL',
+    'green',
+    '_yellow',
+    '_orange',
+    '_purple',
+    'red',
+  ],
 );
 
+/// All decks.
 const Map<DeckType, Deck> fixed_decks = {
   DeckType.standard: standard_deck,
   DeckType.tshirt: tshirt_deck,
