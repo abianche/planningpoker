@@ -46,7 +46,7 @@ class IntroScreenState extends State<IntroScreen> {
         title: 'Join your team!'.toUpperCase(),
         maxLineTitle: 2,
         description: 'Join an online room together with your team and play Planning Poker Online!',
-        centerWidget: Icon(
+        centerWidget: const Icon(
           Icons.people,
           size: 128,
         ),
