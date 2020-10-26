@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:planningpoker/app.dart';
 import 'package:planningpoker/redux/middlewares/app.middleware.dart';
-import 'package:planningpoker/redux/reducers/app_state_reducer.dart';
+import 'package:planningpoker/redux/reducers/app_state.reducer.dart';
 import 'package:planningpoker/redux/states/app_state.dart';
 import 'package:planningpoker/repository.dart';
 import 'package:planningpoker/services/firestore.service.dart';

@@ -1,4 +1,4 @@
-import 'package:planningpoker/redux/actions/settings_actions.dart';
+import 'package:planningpoker/redux/actions/settings.actions.dart';
 import 'package:planningpoker/redux/selectors/selectors.dart';
 import 'package:planningpoker/redux/states/app_state.dart';
 import 'package:planningpoker/repository.dart';

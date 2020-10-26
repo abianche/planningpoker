@@ -9,7 +9,7 @@ import 'package:planningpoker/data/decks.dart';
 import 'package:planningpoker/generated/l10n.dart';
 import 'package:planningpoker/models/deck.model.dart';
 import 'package:planningpoker/models/settings.model.dart';
-import 'package:planningpoker/redux/actions/settings_actions.dart';
+import 'package:planningpoker/redux/actions/settings.actions.dart';
 import 'package:planningpoker/redux/selectors/selectors.dart';
 import 'package:planningpoker/redux/states/app_state.dart';
 import 'package:planningpoker/router.dart';

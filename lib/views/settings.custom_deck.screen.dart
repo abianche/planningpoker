@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:planningpoker/generated/l10n.dart';
-import 'package:planningpoker/redux/actions/settings_actions.dart';
+import 'package:planningpoker/redux/actions/settings.actions.dart';
 import 'package:planningpoker/redux/selectors/selectors.dart';
 import 'package:planningpoker/redux/states/app_state.dart';
 import 'package:planningpoker/utils.dart';
