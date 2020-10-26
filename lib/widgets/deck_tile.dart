@@ -1,7 +1,6 @@
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:planningpoker/models/deck.model.dart';
-import 'package:planningpoker/models/settings.model.dart';
 import 'package:planningpoker/widgets/card_back.dart';
 import 'package:planningpoker/widgets/card_front.dart';
 
@@ -9,14 +8,14 @@ class DeckTile extends StatefulWidget {
   final Deck deck;
   final dynamic data;
   final String name;
-  final Settings settings;
+  final bool tapToReveal;
 
   const DeckTile({
     Key key,
     @required this.deck,
     @required this.data,
     @required this.name,
-    @required this.settings,
+    @required this.tapToReveal,
   }) : super(key: key);
 
   @override
@@ -108,17 +107,16 @@ class _DeckTileState extends State<DeckTile> {
           widthFactor: 0.95,
           heightFactor: 0.7,
           child: FlipCard(
-            back: widget.settings.tapToReveal
+            back: widget.tapToReveal
                 ? CardBack(
                     data: widget.data,
                     name: widget.name,
                     deck: widget.deck,
-                    darkTheme: widget.settings.darkMode,
                     // goToRoom: vm.goToRoom,
                     // setCard: vm.setCard,
                   )
                 : null,
-            front: widget.settings.tapToReveal
+            front: widget.tapToReveal
                 ? CardFront(
                     deck: widget.deck,
                   )
@@ -126,12 +124,11 @@ class _DeckTileState extends State<DeckTile> {
                     data: widget.data,
                     name: widget.name,
                     deck: widget.deck,
-                    darkTheme: widget.settings.darkMode,
                     // goToRoom: vm.goToRoom,
                     // setCard: vm.setCard,
                   ),
             direction: FlipDirection.HORIZONTAL,
-            flipOnTouch: widget.settings.tapToReveal,
+            flipOnTouch: widget.tapToReveal,
           ),
         ),
         shape: RoundedRectangleBorder(
@@ -141,34 +138,3 @@ class _DeckTileState extends State<DeckTile> {
     );
   }
 }
-
-// class _ViewModel {
-//   final bool tapToReveal;
-//   final bool darkTheme;
-//   final DeckType deck;
-//   void Function(String, bool) setCard;
-//   final Function() goToRoom;
-
-//   _ViewModel({
-//     @required this.tapToReveal,
-//     @required this.darkTheme,
-//     @required this.deck,
-//     @required this.setCard,
-//     @required this.goToRoom,
-//   });
-
-//   static _ViewModel fromStore(Store<AppState> store) {
-//     return _ViewModel(
-//       tapToReveal: settingsSelector(store.state).tapToReveal,
-//       darkTheme: settingsSelector(store.state).darkMode,
-//       deck: settingsSelector(store.state).deck,
-//       // room: roomSelector(store.state),
-//       // setCard: (String card, bool revealed) {
-//       //   store.dispatch(SetCardAction(card: card, revealed: revealed));
-//       // },
-//       // goToRoom: () {
-//       //   store.dispatch(SetTabAction(AppTab.room));
-//       // },
-//     );
-//   }
-// }

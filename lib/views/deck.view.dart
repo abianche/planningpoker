@@ -1,12 +1,15 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:redux/redux.dart';
+
 import 'package:planningpoker/data/decks.dart';
 import 'package:planningpoker/models/deck.model.dart';
+import 'package:planningpoker/models/room.model.dart';
 import 'package:planningpoker/models/settings.model.dart';
+import 'package:planningpoker/redux/selectors/selectors.dart';
 import 'package:planningpoker/redux/states/app_state.dart';
 import 'package:planningpoker/utils.dart';
-import 'package:redux/redux.dart';
 
 class DeckView extends StatelessWidget {
   const DeckView({Key key}) : super(key: key);
@@ -27,7 +30,7 @@ class DeckView extends StatelessWidget {
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: getDeckTiles(currentDeck, vm.settings),
+              children: getDeckTiles(currentDeck, vm.settings.tapToReveal),
             ),
           ),
         );
@@ -45,7 +48,7 @@ class _ViewModel {
 
   static _ViewModel fromStore(Store<AppState> store) {
     return _ViewModel(
-      settings: store.state.settings,
+      settings: settingsSelector(store.state),
     );
   }
 
