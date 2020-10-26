@@ -19,6 +19,8 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
+  static m0(deckName) => "${deckName} deck";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
     "about" : MessageLookupByLibrary.simpleMessage("About"),
@@ -30,11 +32,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "darkMode" : MessageLookupByLibrary.simpleMessage("Dark mode"),
     "darkModeInfo" : MessageLookupByLibrary.simpleMessage("Enable dark mode"),
     "deck" : MessageLookupByLibrary.simpleMessage("Deck"),
+    "deckName" : m0,
     "error" : MessageLookupByLibrary.simpleMessage("Error"),
     "followMe" : MessageLookupByLibrary.simpleMessage("Follow me!"),
     "followMeInfo" : MessageLookupByLibrary.simpleMessage("Head over to my profile page, follow and support me!"),
     "greeting" : MessageLookupByLibrary.simpleMessage("Hello, world!"),
     "instructions" : MessageLookupByLibrary.simpleMessage("Instructions"),
+    "joinARoom" : MessageLookupByLibrary.simpleMessage("Join or create a room"),
     "loading" : MessageLookupByLibrary.simpleMessage("Loading"),
     "openRoom" : MessageLookupByLibrary.simpleMessage("Open room"),
     "pageNotFound" : MessageLookupByLibrary.simpleMessage("Page not found"),

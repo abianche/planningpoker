@@ -354,6 +354,26 @@ class L {
       args: [],
     );
   }
+
+  /// `{deckName} deck`
+  String deckName(Object deckName) {
+    return Intl.message(
+      '$deckName deck',
+      name: 'deckName',
+      desc: '',
+      args: [deckName],
+    );
+  }
+
+  /// `Join or create a room`
+  String get joinARoom {
+    return Intl.message(
+      'Join or create a room',
+      name: 'joinARoom',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<L> {

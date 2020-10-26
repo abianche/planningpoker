@@ -31,5 +31,12 @@
   "customDeckSaveTooltip": "Save the configuration",
   "customDeckRestoreTooltip": "Reset the configuration",
   "openRoom": "Open room",
-  "showTheIntroInfo": "Show the intro slides again."
+  "showTheIntroInfo": "Show the intro slides again.",
+  "deckName": "{deckName} deck",
+  "@deckName": {
+    "placeholders": {
+      "deckName": {}
+    }
+  },
+  "joinARoom": "Join a room"
 }
