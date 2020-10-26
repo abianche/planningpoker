@@ -5,7 +5,9 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:launch_review/launch_review.dart';
 import 'package:package_info/package_info.dart';
 import 'package:planningpoker/constants.dart';
+import 'package:planningpoker/data/fixed_decks.dart';
 import 'package:planningpoker/generated/l10n.dart';
+import 'package:planningpoker/models/deck.model.dart';
 import 'package:planningpoker/models/settings.model.dart';
 import 'package:planningpoker/redux/actions/settings_actions.dart';
 import 'package:planningpoker/redux/selectors/selectors.dart';
@@ -30,12 +32,57 @@ class SettingsScreen extends StatelessWidget {
         ),
         body: ListView(
           children: [
-            ListTile(
+            ExpansionTile(
               title: Text(L.of(context).selectDeck),
               subtitle: Text(L.of(context).selectDeckInfo),
-              onTap: () => {
-                Navigator.of(context).pushNamed(Routes.settings_decks),
-              },
+              children: [
+                RadioListTile(
+                  title: Text(standard_deck.deckName),
+                  value: DeckType.standard.index,
+                  groupValue: vm.settings.selectedDeck.index,
+                  onChanged: (int newValue) {
+                    vm.setSettings(vm.settings.copyWith(selectedDeck: DeckType.standard));
+                  },
+                ),
+                RadioListTile(
+                  title: Text(tshirt_deck.deckName),
+                  value: DeckType.tshirt.index,
+                  groupValue: vm.settings.selectedDeck.index,
+                  onChanged: (int newValue) {
+                    vm.setSettings(vm.settings.copyWith(selectedDeck: DeckType.tshirt));
+                  },
+                ),
+                RadioListTile(
+                  title: Text(fibonacci_deck.deckName),
+                  value: DeckType.fibonacci.index,
+                  groupValue: vm.settings.selectedDeck.index,
+                  onChanged: (int newValue) {
+                    vm.setSettings(vm.settings.copyWith(selectedDeck: DeckType.fibonacci));
+                  },
+                ),
+                RadioListTile(
+                  title: Text(risk_deck.deckName),
+                  value: DeckType.risk.index,
+                  groupValue: vm.settings.selectedDeck.index,
+                  onChanged: (int newValue) {
+                    vm.setSettings(vm.settings.copyWith(selectedDeck: DeckType.risk));
+                  },
+                ),
+                RadioListTile(
+                  title: Text(custom_deck.deckName),
+                  value: DeckType.custom.index,
+                  groupValue: vm.settings.selectedDeck.index,
+                  onChanged: (int newValue) {
+                    vm.setSettings(vm.settings.copyWith(selectedDeck: DeckType.custom));
+                  },
+                  secondary: IconButton(
+                    icon: const Icon(Icons.settings),
+                    onPressed: () {
+                      Navigator.of(context).pushNamed(Routes.settings_custom_deck);
+                    },
+                  ),
+                ),
+              ],
             ),
             const Divider(),
             ListTile(

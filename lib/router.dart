@@ -7,7 +7,6 @@ class Routes {
   static const root = '/';
   static const home = '/home';
   static const settings = '/home/settings';
-  static const settings_decks = '/home/settings/selectdecks';
   static const settings_custom_deck = '/home/settings/customdeck';
   static const settings_info = '/home/settings/info';
   static const settings_intro = '/home/settings/intro';
