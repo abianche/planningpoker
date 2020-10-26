@@ -18,6 +18,10 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex;
+  final _pages = [
+    const DeckView(),
+    const RoomView(),
+  ];
 
   @override
   void initState() {
@@ -36,7 +40,17 @@ class _HomeScreenState extends State<HomeScreen> {
 
         return Scaffold(
           appBar: AppBar(
-            title: Text(currentDeck.deckName),
+            title: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(L.of(context).title),
+                Text(
+                  L.of(context).deckName(currentDeck.deckName),
+                  textScaleFactor: 0.9,
+                ),
+              ],
+            ),
+            centerTitle: false,
             backgroundColor: Color(currentDeck.deckColor),
             actions: [
               IconButton(
@@ -45,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ],
           ),
-          body: _currentIndex == 1 ? const RoomView() : const DeckView(),
+          body: _pages[_currentIndex],
           bottomNavigationBar: BottomNavigationBar(
             elevation: 0.0,
             fixedColor: vm.settings.darkMode ? Colors.white : Color(currentDeck.deckColor),
