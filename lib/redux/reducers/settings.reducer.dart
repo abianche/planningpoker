@@ -1,5 +1,5 @@
 import 'package:planningpoker/models/settings.model.dart';
-import 'package:planningpoker/redux/actions/settings_actions.dart';
+import 'package:planningpoker/redux/actions/settings.actions.dart';
 import 'package:redux/redux.dart';
 
 final settingsReducer = combineReducers<Settings>([

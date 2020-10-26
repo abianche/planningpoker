@@ -1,4 +1,4 @@
-import 'package:planningpoker/redux/actions/settings_actions.dart';
+import 'package:planningpoker/redux/actions/settings.actions.dart';
 import 'package:redux/redux.dart';
 
 final initReducer = combineReducers<bool>([
