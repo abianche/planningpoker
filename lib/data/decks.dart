@@ -87,7 +87,7 @@ const risk_deck = Deck(
 
 /// Custom deck.
 const custom_deck = Deck(
-  deckName: 'Custom deck',
+  deckName: 'Custom',
   deckImage: 'deck_back_black.png',
   deckColor: 0xFF000000,
   deckColorDark: 0xFFFFFFFF,
