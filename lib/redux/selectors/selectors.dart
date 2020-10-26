@@ -6,3 +6,6 @@ Settings settingsSelector(AppState state) => state.settings;
 
 /// Selects the [AppTab] portion of the state.
 AppTab activeTabSelector(AppState state) => state.activeTab;
+
+/// Selects the initialized of the state.
+bool initializedSelector(AppState state) => state.initialized;
