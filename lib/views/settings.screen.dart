@@ -85,41 +85,35 @@ class SettingsScreen extends StatelessWidget {
               ],
             ),
             const Divider(),
-            ListTile(
+            SwitchListTile(
               title: Text(L.of(context).tapToReveal),
               subtitle: Text(L.of(context).tapToRevealInfo),
-              trailing: Switch(
-                value: vm.settings.tapToReveal,
-                onChanged: (bool value) => vm.setSettings(
-                  vm.settings.copyWith(tapToReveal: value),
-                ),
+              value: vm.settings.tapToReveal,
+              onChanged: (bool value) => vm.setSettings(
+                vm.settings.copyWith(tapToReveal: value),
               ),
             ),
-            ListTile(
+            SwitchListTile(
               title: Text(L.of(context).darkMode),
               subtitle: Text(L.of(context).darkModeInfo),
-              trailing: Switch(
-                value: vm.settings.darkMode,
-                onChanged: (bool value) => vm.setSettings(
-                  vm.settings.copyWith(darkMode: value),
-                ),
+              value: vm.settings.darkMode,
+              onChanged: (bool value) => vm.setSettings(
+                vm.settings.copyWith(darkMode: value),
               ),
             ),
-            ListTile(
+            SwitchListTile(
               title: Text(L.of(context).vibration),
               subtitle: Text(L.of(context).vibrationInfo),
-              trailing: Switch(
-                value: vm.settings.vibration,
-                onChanged: (bool value) async {
-                  vm.setSettings(
-                    vm.settings.copyWith(vibration: value),
-                  );
+              value: vm.settings.vibration,
+              onChanged: (bool value) async {
+                vm.setSettings(
+                  vm.settings.copyWith(vibration: value),
+                );
 
-                  if (value == true && await Vibration.hasVibrator()) {
-                    Vibration.vibrate();
-                  }
-                },
-              ),
+                if (value == true && await Vibration.hasVibrator()) {
+                  Vibration.vibrate();
+                }
+              },
             ),
             const Divider(),
             ListTile(
