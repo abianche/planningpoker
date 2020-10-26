@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
-final lightTheme = ThemeData.light();
-final darkTheme = ThemeData.dark().copyWith(
-  toggleableActiveColor: Colors.red,
-);
-
 ThemeData getTheme(BuildContext context, bool darkMode) {
-  return darkMode ? darkTheme : lightTheme;
+  return darkMode
+      ? ThemeData.dark().copyWith(
+          toggleableActiveColor: Colors.orange,
+        )
+      : ThemeData.light().copyWith(
+          toggleableActiveColor: Colors.red,
+        );
 }
