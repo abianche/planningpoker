@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:planningpoker/views/home.screen.dart';
+import 'package:planningpoker/views/info.screen.dart';
 import 'package:planningpoker/views/settings.custom_deck.screen.dart';
 import 'package:planningpoker/views/settings.screen.dart';
 import 'package:planningpoker/views/splash.screen.dart';
@@ -16,16 +17,11 @@ class Routes {
 /// Route builder.
 Map<String, WidgetBuilder> getRoutes() {
   return {
-    Routes.root: (context) => SplashScreen(
-        // onInit: () {
-        // StoreProvider.of<AppState>(context).dispatch(LoadSettingsAction());
-        // StoreProvider.of<AppState>(context).dispatch(LoadRoomAction());
-        // },
-        ),
-    Routes.home: (context) => HomeScreen(),
-    Routes.settings: (context) => SettingsScreen(),
-    Routes.settings_custom_deck: (context) => CustomDeckSetup(),
-    // Routes.settings_info: (context) => InfoScreen(),
+    Routes.root: (context) => const SplashScreen(),
+    Routes.home: (context) => const HomeScreen(),
+    Routes.settings: (context) => const SettingsScreen(),
+    Routes.settings_custom_deck: (context) => const CustomDeckSetup(),
+    Routes.settings_info: (context) => const InfoScreen(),
     // Routes.settings_intro: (context) => IntroScreen(),
   };
 }
