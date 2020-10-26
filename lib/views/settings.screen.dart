@@ -78,7 +78,7 @@ class SettingsScreen extends StatelessWidget {
             ListTile(
               title: Text(L.of(context).whatIsPlanningPoker),
               subtitle: Text(L.of(context).instructions),
-              onTap: () => {},
+              onTap: () => Navigator.of(context).pushNamed(Routes.settings_info),
             ),
             FutureBuilder(
               future: PackageInfo.fromPlatform(),
