@@ -3,7 +3,12 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:planningpoker/app.dart';
+import 'package:planningpoker/redux/middlewares/app.middleware.dart';
+import 'package:planningpoker/redux/reducers/app_state_reducer.dart';
+import 'package:planningpoker/redux/states/app_state.dart';
+import 'package:planningpoker/repository.dart';
 import 'package:planningpoker/services/firestore.service.dart';
+import 'package:redux/redux.dart';
 
 FirebaseAuth auth = FirebaseAuth.instance;
 
@@ -18,5 +23,14 @@ void main() async {
   await Firebase.initializeApp();
   FirestoreService();
 
-  runApp(const App());
+  final store = Store<AppState>(
+    appReducer,
+    distinct: true,
+    initialState: AppState.initialState(),
+    middleware: createAppMiddleware(Repository()),
+  );
+
+  runApp(App(
+    store: store,
+  ));
 }
