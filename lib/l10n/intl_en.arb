@@ -24,5 +24,10 @@
   "followMe": "Follow me!",
   "followMeInfo": "Head over to my profile page, follow and support me!",
   "deck": "Deck",
-  "room": "Room"
+  "room": "Room",
+  "customDeckSaveMessage": "The configuration has been saved!",
+  "customDeckRestoreMessage": "The configuration has been restored!",
+  "customDeckSetup": "Custom deck setup",
+  "customDeckSaveTooltip": "Save the configuration",
+  "customDeckRestoreTooltip": "Reset the configuration"
 }

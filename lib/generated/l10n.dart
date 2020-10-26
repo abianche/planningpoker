@@ -284,6 +284,56 @@ class L {
       args: [],
     );
   }
+
+  /// `The configuration has been saved!`
+  String get customDeckSaveMessage {
+    return Intl.message(
+      'The configuration has been saved!',
+      name: 'customDeckSaveMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The configuration has been restored!`
+  String get customDeckRestoreMessage {
+    return Intl.message(
+      'The configuration has been restored!',
+      name: 'customDeckRestoreMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Custom deck setup`
+  String get customDeckSetup {
+    return Intl.message(
+      'Custom deck setup',
+      name: 'customDeckSetup',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save the configuration`
+  String get customDeckSaveTooltip {
+    return Intl.message(
+      'Save the configuration',
+      name: 'customDeckSaveTooltip',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reset the configuration`
+  String get customDeckRestoreTooltip {
+    return Intl.message(
+      'Reset the configuration',
+      name: 'customDeckRestoreTooltip',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<L> {

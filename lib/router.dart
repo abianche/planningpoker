@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:planningpoker/views/home.screen.dart';
+import 'package:planningpoker/views/settings.custom_deck.screen.dart';
 import 'package:planningpoker/views/settings.screen.dart';
 import 'package:planningpoker/views/splash.screen.dart';
 
@@ -23,8 +24,7 @@ Map<String, WidgetBuilder> getRoutes() {
         ),
     Routes.home: (context) => HomeScreen(),
     Routes.settings: (context) => SettingsScreen(),
-    // Routes.settings_decks: (context) => SelectDecks(),
-    // Routes.settings_custom_deck: (context) => CustomDeckSetup(),
+    Routes.settings_custom_deck: (context) => CustomDeckSetup(),
     // Routes.settings_info: (context) => InfoScreen(),
     // Routes.settings_intro: (context) => IntroScreen(),
   };

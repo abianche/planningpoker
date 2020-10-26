@@ -5,6 +5,7 @@ import 'package:planningpoker/generated/l10n.dart';
 import 'package:planningpoker/models/settings.model.dart';
 import 'package:planningpoker/redux/states/app_state.dart';
 import 'package:planningpoker/router.dart';
+import 'package:planningpoker/views/deck.view.dart';
 import 'package:redux/redux.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -43,10 +44,10 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ],
           ),
-          body: _currentIndex == 1 ? Center(child: Text("Room")) : Center(child: Text("Deck")),
+          body: _currentIndex == 1 ? Center(child: Text("Room")) : const DeckView(),
           bottomNavigationBar: BottomNavigationBar(
             elevation: 0.0,
-            fixedColor: Color(currentDeck.deckColor),
+            fixedColor: vm.settings.darkMode ? Colors.white : Color(currentDeck.deckColor),
             currentIndex: _currentIndex,
             onTap: (value) => setState(() => _currentIndex = value),
             items: [
