@@ -46,6 +46,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "shareThisApp" : MessageLookupByLibrary.simpleMessage("Share this app!"),
     "shareThisAppInfo" : MessageLookupByLibrary.simpleMessage("Share this app with your colleagues!"),
     "showTheIntro" : MessageLookupByLibrary.simpleMessage("Show the intro"),
+    "showTheIntroInfo" : MessageLookupByLibrary.simpleMessage("Show the intro slides again."),
     "tapToReveal" : MessageLookupByLibrary.simpleMessage("Tap to reveal"),
     "tapToRevealInfo" : MessageLookupByLibrary.simpleMessage("The picked card require an extra tap to be revelead"),
     "title" : MessageLookupByLibrary.simpleMessage("Planning Poker Online"),

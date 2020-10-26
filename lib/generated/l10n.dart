@@ -344,6 +344,16 @@ class L {
       args: [],
     );
   }
+
+  /// `Show the intro slides again.`
+  String get showTheIntroInfo {
+    return Intl.message(
+      'Show the intro slides again.',
+      name: 'showTheIntroInfo',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<L> {

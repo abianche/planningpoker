@@ -143,13 +143,13 @@ class SettingsScreen extends StatelessWidget {
                     subtitle: Text(L.of(context).loading),
                     enabled: false,
                   );
-                  ;
                 }
               },
             ),
             const Divider(),
             ListTile(
               title: Text(L.of(context).showTheIntro),
+              subtitle: Text(L.of(context).showTheIntroInfo),
               onTap: () {
                 Navigator.of(context).pushNamed(Routes.settings_intro);
               },

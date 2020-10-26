@@ -30,5 +30,6 @@
   "customDeckSetup": "Custom deck setup",
   "customDeckSaveTooltip": "Save the configuration",
   "customDeckRestoreTooltip": "Reset the configuration",
-  "openRoom": "Open room"
+  "openRoom": "Open room",
+  "showTheIntroInfo": "Show the intro slides again."
 }
