@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:planningpoker/models/deck.model.dart';
+import 'package:planningpoker/models/settings.model.dart';
 import 'package:planningpoker/widgets/deck_tile.dart';
 
 const row_length = 3;
 
 /// Returns the a list of [DeckTile]s from the current deck. Disabled tiles are not returned.
-List<Widget> getDeckTiles(Deck deck) {
+List<Widget> getDeckTiles(
+  Deck deck,
+  Settings settings,
+) {
   final items = <Widget>[];
   final tileNames = deck.deckValues.toList();
   tileNames.removeWhere((value) => value.startsWith('_'));
@@ -21,6 +25,7 @@ List<Widget> getDeckTiles(Deck deck) {
             deck: deck,
             data: getTileDataFromName(name),
             name: name,
+            settings: settings,
           ),
         )
         .toList();

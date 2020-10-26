@@ -1,16 +1,22 @@
+import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:planningpoker/models/deck.model.dart';
+import 'package:planningpoker/models/settings.model.dart';
+import 'package:planningpoker/widgets/card_back.dart';
+import 'package:planningpoker/widgets/card_front.dart';
 
 class DeckTile extends StatefulWidget {
   final Deck deck;
   final dynamic data;
   final String name;
+  final Settings settings;
 
   const DeckTile({
     Key key,
     @required this.deck,
     @required this.data,
     @required this.name,
+    @required this.settings,
   }) : super(key: key);
 
   @override
@@ -34,7 +40,7 @@ class _DeckTileState extends State<DeckTile> {
             style: const TextStyle(fontSize: 24.0),
           ),
           onPressed: () async {
-            // await showSelection(vm);
+            await showSelection();
           },
         ),
       );
@@ -51,7 +57,7 @@ class _DeckTileState extends State<DeckTile> {
           ),
           child: Icon(widget.data),
           onPressed: () async {
-            // await showSelection(vm);
+            await showSelection();
           },
         ),
       );
@@ -67,7 +73,7 @@ class _DeckTileState extends State<DeckTile> {
           ),
           padding: const EdgeInsets.all(16.0),
           onPressed: () async {
-            // await showSelection(vm);
+            await showSelection();
           },
           color: widget.data,
         ),
@@ -91,51 +97,49 @@ class _DeckTileState extends State<DeckTile> {
     );
   }
 
-  // void showSelection(_ViewModel vm) async {
-  //   final deckProps = deck_types_properties[vm.deck];
+  void showSelection() async {
+    // vm.setCard(widget.name, false);
 
-  //   vm.setCard(widget.name, false);
-
-  //   await showDialog<bool>(
-  //     context: context,
-  //     builder: (context) => Dialog(
-  //       backgroundColor: Colors.transparent,
-  //       child: FractionallySizedBox(
-  //         widthFactor: 0.95,
-  //         heightFactor: 0.7,
-  //         child: FlipCard(
-  //           back: vm.tapToReveal
-  //               ? CardBack(
-  //                   data: widget.data,
-  //                   name: widget.name,
-  //                   deckProps: deckProps,
-  //                   darkTheme: vm.darkTheme,
-  //                   goToRoom: vm.goToRoom,
-  //                   setCard: vm.setCard,
-  //                 )
-  //               : null,
-  //           front: vm.tapToReveal
-  //               ? CardFront(
-  //                   deckProps: deckProps,
-  //                 )
-  //               : CardBack(
-  //                   data: widget.data,
-  //                   name: widget.name,
-  //                   deckProps: deckProps,
-  //                   darkTheme: vm.darkTheme,
-  //                   goToRoom: vm.goToRoom,
-  //                   setCard: vm.setCard,
-  //                 ),
-  //           direction: FlipDirection.HORIZONTAL,
-  //           flipOnTouch: vm.tapToReveal,
-  //         ),
-  //       ),
-  //       shape: RoundedRectangleBorder(
-  //         borderRadius: BorderRadius.circular(25),
-  //       ),
-  //     ),
-  //   );
-  // }
+    await showDialog<bool>(
+      context: context,
+      builder: (context) => Dialog(
+        backgroundColor: Colors.transparent,
+        child: FractionallySizedBox(
+          widthFactor: 0.95,
+          heightFactor: 0.7,
+          child: FlipCard(
+            back: widget.settings.tapToReveal
+                ? CardBack(
+                    data: widget.data,
+                    name: widget.name,
+                    deck: widget.deck,
+                    darkTheme: widget.settings.darkMode,
+                    // goToRoom: vm.goToRoom,
+                    // setCard: vm.setCard,
+                  )
+                : null,
+            front: widget.settings.tapToReveal
+                ? CardFront(
+                    deck: widget.deck,
+                  )
+                : CardBack(
+                    data: widget.data,
+                    name: widget.name,
+                    deck: widget.deck,
+                    darkTheme: widget.settings.darkMode,
+                    // goToRoom: vm.goToRoom,
+                    // setCard: vm.setCard,
+                  ),
+            direction: FlipDirection.HORIZONTAL,
+            flipOnTouch: widget.settings.tapToReveal,
+          ),
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(25),
+        ),
+      ),
+    );
+  }
 }
 
 // class _ViewModel {

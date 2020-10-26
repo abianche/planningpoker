@@ -36,6 +36,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "greeting" : MessageLookupByLibrary.simpleMessage("Ciao, mondo!"),
     "instructions" : MessageLookupByLibrary.simpleMessage("Instructions"),
     "loading" : MessageLookupByLibrary.simpleMessage("Loading"),
+    "openRoom" : MessageLookupByLibrary.simpleMessage("Open room"),
     "pageNotFound" : MessageLookupByLibrary.simpleMessage("Page not found"),
     "rateThisApp" : MessageLookupByLibrary.simpleMessage("Rate this app!"),
     "rateThisAppInfo" : MessageLookupByLibrary.simpleMessage("Take a moment to rate this app! It means a lot!"),

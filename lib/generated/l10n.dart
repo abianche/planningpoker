@@ -334,6 +334,16 @@ class L {
       args: [],
     );
   }
+
+  /// `Open room`
+  String get openRoom {
+    return Intl.message(
+      'Open room',
+      name: 'openRoom',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<L> {

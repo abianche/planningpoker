@@ -27,7 +27,7 @@ class DeckView extends StatelessWidget {
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: getDeckTiles(currentDeck),
+              children: getDeckTiles(currentDeck, vm.settings),
             ),
           ),
         );

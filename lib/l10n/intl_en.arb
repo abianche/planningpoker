@@ -29,5 +29,6 @@
   "customDeckRestoreMessage": "The configuration has been restored!",
   "customDeckSetup": "Custom deck setup",
   "customDeckSaveTooltip": "Save the configuration",
-  "customDeckRestoreTooltip": "Reset the configuration"
+  "customDeckRestoreTooltip": "Reset the configuration",
+  "openRoom": "Open room"
 }
