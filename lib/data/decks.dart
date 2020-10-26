@@ -128,7 +128,7 @@ const custom_deck = Deck(
 );
 
 /// All decks.
-const Map<DeckType, Deck> fixed_decks = {
+const Map<DeckType, Deck> all_decks = {
   DeckType.standard: standard_deck,
   DeckType.tshirt: tshirt_deck,
   DeckType.fibonacci: fibonacci_deck,

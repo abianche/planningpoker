@@ -264,6 +264,26 @@ class L {
       args: [],
     );
   }
+
+  /// `Deck`
+  String get deck {
+    return Intl.message(
+      'Deck',
+      name: 'deck',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Room`
+  String get room {
+    return Intl.message(
+      'Room',
+      name: 'room',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<L> {

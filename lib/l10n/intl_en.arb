@@ -22,5 +22,7 @@
   "shareThisApp": "Share this app!",
   "shareThisAppInfo": "Share this app with your colleagues!",
   "followMe": "Follow me!",
-  "followMeInfo": "Head over to my profile page, follow and support me!"
+  "followMeInfo": "Head over to my profile page, follow and support me!",
+  "deck": "Deck",
+  "room": "Room"
 }

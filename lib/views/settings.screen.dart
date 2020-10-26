@@ -5,7 +5,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:launch_review/launch_review.dart';
 import 'package:package_info/package_info.dart';
 import 'package:planningpoker/constants.dart';
-import 'package:planningpoker/data/fixed_decks.dart';
+import 'package:planningpoker/data/decks.dart';
 import 'package:planningpoker/generated/l10n.dart';
 import 'package:planningpoker/models/deck.model.dart';
 import 'package:planningpoker/models/settings.model.dart';

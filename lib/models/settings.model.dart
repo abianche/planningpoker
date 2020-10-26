@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:planningpoker/data/fixed_decks.dart';
+import 'package:planningpoker/data/decks.dart';
 import 'package:planningpoker/models/deck.model.dart';
 
 part 'settings.model.g.dart';
