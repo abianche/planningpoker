@@ -29,6 +29,7 @@ class SettingsScreen extends StatelessWidget {
       builder: (context, vm) => Scaffold(
         appBar: AppBar(
           title: Text(L.of(context).title),
+          backgroundColor: Colors.black,
         ),
         body: ListView(
           children: [
