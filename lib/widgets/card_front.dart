@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:planningpoker/models/deck.model.dart';
 import 'package:planningpoker/generated/l10n.dart';
+import 'package:planningpoker/models/deck.model.dart';
 
 class CardFront extends StatelessWidget {
   const CardFront({

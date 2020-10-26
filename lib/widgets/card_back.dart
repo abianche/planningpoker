@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:planningpoker/generated/l10n.dart';
 import 'package:planningpoker/models/deck.model.dart';
 import 'package:planningpoker/widgets/card_content.dart';
-import 'package:planningpoker/generated/l10n.dart';
 
 class CardBack extends StatelessWidget {
   const CardBack({
