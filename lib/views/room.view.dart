@@ -35,6 +35,9 @@ class _RoomViewState extends State<RoomView> {
     roomController.clear();
     playerController.clear();
 
+    roomController.text = "test";
+    playerController.text = "playerone";
+
     return showDialog(
         barrierDismissible: false,
         context: context,
@@ -50,15 +53,15 @@ class _RoomViewState extends State<RoomView> {
                       maxLength: 16,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       controller: roomController,
-                      decoration: const InputDecoration(
-                        labelText: 'Room name',
+                      decoration: InputDecoration(
+                        labelText: L.of(context).roomName,
                       ),
                       validator: (value) {
                         if (value.isEmpty) {
-                          return 'Enter room name!';
+                          return L.of(context).enterRoomName;
                         }
                         if (value.length > 16) {
-                          return 'Room name is too long!';
+                          return L.of(context).roomNameIsTooLong;
                         }
 
                         return null;
@@ -68,15 +71,15 @@ class _RoomViewState extends State<RoomView> {
                       maxLength: 30,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       controller: playerController,
-                      decoration: const InputDecoration(
-                        labelText: 'Player name',
+                      decoration: InputDecoration(
+                        labelText: L.of(context).playerName,
                       ),
                       validator: (value) {
                         if (value.isEmpty) {
-                          return 'Enter player name!';
+                          return L.of(context).enterPlayerName;
                         }
                         if (value.length > 30) {
-                          return 'Player name is too long!';
+                          return L.of(context).playerNameIsTooLong;
                         }
 
                         return null;

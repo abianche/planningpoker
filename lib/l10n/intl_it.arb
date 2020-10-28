@@ -48,5 +48,11 @@
       "username": {},
       "room": {}
     }
-  }
+  },
+  "enterRoomName": "Enter room name!",
+  "roomNameIsTooLong": "Room name is too long!",
+  "enterPlayerName": "Enter player name!",
+  "playerNameIsTooLong": "Player name is too long!",
+  "playerName": "Player name",
+  "roomName": "Room name"
 }

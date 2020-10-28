@@ -414,6 +414,66 @@ class L {
       args: [username, room],
     );
   }
+
+  /// `Enter room name!`
+  String get enterRoomName {
+    return Intl.message(
+      'Enter room name!',
+      name: 'enterRoomName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Room name is too long!`
+  String get roomNameIsTooLong {
+    return Intl.message(
+      'Room name is too long!',
+      name: 'roomNameIsTooLong',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter player name!`
+  String get enterPlayerName {
+    return Intl.message(
+      'Enter player name!',
+      name: 'enterPlayerName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Player name is too long!`
+  String get playerNameIsTooLong {
+    return Intl.message(
+      'Player name is too long!',
+      name: 'playerNameIsTooLong',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Player name`
+  String get playerName {
+    return Intl.message(
+      'Player name',
+      name: 'playerName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Room name`
+  String get roomName {
+    return Intl.message(
+      'Room name',
+      name: 'roomName',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<L> {
