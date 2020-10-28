@@ -57,4 +57,15 @@ class FirestoreService {
 
     return true;
   }
+
+  Future<void> createPlayer(String roomId, Player player) async {
+    final ds = await FirebaseFirestore.instance.collection(_room_collection).doc(roomId).get();
+    if (!ds.exists) return null; // TODO: handle error
+
+    await ds.reference.update({
+      'players': FieldValue.arrayUnion([player.toJson()])
+    });
+
+    return;
+  }
 }

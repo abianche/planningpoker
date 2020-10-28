@@ -405,10 +405,10 @@ class L {
     );
   }
 
-  /// `{username} already exists in room {room}!`
+  /// `Player {username} already exists in room {room}!`
   String playerAlreadyExistsInRoom(Object username, Object room) {
     return Intl.message(
-      '$username already exists in room $room!',
+      'Player $username already exists in room $room!',
       name: 'playerAlreadyExistsInRoom',
       desc: '',
       args: [username, room],

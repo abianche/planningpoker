@@ -42,7 +42,7 @@
   "username": "Username",
   "logout": "Logout",
   "ops": "Ops!",
-  "playerAlreadyExistsInRoom": "{username} already exists in room {room}!",
+  "playerAlreadyExistsInRoom": "Player {username} already exists in room {room}!",
   "@playerAlreadyExistsInRoom": {
     "placeholders": {
       "username": {},

@@ -21,7 +21,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static m0(deckName) => "${deckName} deck";
 
-  static m1(username, room) => "${username} already exists in room ${room}!";
+  static m1(username, room) => "Player ${username} already exists in room ${room}!";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {

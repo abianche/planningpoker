@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:redux/redux.dart';
+
 import 'package:planningpoker/generated/l10n.dart';
 import 'package:planningpoker/logger.dart';
 import 'package:planningpoker/models/player.model.dart';
@@ -11,7 +13,6 @@ import 'package:planningpoker/redux/selectors/selectors.dart';
 import 'package:planningpoker/redux/states/app_state.dart';
 import 'package:planningpoker/services/firebase.service.dart';
 import 'package:planningpoker/services/firestore.service.dart';
-import 'package:redux/redux.dart';
 
 final log = getLogger('RoomView');
 
@@ -98,6 +99,10 @@ class _RoomViewState extends State<RoomView> {
 
                     final roomId = await FirestoreService().roomExists(roomName);
                     Room room;
+                    final player = Player(
+                      username: playerName,
+                      uid: FirebaseService().auth.currentUser.uid,
+                    );
 
                     if (roomId != null) {
                       // check if player with the same name exists
@@ -109,10 +114,18 @@ class _RoomViewState extends State<RoomView> {
                           builder: (context) => AlertDialog(
                             title: Text(L.of(context).ops),
                             content: Text(L.of(context).playerAlreadyExistsInRoom(playerName, roomName)),
+                            actions: [
+                              FlatButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Text(MaterialLocalizations.of(context).okButtonLabel),
+                              ),
+                            ],
                           ),
                         );
                       } else {
-                        //TODO: create player in room
+                        await FirestoreService().createPlayer(roomId, player);
                       }
                     }
 
@@ -123,10 +136,11 @@ class _RoomViewState extends State<RoomView> {
                       );
                     } else {
                       room = await FirestoreService().createRoom(roomName);
-                      //TODO: create room above with player
+                      await FirestoreService().createPlayer(room.uid, player);
                     }
 
                     vm.setRoom(room);
+                    vm.setPlayer(player);
 
                     Navigator.pop(context);
                   }
@@ -241,9 +255,16 @@ class _ViewModel {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is _ViewModel && o.player == player && o.room == room && o.setRoom == setRoom;
+    return o is _ViewModel &&
+        o.player == player &&
+        o.room == room &&
+        o.setRoom == setRoom &&
+        o.setPlayer == setPlayer &&
+        o.logout == logout;
   }
 
   @override
-  int get hashCode => player.hashCode ^ room.hashCode ^ setRoom.hashCode;
+  int get hashCode {
+    return player.hashCode ^ room.hashCode ^ setRoom.hashCode ^ setPlayer.hashCode ^ logout.hashCode;
+  }
 }
