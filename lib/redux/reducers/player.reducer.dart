@@ -4,6 +4,7 @@ import 'package:redux/redux.dart';
 
 final playerReducer = combineReducers<Player>([
   TypedReducer<Player, SetPlayerAction>(_setPlayer),
+  TypedReducer<Player, ResetPlayerAction>(_resetPlayer),
 ]);
 
 Player _setPlayer(Player player, SetPlayerAction action) {
@@ -12,4 +13,8 @@ Player _setPlayer(Player player, SetPlayerAction action) {
     username: action.player.username,
     currentCard: action.player.currentCard,
   );
+}
+
+Player _resetPlayer(Player player, ResetPlayerAction action) {
+  return Player.initialState();
 }

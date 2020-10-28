@@ -43,4 +43,18 @@ class FirestoreService {
 
     return ds.docs.single.id;
   }
+
+  /// Returns `true` if the a player with username `playerName` exists in room with uid `roomId`. `false` otherwise.
+  Future<bool> playerExists(String roomId, String playerName) async {
+    final ds = await FirebaseFirestore.instance.collection(_room_collection).doc(roomId).get();
+    if (!ds.exists) return null; // TODO: handle error
+
+    List<dynamic> playersRaw = ds.get('players');
+    List<Player> players = playersRaw.map((e) => Player.fromJson(e)).toList();
+    final playerIndex = players.indexWhere((e) => e.username == playerName);
+
+    if (playerIndex == -1) return false;
+
+    return true;
+  }
 }

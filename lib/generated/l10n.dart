@@ -374,6 +374,46 @@ class L {
       args: [],
     );
   }
+
+  /// `Username`
+  String get username {
+    return Intl.message(
+      'Username',
+      name: 'username',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Logout`
+  String get logout {
+    return Intl.message(
+      'Logout',
+      name: 'logout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ops!`
+  String get ops {
+    return Intl.message(
+      'Ops!',
+      name: 'ops',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{username} already exists in room {room}!`
+  String playerAlreadyExistsInRoom(Object username, Object room) {
+    return Intl.message(
+      '$username already exists in room $room!',
+      name: 'playerAlreadyExistsInRoom',
+      desc: '',
+      args: [username, room],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<L> {

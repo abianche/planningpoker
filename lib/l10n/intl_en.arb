@@ -38,5 +38,15 @@
       "deckName": {}
     }
   },
-  "joinARoom": "Join or create a room"
+  "joinARoom": "Join or create a room",
+  "username": "Username",
+  "logout": "Logout",
+  "ops": "Ops!",
+  "playerAlreadyExistsInRoom": "{username} already exists in room {room}!",
+  "@playerAlreadyExistsInRoom": {
+    "placeholders": {
+      "username": {},
+      "room": {}
+    }
+  }
 }

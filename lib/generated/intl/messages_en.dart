@@ -21,6 +21,8 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static m0(deckName) => "${deckName} deck";
 
+  static m1(username, room) => "${username} already exists in room ${room}!";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
     "about" : MessageLookupByLibrary.simpleMessage("About"),
@@ -40,8 +42,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "instructions" : MessageLookupByLibrary.simpleMessage("Instructions"),
     "joinARoom" : MessageLookupByLibrary.simpleMessage("Join or create a room"),
     "loading" : MessageLookupByLibrary.simpleMessage("Loading"),
+    "logout" : MessageLookupByLibrary.simpleMessage("Logout"),
     "openRoom" : MessageLookupByLibrary.simpleMessage("Open room"),
+    "ops" : MessageLookupByLibrary.simpleMessage("Ops!"),
     "pageNotFound" : MessageLookupByLibrary.simpleMessage("Page not found"),
+    "playerAlreadyExistsInRoom" : m1,
     "rateThisApp" : MessageLookupByLibrary.simpleMessage("Rate this app!"),
     "rateThisAppInfo" : MessageLookupByLibrary.simpleMessage("Take a moment to rate this app! It means a lot!"),
     "room" : MessageLookupByLibrary.simpleMessage("Room"),
@@ -54,6 +59,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "tapToReveal" : MessageLookupByLibrary.simpleMessage("Tap to reveal"),
     "tapToRevealInfo" : MessageLookupByLibrary.simpleMessage("The picked card require an extra tap to be revelead"),
     "title" : MessageLookupByLibrary.simpleMessage("Planning Poker Online"),
+    "username" : MessageLookupByLibrary.simpleMessage("Username"),
     "vibration" : MessageLookupByLibrary.simpleMessage("Vibration"),
     "vibrationInfo" : MessageLookupByLibrary.simpleMessage("Enable vibration"),
     "whatIsPlanningPoker" : MessageLookupByLibrary.simpleMessage("What is Planning Poker ®?")

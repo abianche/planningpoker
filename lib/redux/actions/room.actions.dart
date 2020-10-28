@@ -10,3 +10,5 @@ class SetRoomAction {
   @override
   String toString() => 'SetRoomAction(room: $room)';
 }
+
+class ResetRoomAction {}

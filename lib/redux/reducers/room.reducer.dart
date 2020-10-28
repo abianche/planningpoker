@@ -4,6 +4,7 @@ import 'package:redux/redux.dart';
 
 final roomReducer = combineReducers<Room>([
   TypedReducer<Room, SetRoomAction>(_setRoom),
+  TypedReducer<Room, ResetRoomAction>(_resetRoom),
 ]);
 
 Room _setRoom(Room room, SetRoomAction action) {
@@ -12,4 +13,8 @@ Room _setRoom(Room room, SetRoomAction action) {
     name: action.room.name,
     players: action.room.players,
   );
+}
+
+Room _resetRoom(Room room, ResetRoomAction action) {
+  return Room.initialState();
 }

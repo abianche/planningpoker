@@ -10,3 +10,5 @@ class SetPlayerAction {
   @override
   String toString() => 'SetPlayerAction(player: $player)';
 }
+
+class ResetPlayerAction {}

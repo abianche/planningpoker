@@ -24,6 +24,7 @@ class RoomView extends StatefulWidget {
 
 class _RoomViewState extends State<RoomView> {
   final TextEditingController roomController = new TextEditingController();
+  final TextEditingController playerController = new TextEditingController();
   final GlobalKey<FormState> _keyJoinRoomForm = new GlobalKey<FormState>();
 
   Future<User> _signIn() async {
@@ -31,6 +32,9 @@ class _RoomViewState extends State<RoomView> {
   }
 
   Future joinOrCreateRoom(_ViewModel vm) async {
+    roomController.clear();
+    playerController.clear();
+
     return showDialog(
         barrierDismissible: false,
         context: context,
@@ -45,31 +49,34 @@ class _RoomViewState extends State<RoomView> {
                     TextFormField(
                       maxLength: 16,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
+                      controller: roomController,
                       decoration: const InputDecoration(
                         labelText: 'Room name',
                       ),
-                      onSaved: (roomName) async {
-                        roomController.text = roomName;
-                        final roomId = await FirestoreService().roomExists(roomName);
-                        Room room;
-
-                        if (roomId != null) {
-                          room = Room.initialState().copyWith(
-                            uid: roomId,
-                            name: roomName,
-                          );
-                        } else {
-                          room = await FirestoreService().createRoom(roomName);
-                        }
-
-                        vm.setRoom(room);
-                      },
                       validator: (value) {
                         if (value.isEmpty) {
                           return 'Enter room name!';
                         }
                         if (value.length > 16) {
                           return 'Room name is too long!';
+                        }
+
+                        return null;
+                      },
+                    ),
+                    TextFormField(
+                      maxLength: 30,
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      controller: playerController,
+                      decoration: const InputDecoration(
+                        labelText: 'Player name',
+                      ),
+                      validator: (value) {
+                        if (value.isEmpty) {
+                          return 'Enter player name!';
+                        }
+                        if (value.length > 30) {
+                          return 'Player name is too long!';
                         }
 
                         return null;
@@ -81,9 +88,43 @@ class _RoomViewState extends State<RoomView> {
             ),
             actions: <Widget>[
               FlatButton(
-                onPressed: () {
+                onPressed: () async {
                   if (_keyJoinRoomForm.currentState.validate()) {
-                    _keyJoinRoomForm.currentState.save();
+                    final roomName = roomController.text;
+                    final playerName = playerController.text;
+
+                    final roomId = await FirestoreService().roomExists(roomName);
+                    Room room;
+
+                    if (roomId != null) {
+                      // check if player with the same name exists
+                      final playerExists = await FirestoreService().playerExists(roomId, playerName);
+                      if (playerExists) {
+                        return await showDialog(
+                          context: context,
+                          barrierColor: Colors.transparent,
+                          builder: (context) => AlertDialog(
+                            title: Text(L.of(context).ops),
+                            content: Text(L.of(context).playerAlreadyExistsInRoom(playerName, roomName)),
+                          ),
+                        );
+                      } else {
+                        //TODO: create player in room
+                      }
+                    }
+
+                    if (roomId != null) {
+                      room = Room.initialState().copyWith(
+                        uid: roomId,
+                        name: roomName,
+                      );
+                    } else {
+                      room = await FirestoreService().createRoom(roomName);
+                      //TODO: create room above with player
+                    }
+
+                    vm.setRoom(room);
+
                     Navigator.pop(context);
                   }
                 },
@@ -122,7 +163,39 @@ class _RoomViewState extends State<RoomView> {
                   label: Text(L.of(context).joinARoom),
                 ),
               )
-            : Center(child: Text(vm.room.toString())),
+            : Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('${L.of(context).room}: ${vm.room.name}'),
+                            const SizedBox(height: 5),
+                            Text('${L.of(context).username}: ${vm.player.username}'),
+                          ],
+                        ),
+                        IconButton(
+                          tooltip: L.of(context).logout,
+                          icon: const Icon(Icons.logout),
+                          onPressed: () {
+                            vm.logout();
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Divider(),
+                  Expanded(
+                    child: ListView(
+                      children: [],
+                    ),
+                  ),
+                ],
+              ),
       ),
     );
   }
@@ -133,11 +206,15 @@ class _ViewModel {
   final Room room;
 
   final Function(Room) setRoom;
+  final Function(Player) setPlayer;
+  final Function() logout;
 
   _ViewModel({
     @required this.player,
     @required this.room,
     @required this.setRoom,
+    @required this.setPlayer,
+    @required this.logout,
   });
 
   static _ViewModel fromStore(Store<AppState> store) {
@@ -146,6 +223,13 @@ class _ViewModel {
       room: roomSelector(store.state),
       setRoom: (Room room) {
         store.dispatch(SetRoomAction(room: room));
+      },
+      setPlayer: (Player player) {
+        store.dispatch(SetPlayerAction(player: player));
+      },
+      logout: () {
+        store.dispatch(ResetRoomAction());
+        store.dispatch(ResetPlayerAction());
       },
     );
   }
