@@ -70,7 +70,7 @@ packages:
       name: build_runner
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.10.3"
+    version: "1.10.4"
   build_runner_core:
     dependency: transitive
     description:
@@ -559,7 +559,7 @@ packages:
       name: share
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.6.5+3"
+    version: "0.6.5+4"
   shared_preferences:
     dependency: "direct main"
     description:
