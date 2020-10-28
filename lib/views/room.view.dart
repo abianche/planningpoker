@@ -1,8 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:redux/redux.dart';
-
 import 'package:planningpoker/generated/l10n.dart';
 import 'package:planningpoker/logger.dart';
 import 'package:planningpoker/models/player.model.dart';
@@ -13,6 +11,8 @@ import 'package:planningpoker/redux/selectors/selectors.dart';
 import 'package:planningpoker/redux/states/app_state.dart';
 import 'package:planningpoker/services/firebase.service.dart';
 import 'package:planningpoker/services/firestore.service.dart';
+import 'package:planningpoker/widgets/players_overview.dart';
+import 'package:redux/redux.dart';
 
 final log = getLogger('RoomView');
 
@@ -180,39 +180,7 @@ class _RoomViewState extends State<RoomView> {
                   label: Text(L.of(context).joinARoom),
                 ),
               )
-            : Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text('${L.of(context).room}: ${vm.room.name}'),
-                            const SizedBox(height: 5),
-                            Text('${L.of(context).username}: ${vm.player.username}'),
-                          ],
-                        ),
-                        IconButton(
-                          tooltip: L.of(context).logout,
-                          icon: const Icon(Icons.logout),
-                          onPressed: () {
-                            vm.logout();
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                  const Divider(),
-                  Expanded(
-                    child: ListView(
-                      children: [],
-                    ),
-                  ),
-                ],
-              ),
+            : const PlayersOverview(),
       ),
     );
   }
@@ -224,14 +192,12 @@ class _ViewModel {
 
   final Function(Room) setRoom;
   final Function(Player) setPlayer;
-  final Function() logout;
 
   _ViewModel({
     @required this.player,
     @required this.room,
     @required this.setRoom,
     @required this.setPlayer,
-    @required this.logout,
   });
 
   static _ViewModel fromStore(Store<AppState> store) {
@@ -244,10 +210,6 @@ class _ViewModel {
       setPlayer: (Player player) {
         store.dispatch(SetPlayerAction(player: player));
       },
-      logout: () {
-        store.dispatch(ResetRoomAction());
-        store.dispatch(ResetPlayerAction());
-      },
     );
   }
 
@@ -255,16 +217,11 @@ class _ViewModel {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is _ViewModel &&
-        o.player == player &&
-        o.room == room &&
-        o.setRoom == setRoom &&
-        o.setPlayer == setPlayer &&
-        o.logout == logout;
+    return o is _ViewModel && o.player == player && o.room == room && o.setRoom == setRoom && o.setPlayer == setPlayer;
   }
 
   @override
   int get hashCode {
-    return player.hashCode ^ room.hashCode ^ setRoom.hashCode ^ setPlayer.hashCode ^ logout.hashCode;
+    return player.hashCode ^ room.hashCode ^ setRoom.hashCode ^ setPlayer.hashCode;
   }
 }
