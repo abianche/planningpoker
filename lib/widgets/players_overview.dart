@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:redux/redux.dart';
-
 import 'package:planningpoker/generated/l10n.dart';
 import 'package:planningpoker/models/player.model.dart';
 import 'package:planningpoker/models/room.model.dart';
@@ -9,6 +7,8 @@ import 'package:planningpoker/redux/actions/player.actions.dart';
 import 'package:planningpoker/redux/actions/room.actions.dart';
 import 'package:planningpoker/redux/selectors/selectors.dart';
 import 'package:planningpoker/redux/states/app_state.dart';
+import 'package:planningpoker/widgets/player_card.dart';
+import 'package:redux/redux.dart';
 
 class PlayersOverview extends StatelessWidget {
   const PlayersOverview({Key key}) : super(key: key);
@@ -46,8 +46,14 @@ class PlayersOverview extends StatelessWidget {
             ),
             const Divider(),
             Expanded(
-              child: ListView(
-                children: [],
+              child: GridView.count(
+                physics: const ScrollPhysics(),
+                shrinkWrap: true,
+                crossAxisCount: 3,
+                children: [
+                  // TODO: test
+                  PlayerCard(player: Player(currentCard: "3", username: "test")),
+                ],
               ),
             ),
           ],
