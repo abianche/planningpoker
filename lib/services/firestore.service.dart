@@ -28,17 +28,21 @@ class FirestoreService {
         'players': [],
         'last_updated': DateTime.now().millisecondsSinceEpoch,
       },
-    );
+    ).catchError((error) => log.e('createRoom | $error'));
 
-    final ds = await d.get();
-    final room = Room.fromJson(ds.data()).copyWith(uid: ds.id);
+    final room = Room(name: name, players: [], uid: d.id);
     return room;
   }
 
   /// Returns the `uid` of the room if a room with the given `name` exists. `null` otherwise.
   Future<String> roomExists(String name) async {
-    final ds =
-        await FirebaseFirestore.instance.collection(_room_collection).limit(1).where('name', isEqualTo: name).get();
+    final ds = await FirebaseFirestore.instance
+        .collection(_room_collection)
+        .limit(1)
+        .where('name', isEqualTo: name)
+        .get()
+        .catchError((error) => log.e('roomExists | $error'));
+
     if (ds.size == 0) return null;
 
     return ds.docs.single.id;
@@ -46,26 +50,34 @@ class FirestoreService {
 
   /// Returns `true` if the a player with username `playerName` exists in room with uid `roomId`. `false` otherwise.
   Future<bool> playerExists(String roomId, String playerName) async {
-    final ds = await FirebaseFirestore.instance.collection(_room_collection).doc(roomId).get();
-    if (!ds.exists) return null; // TODO: handle error
+    final dr = await FirebaseFirestore.instance.collection(_room_collection).doc(roomId);
 
-    List<dynamic> playersRaw = ds.get('players');
-    List<Player> players = playersRaw.map((e) => Player.fromJson(e)).toList();
-    final playerIndex = players.indexWhere((e) => e.username == playerName);
+    return firestore.runTransaction((t) async {
+      final ds = await t.get(dr);
+      if (!ds.exists) throw Exception('Room $roomId` does not exist!');
 
-    if (playerIndex == -1) return false;
+      List<dynamic> playersRaw = ds.data()['players'];
+      List<Player> players = playersRaw.map((e) => Player.fromJson(e)).toList();
 
-    return true;
+      final playerIndex = players.indexWhere((e) => e.username == playerName);
+      if (playerIndex == -1) return false;
+
+      return true;
+    }).catchError((error) => log.e('playerExists | $error'));
   }
 
   Future<void> createPlayer(String roomId, Player player) async {
-    final ds = await FirebaseFirestore.instance.collection(_room_collection).doc(roomId).get();
-    if (!ds.exists) return null; // TODO: handle error
+    final dr = await FirebaseFirestore.instance.collection(_room_collection).doc(roomId);
 
-    await ds.reference.update({
-      'players': FieldValue.arrayUnion([player.toJson()])
-    });
+    return firestore.runTransaction((t) async {
+      final ds = await t.get(dr);
+      if (!ds.exists) throw Exception('Room $roomId` does not exist!');
 
-    return;
+      await ds.reference.update({
+        'players': FieldValue.arrayUnion([player.toJson()])
+      });
+
+      return;
+    }).catchError((error) => log.e('playerExists | $error'));
   }
 }
