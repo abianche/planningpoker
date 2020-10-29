@@ -8,13 +8,11 @@ class PlayerCard extends StatelessWidget {
     @required this.roomId,
     @required this.userName,
     @required this.player,
-    @required this.color,
   }) : super(key: key);
 
   final String roomId;
   final String userName;
   final Player player;
-  final Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +41,7 @@ class PlayerCard extends StatelessWidget {
                       : Stack(
                           alignment: AlignmentDirectional.bottomCenter,
                           children: [
-                            Opacity(opacity: 0.25, child: CardBackMini(card: player.currentCard.substring(1))),
+                            Opacity(opacity: 0.25, child: CardBackMini(card: player.currentCard?.substring(1))),
                           ],
                         ),
                 ),

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:planningpoker/generated/l10n.dart';
@@ -15,7 +16,7 @@ class PlayersOverview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StoreConnector(
+    return StoreConnector<AppState, _ViewModel>(
       distinct: true,
       converter: _ViewModel.fromStore,
       builder: (context, vm) => Container(
@@ -45,16 +46,37 @@ class PlayersOverview extends StatelessWidget {
               ),
             ),
             const Divider(),
-            Expanded(
-              child: GridView.count(
-                physics: const ScrollPhysics(),
-                shrinkWrap: true,
-                crossAxisCount: 3,
-                children: [
-                  // TODO: test
-                  PlayerCard(player: Player(currentCard: "3", username: "test")),
-                ],
-              ),
+            StreamBuilder<DocumentSnapshot>(
+              stream: FirebaseFirestore.instance.collection('rooms').doc(vm.room.uid).snapshots(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  final ds = snapshot.data;
+                  final room = Room.fromJson(ds.data());
+
+                  return Expanded(
+                    child: GridView.count(
+                      physics: const ScrollPhysics(),
+                      shrinkWrap: true,
+                      crossAxisCount: 2,
+                      children: room.players
+                          .map((player) => PlayerCard(
+                                roomId: room.uid,
+                                userName: vm.player.username,
+                                player: player,
+                              ))
+                          .toList(),
+                    ),
+                  );
+                } else if (snapshot.hasError) {
+                  return Center(
+                    child: Text('Ops! An error occurred!'),
+                  );
+                } else {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+              },
             ),
           ],
         ),

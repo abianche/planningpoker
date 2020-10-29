@@ -29,7 +29,7 @@ class Player {
   }
 
   bool isReady() {
-    return !this.currentCard.startsWith("_");
+    return this.currentCard != null && !this.currentCard.startsWith("_");
   }
 
   factory Player.fromJson(Map<String, dynamic> json) => _$PlayerFromJson(json);
