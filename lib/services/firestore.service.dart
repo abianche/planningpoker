@@ -78,6 +78,6 @@ class FirestoreService {
       });
 
       return;
-    }).catchError((error) => log.e('playerExists | $error'));
+    }).catchError((error) => log.e('createPlayer | $error'));
   }
 }
