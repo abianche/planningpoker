@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart' show DocumentSnapshot;
 import 'package:planningpoker/models/player.model.dart';
 import 'package:planningpoker/models/room.model.dart';
 import 'package:planningpoker/models/settings.model.dart';
@@ -10,6 +11,7 @@ class AppState {
   final Settings settings;
   final Player player;
   final Room room;
+  final Stream<DocumentSnapshot> roomStream;
 
   AppState({
     this.initialized,
@@ -17,6 +19,7 @@ class AppState {
     this.settings,
     this.player,
     this.room,
+    this.roomStream,
   });
 
   AppState.initialState()
@@ -24,7 +27,8 @@ class AppState {
         activeTab = AppTab.deck,
         settings = Settings.initialState(),
         player = Player.initialState(),
-        room = Room.initialState();
+        room = Room.initialState(),
+        roomStream = null;
 
   AppState copyWith({
     bool initialized,
@@ -32,6 +36,7 @@ class AppState {
     Settings settings,
     Player player,
     Room room,
+    Stream<DocumentSnapshot> roomStream,
   }) {
     return AppState(
       initialized: initialized ?? this.initialized,
@@ -39,12 +44,13 @@ class AppState {
       settings: settings ?? this.settings,
       player: player ?? this.player,
       room: room ?? this.room,
+      roomStream: roomStream ?? this.roomStream,
     );
   }
 
   @override
   String toString() {
-    return 'AppState(initialized: $initialized, activeTab: $activeTab, settings: $settings, player: $player, room: $room)';
+    return 'AppState(initialized: $initialized, activeTab: $activeTab, settings: $settings, player: $player, room: $room, roomStream: $roomStream)';
   }
 
   @override
@@ -56,11 +62,17 @@ class AppState {
         o.activeTab == activeTab &&
         o.settings == settings &&
         o.player == player &&
-        o.room == room;
+        o.room == room &&
+        o.roomStream == roomStream;
   }
 
   @override
   int get hashCode {
-    return initialized.hashCode ^ activeTab.hashCode ^ settings.hashCode ^ player.hashCode ^ room.hashCode;
+    return initialized.hashCode ^
+        activeTab.hashCode ^
+        settings.hashCode ^
+        player.hashCode ^
+        room.hashCode ^
+        roomStream.hashCode;
   }
 }
