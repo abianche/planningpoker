@@ -7,11 +7,22 @@
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:planningpoker/app.dart';
+import 'package:planningpoker/redux/reducers/app_state.reducer.dart';
+import 'package:planningpoker/redux/states/app_state.dart';
+import 'package:redux/redux.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
+    final store = Store<AppState>(
+      appReducer,
+      distinct: true,
+      initialState: AppState.initialState(),
+    );
+
     // ignore: prefer_const_constructors
-    await tester.pumpWidget(App());
+    await tester.pumpWidget(App(
+      store: store,
+    ));
   });
 }

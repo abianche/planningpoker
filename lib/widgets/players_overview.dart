@@ -68,11 +68,11 @@ class PlayersOverview extends StatelessWidget {
                     ),
                   );
                 } else if (snapshot.hasError) {
-                  return Center(
+                  return const Center(
                     child: Text('Ops! An error occurred!'),
                   );
                 } else {
-                  return Center(
+                  return const Center(
                     child: CircularProgressIndicator(),
                   );
                 }

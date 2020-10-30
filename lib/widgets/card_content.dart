@@ -15,9 +15,7 @@ class CardContent extends StatelessWidget {
       return Center(
         child: Text(
           data,
-          style: TextStyle(
-              fontSize: Theme.of(context).textTheme.headline1.fontSize,
-              fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: Theme.of(context).textTheme.headline1.fontSize, fontWeight: FontWeight.bold),
         ),
       );
     } else if (data is Color) {
@@ -25,7 +23,7 @@ class CardContent extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(14.0),
           child: Container(
-            margin: EdgeInsets.only(bottom: 6),
+            margin: const EdgeInsets.only(bottom: 6),
             decoration: BoxDecoration(
               shape: BoxShape.rectangle,
               borderRadius: BorderRadius.circular(15),
