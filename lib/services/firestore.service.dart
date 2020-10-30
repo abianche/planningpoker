@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:planningpoker/logger.dart';
 import 'package:planningpoker/models/player.model.dart';
 import 'package:planningpoker/models/room.model.dart';
+import 'package:planningpoker/services/firebase.service.dart';
 
 /// Service class for Firestore.
 class FirestoreService {
@@ -50,6 +51,7 @@ class FirestoreService {
 
   /// Returns `true` if the a player with username `playerName` exists in room with uid `roomId`. `false` otherwise.
   Future<bool> playerExists(String roomId, String playerName) async {
+    final uid = FirebaseService().auth.currentUser.uid;
     final dr = await FirebaseFirestore.instance.collection(_room_collection).doc(roomId);
 
     return firestore.runTransaction((t) async {
@@ -59,7 +61,7 @@ class FirestoreService {
       List<dynamic> playersRaw = ds.data()['players'];
       List<Player> players = playersRaw.map((e) => Player.fromJson(e)).toList();
 
-      final playerIndex = players.indexWhere((e) => e.username == playerName);
+      final playerIndex = players.indexWhere((e) => e.username == playerName && e.uid != uid);
       if (playerIndex == -1) return false;
 
       return true;
