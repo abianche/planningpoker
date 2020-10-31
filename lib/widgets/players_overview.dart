@@ -47,7 +47,7 @@ class PlayersOverview extends StatelessWidget {
             ),
             const Divider(),
             StreamBuilder<DocumentSnapshot>(
-              stream: FirebaseFirestore.instance.collection('rooms').doc(vm.room.uid).snapshots(),
+              stream: vm.roomStream,
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   final ds = snapshot.data;
@@ -88,12 +88,14 @@ class PlayersOverview extends StatelessWidget {
 class _ViewModel {
   final Player player;
   final Room room;
+  final Stream<DocumentSnapshot> roomStream;
 
   final Function() logout;
 
   _ViewModel({
     @required this.player,
     @required this.room,
+    @required this.roomStream,
     @required this.logout,
   });
 
@@ -101,6 +103,7 @@ class _ViewModel {
     return _ViewModel(
       player: playerSelector(store.state),
       room: roomSelector(store.state),
+      roomStream: roomStreamSelector(store.state),
       logout: () {
         store.dispatch(ResetRoomAction());
         store.dispatch(ResetPlayerAction());
@@ -112,9 +115,11 @@ class _ViewModel {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is _ViewModel && o.player == player && o.room == room && o.logout == logout;
+    return o is _ViewModel && o.player == player && o.room == room && o.roomStream == roomStream && o.logout == logout;
   }
 
   @override
-  int get hashCode => player.hashCode ^ room.hashCode ^ logout.hashCode;
+  int get hashCode {
+    return player.hashCode ^ room.hashCode ^ roomStream.hashCode ^ logout.hashCode;
+  }
 }
