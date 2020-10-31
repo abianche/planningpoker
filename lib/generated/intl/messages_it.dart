@@ -26,6 +26,7 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
     "about" : MessageLookupByLibrary.simpleMessage("About"),
+    "confirm" : MessageLookupByLibrary.simpleMessage("Confirm"),
     "customDeckRestoreMessage" : MessageLookupByLibrary.simpleMessage("The configuration has been restored!"),
     "customDeckRestoreTooltip" : MessageLookupByLibrary.simpleMessage("Reset the configuration"),
     "customDeckSaveMessage" : MessageLookupByLibrary.simpleMessage("The configuration has been saved!"),

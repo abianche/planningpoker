@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:redux/redux.dart';
+
 import 'package:planningpoker/data/decks.dart';
 import 'package:planningpoker/generated/l10n.dart';
 import 'package:planningpoker/models/settings.model.dart';
+import 'package:planningpoker/redux/actions/tab.actions.dart';
+import 'package:planningpoker/redux/selectors/selectors.dart';
 import 'package:planningpoker/redux/states/app_state.dart';
 import 'package:planningpoker/router.dart';
 import 'package:planningpoker/views/deck.view.dart';
 import 'package:planningpoker/views/room.view.dart';
-import 'package:redux/redux.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key key}) : super(key: key);
@@ -17,18 +20,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _currentIndex;
   final _pages = [
     const DeckView(),
     const RoomView(),
   ];
-
-  @override
-  void initState() {
-    /// deck is the initial view
-    _currentIndex = 0;
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,12 +54,12 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ],
           ),
-          body: _pages[_currentIndex],
+          body: _pages[vm.appTab.index],
           bottomNavigationBar: BottomNavigationBar(
             elevation: 0.0,
             fixedColor: vm.settings.darkMode ? Colors.white : Color(currentDeck.deckColor),
-            currentIndex: _currentIndex,
-            onTap: (value) => setState(() => _currentIndex = value),
+            currentIndex: vm.appTab.index,
+            onTap: (value) => setState(() => vm.setCurrentTab(AppTab.values[value])),
             items: [
               BottomNavigationBarItem(
                 label: L.of(context).deck,
@@ -83,15 +78,24 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 class _ViewModel {
+  final AppTab appTab;
   final Settings settings;
 
+  final Function(AppTab) setCurrentTab;
+
   _ViewModel({
+    @required this.appTab,
     @required this.settings,
+    @required this.setCurrentTab,
   });
 
   static _ViewModel fromStore(Store<AppState> store) {
     return _ViewModel(
-      settings: store.state.settings,
+      appTab: appTabSelector(store.state),
+      settings: settingsSelector(store.state),
+      setCurrentTab: (AppTab currentTab) {
+        store.dispatch(SetTabAction(currentTab));
+      },
     );
   }
 
@@ -99,9 +103,9 @@ class _ViewModel {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is _ViewModel && o.settings == settings;
+    return o is _ViewModel && o.appTab == appTab && o.settings == settings && o.setCurrentTab == setCurrentTab;
   }
 
   @override
-  int get hashCode => settings.hashCode;
+  int get hashCode => appTab.hashCode ^ settings.hashCode ^ setCurrentTab.hashCode;
 }

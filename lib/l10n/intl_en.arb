@@ -54,5 +54,6 @@
   "enterPlayerName": "Enter player name!",
   "playerNameIsTooLong": "Player name is too long!",
   "playerName": "Player name",
-  "roomName": "Room name"
+  "roomName": "Room name",
+  "confirm": "Confirm"
 }
