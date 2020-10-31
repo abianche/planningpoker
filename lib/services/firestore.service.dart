@@ -82,4 +82,19 @@ class FirestoreService {
       return;
     }).catchError((error) => log.e('createPlayer | $error'));
   }
+
+  Future<void> updatePlayerStatus(String roomId, Player player) async {
+    final dr = await FirebaseFirestore.instance.collection(_room_collection).doc(roomId);
+
+    return firestore.runTransaction((t) async {
+      final ds = await t.get(dr);
+      if (!ds.exists) throw Exception('Room $roomId` does not exist!');
+
+      await ds.reference.update({
+        'players': FieldValue.arrayUnion([player.toJson()])
+      });
+
+      return;
+    }).catchError((error) => log.e('setPlayerCard | $error'));
+  }
 }

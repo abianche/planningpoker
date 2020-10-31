@@ -1,8 +1,13 @@
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 import 'package:planningpoker/models/deck.model.dart';
+import 'package:planningpoker/redux/actions/player.actions.dart';
+import 'package:planningpoker/redux/selectors/selectors.dart';
+import 'package:planningpoker/redux/states/app_state.dart';
 import 'package:planningpoker/widgets/card_back.dart';
 import 'package:planningpoker/widgets/card_front.dart';
+import 'package:redux/redux.dart';
 
 class DeckTile extends StatefulWidget {
   final Deck deck;
@@ -26,55 +31,70 @@ class _DeckTileState extends State<DeckTile> {
   @override
   Widget build(BuildContext context) {
     if (widget.data is String) {
-      return ButtonTheme(
-        height: 60.0,
-        child: OutlineButton(
-          splashColor: Color(widget.deck.deckColor),
-          borderSide: BorderSide(color: Color(widget.deck.deckColor), width: 0.5),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30.0),
+      return StoreConnector<AppState, _ViewModel>(
+        distinct: true,
+        converter: _ViewModel.fromStore,
+        builder: (context, vm) => ButtonTheme(
+          height: 60.0,
+          child: OutlineButton(
+            splashColor: Color(widget.deck.deckColor),
+            borderSide: BorderSide(color: Color(widget.deck.deckColor), width: 0.5),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30.0),
+            ),
+            child: Text(
+              widget.data,
+              style: const TextStyle(fontSize: 24.0),
+            ),
+            onPressed: () async {
+              vm.setPlayerCard((widget.tapToReveal ? '_${widget.name}' : widget.name));
+              await showSelection();
+            },
           ),
-          child: Text(
-            widget.data,
-            style: const TextStyle(fontSize: 24.0),
-          ),
-          onPressed: () async {
-            await showSelection();
-          },
         ),
       );
     }
 
     if (widget.data is IconData) {
-      return ButtonTheme(
-        height: 60.0,
-        child: OutlineButton(
-          splashColor: Color(widget.deck.deckColor),
-          borderSide: BorderSide(color: Color(widget.deck.deckColor), width: 0.5),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30.0),
+      return StoreConnector<AppState, _ViewModel>(
+        distinct: true,
+        converter: _ViewModel.fromStore,
+        builder: (context, vm) => ButtonTheme(
+          height: 60.0,
+          child: OutlineButton(
+            splashColor: Color(widget.deck.deckColor),
+            borderSide: BorderSide(color: Color(widget.deck.deckColor), width: 0.5),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30.0),
+            ),
+            child: Icon(widget.data),
+            onPressed: () async {
+              vm.setPlayerCard((widget.tapToReveal ? '_${widget.name}' : widget.name));
+              await showSelection();
+            },
           ),
-          child: Icon(widget.data),
-          onPressed: () async {
-            await showSelection();
-          },
         ),
       );
     }
 
     if (widget.data is Color) {
-      return ButtonTheme(
-        height: 60.0,
-        child: RaisedButton(
-          splashColor: Color(widget.deck.deckColor),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30.0),
+      return StoreConnector<AppState, _ViewModel>(
+        distinct: true,
+        converter: _ViewModel.fromStore,
+        builder: (context, vm) => ButtonTheme(
+          height: 60.0,
+          child: RaisedButton(
+            splashColor: Color(widget.deck.deckColor),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30.0),
+            ),
+            padding: const EdgeInsets.all(16.0),
+            onPressed: () async {
+              vm.setPlayerCard((widget.tapToReveal ? '_${widget.name}' : widget.name));
+              await showSelection();
+            },
+            color: widget.data,
           ),
-          padding: const EdgeInsets.all(16.0),
-          onPressed: () async {
-            await showSelection();
-          },
-          color: widget.data,
         ),
       );
     }
@@ -97,8 +117,6 @@ class _DeckTileState extends State<DeckTile> {
   }
 
   void showSelection() async {
-    // vm.setCard(widget.name, false);
-
     await showDialog<bool>(
       context: context,
       builder: (context) => Dialog(
@@ -110,10 +128,8 @@ class _DeckTileState extends State<DeckTile> {
             back: widget.tapToReveal
                 ? CardBack(
                     data: widget.data,
-                    name: widget.name,
                     deck: widget.deck,
-                    // goToRoom: vm.goToRoom,
-                    // setCard: vm.setCard,
+                    name: widget.name,
                   )
                 : null,
             front: widget.tapToReveal
@@ -122,10 +138,8 @@ class _DeckTileState extends State<DeckTile> {
                   )
                 : CardBack(
                     data: widget.data,
-                    name: widget.name,
                     deck: widget.deck,
-                    // goToRoom: vm.goToRoom,
-                    // setCard: vm.setCard,
+                    name: widget.name,
                   ),
             direction: FlipDirection.HORIZONTAL,
             flipOnTouch: widget.tapToReveal,
@@ -137,4 +151,34 @@ class _DeckTileState extends State<DeckTile> {
       ),
     );
   }
+}
+
+class _ViewModel {
+  final Function(String) setPlayerCard;
+
+  _ViewModel({
+    @required this.setPlayerCard,
+  });
+
+  static _ViewModel fromStore(Store<AppState> store) {
+    return _ViewModel(
+      setPlayerCard: (String playerCard) {
+        store.dispatch(
+          SetPlayerAction(
+            player: playerSelector(store.state).copyWith(currentCard: playerCard),
+          ),
+        );
+      },
+    );
+  }
+
+  @override
+  bool operator ==(Object o) {
+    if (identical(this, o)) return true;
+
+    return o is _ViewModel && o.setPlayerCard == setPlayerCard;
+  }
+
+  @override
+  int get hashCode => setPlayerCard.hashCode;
 }

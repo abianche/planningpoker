@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:planningpoker/redux/actions/player.actions.dart';
 import 'package:redux/redux.dart';
 
 import 'package:planningpoker/generated/l10n.dart';
@@ -13,14 +14,14 @@ import 'package:planningpoker/widgets/card_content.dart';
 
 class CardBack extends StatelessWidget {
   final dynamic data;
-  final String name;
   final Deck deck;
+  final String name;
 
   const CardBack({
     Key key,
     @required this.data,
-    @required this.name,
     @required this.deck,
+    @required this.name,
   }) : super(key: key);
 
   @override
@@ -47,6 +48,8 @@ class CardBack extends StatelessWidget {
                   child: FlatButton(
                     onPressed: () {
                       Navigator.of(context).pop();
+                      vm.setPlayerCard((vm.settings.tapToReveal ? '_${this.name}' : this.name));
+
                       vm.setCurrentTab(AppTab.room);
                     },
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(45.0)),
@@ -73,11 +76,13 @@ class _ViewModel {
   final Settings settings;
   final Room room;
 
+  final Function(String) setPlayerCard;
   final Function(AppTab) setCurrentTab;
 
   _ViewModel({
     @required this.settings,
     @required this.room,
+    @required this.setPlayerCard,
     @required this.setCurrentTab,
   });
 
@@ -85,6 +90,13 @@ class _ViewModel {
     return _ViewModel(
       settings: settingsSelector(store.state),
       room: roomSelector(store.state),
+      setPlayerCard: (String playerCard) {
+        store.dispatch(
+          SetPlayerAction(
+            player: playerSelector(store.state).copyWith(currentCard: playerCard),
+          ),
+        );
+      },
       setCurrentTab: (AppTab currentTab) {
         store.dispatch(SetTabAction(currentTab));
       },
