@@ -6,12 +6,10 @@ part 'player.model.g.dart';
 
 /// Model representing the current player.
 class Player {
-  final String uid;
   final String username;
   final String currentCard;
 
   Player({
-    this.uid,
     this.username,
     this.currentCard,
   });
@@ -22,7 +20,6 @@ class Player {
     String currentCard,
   }) {
     return Player(
-      uid: uid ?? this.uid,
       username: username ?? this.username,
       currentCard: currentCard ?? this.currentCard,
     );
@@ -37,20 +34,19 @@ class Player {
   Map<String, dynamic> toJson() => _$PlayerToJson(this);
 
   Player.initialState()
-      : uid = null,
-        username = null,
+      : username = null,
         currentCard = null;
 
   @override
-  String toString() => 'Player(uid: $uid, username: $username, currentCard: $currentCard)';
+  String toString() => 'Player(username: $username, currentCard: $currentCard)';
 
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is Player && o.uid == uid && o.username == username && o.currentCard == currentCard;
+    return o is Player && o.username == username && o.currentCard == currentCard;
   }
 
   @override
-  int get hashCode => uid.hashCode ^ username.hashCode ^ currentCard.hashCode;
+  int get hashCode => username.hashCode ^ currentCard.hashCode;
 }

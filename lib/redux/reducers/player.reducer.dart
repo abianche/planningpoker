@@ -9,7 +9,6 @@ final playerReducer = combineReducers<Player>([
 
 Player _setPlayer(Player player, SetPlayerAction action) {
   return player.copyWith(
-    uid: action.player.uid,
     username: action.player.username,
     currentCard: action.player.currentCard,
   );
