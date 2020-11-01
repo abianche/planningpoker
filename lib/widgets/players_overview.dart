@@ -58,11 +58,11 @@ class PlayersOverview extends StatelessWidget {
                       physics: const ScrollPhysics(),
                       shrinkWrap: true,
                       crossAxisCount: 2,
-                      children: room.players
-                          .map((player) => PlayerCard(
+                      children: room.players.entries
+                          .map((entry) => PlayerCard(
                                 roomId: room.uid,
                                 userName: vm.player.username,
-                                player: player,
+                                player: entry.value,
                               ))
                           .toList(),
                     ),

@@ -11,7 +11,7 @@ part 'room.model.g.dart';
 class Room {
   final String uid;
   final String name;
-  final List<Player> players;
+  final Map<String, Player> players;
 
   Room({
     this.uid,
@@ -22,7 +22,7 @@ class Room {
   Room copyWith({
     String uid,
     String name,
-    List<Player> players,
+    Map<String, Player> players,
   }) {
     return Room(
       uid: uid ?? this.uid,
@@ -38,7 +38,7 @@ class Room {
   Room.initialState()
       : uid = null,
         name = null,
-        players = [];
+        players = {};
 
   @override
   String toString() => 'Room(uid: $uid, name: $name, players: $players)';
@@ -47,7 +47,7 @@ class Room {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is Room && o.uid == uid && o.name == name && listEquals(o.players, players);
+    return o is Room && o.uid == uid && o.name == name && mapEquals(o.players, players);
   }
 
   @override

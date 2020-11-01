@@ -10,10 +10,10 @@ Room _$RoomFromJson(Map<String, dynamic> json) {
   return Room(
     uid: json['uid'] as String,
     name: json['name'] as String,
-    players: (json['players'] as List)
-        ?.map((e) =>
-            e == null ? null : Player.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
+    players: (json['players'] as Map<String, dynamic>)?.map(
+      (k, e) => MapEntry(
+          k, e == null ? null : Player.fromJson(e as Map<String, dynamic>)),
+    ),
   );
 }
 

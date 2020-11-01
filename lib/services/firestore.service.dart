@@ -17,21 +17,21 @@ class FirestoreService {
 
   final firestore = FirebaseFirestore.instance;
   static const _room_collection = "rooms";
+  static const _players_collection = "players";
 
   Future<Room> createRoom(
     String name,
   ) async {
-    CollectionReference rooms = firestore.collection(_room_collection);
+    final rooms = firestore.collection(_room_collection);
 
     final d = await rooms.add(
       {
         'name': name,
-        'players': [],
         'last_updated': DateTime.now().millisecondsSinceEpoch,
       },
     ).catchError((error) => log.e('createRoom | $error'));
 
-    final room = Room(name: name, players: [], uid: d.id);
+    final room = Room(name: name, players: {}, uid: d.id);
     return room;
   }
 
@@ -52,49 +52,36 @@ class FirestoreService {
   /// Returns `true` if the a player with username `playerName` exists in room with uid `roomId`. `false` otherwise.
   Future<bool> playerExists(String roomId, String playerName) async {
     final uid = FirebaseService().auth.currentUser.uid;
-    final dr = await FirebaseFirestore.instance.collection(_room_collection).doc(roomId);
 
-    return firestore.runTransaction((t) async {
-      final ds = await t.get(dr);
-      if (!ds.exists) throw Exception('Room $roomId` does not exist!');
+    final ds = await FirebaseFirestore.instance
+        .collection(_room_collection)
+        .doc(roomId)
+        .collection(_players_collection)
+        .limit(1)
+        .where('username', isEqualTo: playerName)
+        .where('uid', isEqualTo: uid) //FIXME: this should be notEqual
+        .get()
+        .catchError((error) => log.e('playerExists | $error'));
 
-      List<dynamic> playersRaw = ds.data()['players'];
-      List<Player> players = playersRaw.map((e) => Player.fromJson(e)).toList();
+    if (ds.size == 0) return false;
 
-      final playerIndex = players.indexWhere((e) => e.username == playerName && e.uid != uid);
-      if (playerIndex == -1) return false;
-
-      return true;
-    }).catchError((error) => log.e('playerExists | $error'));
+    return true;
   }
 
   Future<void> createPlayer(String roomId, Player player) async {
-    final dr = await FirebaseFirestore.instance.collection(_room_collection).doc(roomId);
+    final cr =
+        await FirebaseFirestore.instance.collection(_room_collection).doc(roomId).collection(_players_collection);
 
-    return firestore.runTransaction((t) async {
-      final ds = await t.get(dr);
-      if (!ds.exists) throw Exception('Room $roomId` does not exist!');
-
-      await ds.reference.update({
-        'players': FieldValue.arrayUnion([player.toJson()])
-      });
-
-      return;
-    }).catchError((error) => log.e('createPlayer | $error'));
+    await cr.doc(player.username).set(player.toJson()).catchError((error) => log.e('createPlayer | $error'));
   }
 
   Future<void> updatePlayerStatus(String roomId, Player player) async {
-    final dr = await FirebaseFirestore.instance.collection(_room_collection).doc(roomId);
+    final dr = await FirebaseFirestore.instance
+        .collection(_room_collection)
+        .doc(roomId)
+        .collection(_players_collection)
+        .doc(player.username);
 
-    return firestore.runTransaction((t) async {
-      final ds = await t.get(dr);
-      if (!ds.exists) throw Exception('Room $roomId` does not exist!');
-
-      await ds.reference.update({
-        'players': FieldValue.arrayUnion([player.toJson()])
-      });
-
-      return;
-    }).catchError((error) => log.e('setPlayerCard | $error'));
+    await dr.set(player.toJson()).catchError((error) => log.e('createPlayer | $error'));
   }
 }
