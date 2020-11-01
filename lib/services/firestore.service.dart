@@ -52,6 +52,7 @@ class FirestoreService {
 
   /// Returns `true` if the a player with username `playerName` exists in room with uid `roomId`. `false` otherwise.
   Future<bool> playerExists(String roomId, String playerName) async {
+    final uid = FirebaseService().auth.currentUser.uid;
     final ds = await this
         .firestore
         .collection(_room_collection)
@@ -63,6 +64,7 @@ class FirestoreService {
         .catchError((error) => log.e('playerExists | $error'));
 
     if (ds.size == 0) return false;
+    if (ds.docs.single.id == uid) return false;
 
     return true;
   }

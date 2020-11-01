@@ -48,7 +48,7 @@ class CardBack extends StatelessWidget {
                   child: FlatButton(
                     onPressed: () {
                       Navigator.of(context).pop();
-                      vm.setPlayerCard((vm.settings.tapToReveal ? '_${this.name}' : this.name));
+                      vm.setPlayerCard(this.name);
 
                       vm.setCurrentTab(AppTab.room);
                     },

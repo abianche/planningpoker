@@ -6,6 +6,7 @@ import 'package:planningpoker/models/player.model.dart';
 import 'package:planningpoker/models/room.model.dart';
 import 'package:planningpoker/models/settings.model.dart';
 import 'package:planningpoker/redux/actions/player.actions.dart';
+import 'package:planningpoker/redux/actions/tab.actions.dart';
 import 'package:planningpoker/redux/selectors/selectors.dart';
 import 'package:planningpoker/redux/states/app_state.dart';
 import 'package:planningpoker/widgets/card_back_mini.dart';
@@ -41,44 +42,64 @@ class PlayerCard extends StatelessWidget {
                       textScaleFactor: 1.25,
                     )
                   : Tooltip(
-                      message: "This is you!",
+                      message: L.of(context).thisIsYou,
                       child: Text(
                         player.username,
                         textScaleFactor: 1.25,
                         style: const TextStyle(fontStyle: FontStyle.italic),
                       ),
                     ),
-              player.isReady()
+              player.isCardConfirmed()
                   ? CardBackMini(card: player.currentCard)
-                  : Center(
-                      child: userName != player.username
-                          ? const CircularProgressIndicator()
-                          : Stack(
-                              alignment: AlignmentDirectional.bottomCenter,
-                              children: [
-                                Opacity(opacity: 0.25, child: CardBackMini(card: player.currentCard?.substring(1))),
-                                Align(
-                                  alignment: Alignment.bottomCenter,
-                                  child: FlatButton(
-                                    onPressed: () {
-                                      vm.setPlayerCard(player.currentCard?.substring(1));
-                                    },
-                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(45.0)),
-                                    child: Text(
-                                      L.of(context).confirm.toUpperCase(),
-                                      style: TextStyle(
-                                        color: vm.settings.darkMode ? Colors.black : Colors.white,
-                                      ),
-                                    ),
-                                    color: Color(
-                                      vm.settings.darkMode ? currentDeck.deckColorDark : currentDeck.deckColor,
-                                    ),
-                                  ),
-                                )
-                              ],
+                  : userName != player.username
+                      ? Center(
+                          child: CircularProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              Color(
+                                vm.settings.darkMode ? currentDeck.deckColorDark : currentDeck.deckColor,
+                              ),
                             ),
-                    ),
-              Container()
+                          ),
+                        )
+                      : Stack(
+                          alignment: AlignmentDirectional.bottomCenter,
+                          children: [
+                            Opacity(opacity: 0.25, child: CardBackMini(card: player.currentCard?.substring(1))),
+                            if (player.currentCard != null)
+                              FlatButton(
+                                onPressed: () {
+                                  vm.setPlayerCard(player.currentCard?.substring(1));
+                                },
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(45.0)),
+                                child: Text(
+                                  L.of(context).confirm.toUpperCase(),
+                                  style: TextStyle(
+                                    color: vm.settings.darkMode ? Colors.black : Colors.white,
+                                  ),
+                                ),
+                                color: Color(
+                                  vm.settings.darkMode ? currentDeck.deckColorDark : currentDeck.deckColor,
+                                ),
+                              )
+                            else
+                              FlatButton(
+                                onPressed: () {
+                                  vm.setCurrentTab(AppTab.deck);
+                                },
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(45.0)),
+                                child: Text(
+                                  L.of(context).pickACard.toUpperCase(),
+                                  style: TextStyle(
+                                    color: vm.settings.darkMode ? Colors.black : Colors.white,
+                                  ),
+                                ),
+                                color: Color(
+                                  vm.settings.darkMode ? currentDeck.deckColorDark : currentDeck.deckColor,
+                                ),
+                              )
+                          ],
+                        ),
+              Container(),
             ],
           ),
         );
@@ -92,11 +113,13 @@ class _ViewModel {
   final Room room;
 
   final Function(String) setPlayerCard;
+  final Function(AppTab) setCurrentTab;
 
   _ViewModel({
     @required this.settings,
     @required this.room,
     @required this.setPlayerCard,
+    @required this.setCurrentTab,
   });
 
   static _ViewModel fromStore(Store<AppState> store) {
@@ -110,6 +133,9 @@ class _ViewModel {
           ),
         );
       },
+      setCurrentTab: (AppTab currentTab) {
+        store.dispatch(SetTabAction(currentTab));
+      },
     );
   }
 
@@ -117,9 +143,13 @@ class _ViewModel {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is _ViewModel && o.settings == settings && o.room == room && o.setPlayerCard == setPlayerCard;
+    return o is _ViewModel &&
+        o.settings == settings &&
+        o.room == room &&
+        o.setPlayerCard == setPlayerCard &&
+        o.setCurrentTab == setCurrentTab;
   }
 
   @override
-  int get hashCode => settings.hashCode ^ room.hashCode ^ setPlayerCard.hashCode;
+  int get hashCode => settings.hashCode ^ room.hashCode ^ setPlayerCard.hashCode ^ setCurrentTab.hashCode;
 }

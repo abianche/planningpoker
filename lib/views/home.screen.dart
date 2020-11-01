@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:planningpoker/redux/actions/player.actions.dart';
 import 'package:redux/redux.dart';
 
 import 'package:planningpoker/data/decks.dart';
@@ -32,6 +33,9 @@ class _HomeScreenState extends State<HomeScreen> {
       converter: _ViewModel.fromStore,
       builder: (context, vm) {
         final currentDeck = all_decks[vm.settings.selectedDeck];
+        if (vm.appTab == AppTab.deck) {
+          vm.resetCard();
+        }
 
         return Scaffold(
           appBar: AppBar(
@@ -82,11 +86,13 @@ class _ViewModel {
   final Settings settings;
 
   final Function(AppTab) setCurrentTab;
+  final Function() resetCard;
 
   _ViewModel({
     @required this.appTab,
     @required this.settings,
     @required this.setCurrentTab,
+    @required this.resetCard,
   });
 
   static _ViewModel fromStore(Store<AppState> store) {
@@ -96,6 +102,20 @@ class _ViewModel {
       setCurrentTab: (AppTab currentTab) {
         store.dispatch(SetTabAction(currentTab));
       },
+      resetCard: () {
+        final player = playerSelector(store.state);
+        String resetCard = player.currentCard;
+
+        if (!player.currentCard.startsWith("_")) {
+          resetCard = '_${resetCard}';
+        }
+
+        store.dispatch(
+          SetPlayerAction(
+            player: player.copyWith(currentCard: resetCard),
+          ),
+        );
+      },
     );
   }
 
@@ -103,9 +123,13 @@ class _ViewModel {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is _ViewModel && o.appTab == appTab && o.settings == settings && o.setCurrentTab == setCurrentTab;
+    return o is _ViewModel &&
+        o.appTab == appTab &&
+        o.settings == settings &&
+        o.setCurrentTab == setCurrentTab &&
+        o.resetCard == resetCard;
   }
 
   @override
-  int get hashCode => appTab.hashCode ^ settings.hashCode ^ setCurrentTab.hashCode;
+  int get hashCode => appTab.hashCode ^ settings.hashCode ^ setCurrentTab.hashCode ^ setCurrentTab.hashCode;
 }

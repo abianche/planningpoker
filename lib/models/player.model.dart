@@ -24,7 +24,7 @@ class Player {
     );
   }
 
-  bool isReady() {
+  bool isCardConfirmed() {
     return this.currentCard != null && !this.currentCard.startsWith("_");
   }
 

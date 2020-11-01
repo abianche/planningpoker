@@ -56,5 +56,6 @@
   "playerName": "Player name",
   "roomName": "Room name",
   "confirm": "Confirm",
-  "thisIsYou": "This is you!"
+  "thisIsYou": "This is you!",
+  "pickACard": "Pick a card"
 }

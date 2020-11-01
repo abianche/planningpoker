@@ -494,6 +494,16 @@ class L {
       args: [],
     );
   }
+
+  /// `Pick a card`
+  String get pickACard {
+    return Intl.message(
+      'Pick a card',
+      name: 'pickACard',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<L> {

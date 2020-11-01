@@ -49,6 +49,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "openRoom" : MessageLookupByLibrary.simpleMessage("Open room"),
     "ops" : MessageLookupByLibrary.simpleMessage("Ops!"),
     "pageNotFound" : MessageLookupByLibrary.simpleMessage("Page not found"),
+    "pickACard" : MessageLookupByLibrary.simpleMessage("Pick a card"),
     "playerAlreadyExistsInRoom" : m1,
     "playerName" : MessageLookupByLibrary.simpleMessage("Player name"),
     "playerNameIsTooLong" : MessageLookupByLibrary.simpleMessage("Player name is too long!"),
