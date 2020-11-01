@@ -85,10 +85,10 @@ class L {
     );
   }
 
-  /// `The picked card require an extra tap to be revelead`
+  /// `The picked card requires an extra tap to be revealed`
   String get tapToRevealInfo {
     return Intl.message(
-      'The picked card require an extra tap to be revelead',
+      'The picked card requires an extra tap to be revealed',
       name: 'tapToRevealInfo',
       desc: '',
       args: [],
@@ -345,10 +345,10 @@ class L {
     );
   }
 
-  /// `Show the intro slides again.`
+  /// `Show the intro slides again`
   String get showTheIntroInfo {
     return Intl.message(
-      'Show the intro slides again.',
+      'Show the intro slides again',
       name: 'showTheIntroInfo',
       desc: '',
       args: [],
@@ -435,10 +435,10 @@ class L {
     );
   }
 
-  /// `Enter player name!`
+  /// `Enter your name!`
   String get enterPlayerName {
     return Intl.message(
-      'Enter player name!',
+      'Enter your name!',
       name: 'enterPlayerName',
       desc: '',
       args: [],

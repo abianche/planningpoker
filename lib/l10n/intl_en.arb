@@ -5,7 +5,7 @@
   "selectDeck": "Select deck",
   "selectDeckInfo": "Pick from pre-configured decks or customize one",
   "tapToReveal": "Tap to reveal",
-  "tapToRevealInfo": "The picked card require an extra tap to be revelead",
+  "tapToRevealInfo": "The picked card requires an extra tap to be revealed",
   "darkMode": "Dark mode",
   "darkModeInfo": "Enable dark mode",
   "vibration": "Vibration",
@@ -31,7 +31,7 @@
   "customDeckSaveTooltip": "Save the configuration",
   "customDeckRestoreTooltip": "Reset the configuration",
   "openRoom": "Open room",
-  "showTheIntroInfo": "Show the intro slides again.",
+  "showTheIntroInfo": "Show the intro slides again",
   "deckName": "{deckName} deck",
   "@deckName": {
     "placeholders": {
@@ -51,7 +51,7 @@
   },
   "enterRoomName": "Enter room name!",
   "roomNameIsTooLong": "Room name is too long!",
-  "enterPlayerName": "Enter player name!",
+  "enterPlayerName": "Enter your name!",
   "playerNameIsTooLong": "Player name is too long!",
   "playerName": "Player name",
   "roomName": "Room name",
