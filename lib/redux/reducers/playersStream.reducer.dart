@@ -1,16 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:planningpoker/redux/actions/room.actions.dart';
+import 'package:planningpoker/services/firestore.service.dart';
 import 'package:redux/redux.dart';
 
-final playersStreamReducer = combineReducers<Stream<DocumentSnapshot>>([
-  TypedReducer<Stream<DocumentSnapshot>, SetRoomAction>(_setPlayersStream),
-  TypedReducer<Stream<DocumentSnapshot>, ResetRoomAction>(_resetPlayersStream),
+final playersStreamReducer = combineReducers<Stream<QuerySnapshot>>([
+  TypedReducer<Stream<QuerySnapshot>, SetRoomAction>(_setPlayersStream),
+  TypedReducer<Stream<QuerySnapshot>, ResetRoomAction>(_resetPlayersStream),
 ]);
 
-Stream<DocumentSnapshot> _setPlayersStream(Stream<DocumentSnapshot> playersStream, SetRoomAction action) {
-  return FirebaseFirestore.instance.collection('rooms').doc(action.room.uid).collection('players')
+Stream<QuerySnapshot> _setPlayersStream(Stream<QuerySnapshot> playersStream, SetRoomAction action) {
+  return FirestoreService().getPlayersStream(action.room.uid);
 }
 
-Stream<DocumentSnapshot> _resetPlayersStream(Stream<DocumentSnapshot> playersStream, ResetRoomAction action) {
+Stream<QuerySnapshot> _resetPlayersStream(Stream<QuerySnapshot> playersStream, ResetRoomAction action) {
   return null;
 }

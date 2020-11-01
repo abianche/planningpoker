@@ -55,5 +55,6 @@
   "playerNameIsTooLong": "Player name is too long!",
   "playerName": "Player name",
   "roomName": "Room name",
-  "confirm": "Confirm"
+  "confirm": "Confirm",
+  "thisIsYou": "This is you!"
 }

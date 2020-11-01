@@ -31,13 +31,14 @@ class FirestoreService {
       },
     ).catchError((error) => log.e('createRoom | $error'));
 
-    final room = Room(name: name, players: {}, uid: d.id);
+    final room = Room(name: name, uid: d.id);
     return room;
   }
 
   /// Returns the `uid` of the room if a room with the given `name` exists. `null` otherwise.
   Future<String> roomExists(String name) async {
-    final ds = await FirebaseFirestore.instance
+    final ds = await this
+        .firestore
         .collection(_room_collection)
         .limit(1)
         .where('name', isEqualTo: name)
@@ -51,15 +52,13 @@ class FirestoreService {
 
   /// Returns `true` if the a player with username `playerName` exists in room with uid `roomId`. `false` otherwise.
   Future<bool> playerExists(String roomId, String playerName) async {
-    final uid = FirebaseService().auth.currentUser.uid;
-
-    final ds = await FirebaseFirestore.instance
+    final ds = await this
+        .firestore
         .collection(_room_collection)
         .doc(roomId)
         .collection(_players_collection)
         .limit(1)
         .where('username', isEqualTo: playerName)
-        .where('uid', isEqualTo: uid) //FIXME: this should be notEqual
         .get()
         .catchError((error) => log.e('playerExists | $error'));
 
@@ -69,21 +68,27 @@ class FirestoreService {
   }
 
   Future<void> createPlayer(String roomId, Player player) async {
-    final cr =
-        await FirebaseFirestore.instance.collection(_room_collection).doc(roomId).collection(_players_collection);
+    final uid = FirebaseService().auth.currentUser.uid;
+    final cr = await this.firestore.collection(_room_collection).doc(roomId).collection(_players_collection);
 
-    await cr.doc(player.username).set(player.toJson()).catchError((error) => log.e('createPlayer | $error'));
+    await cr.doc(uid).set(player.toJson()).catchError((error) => log.e('createPlayer | $error'));
   }
 
   Future<void> updatePlayerStatus(String roomId, Player player) async {
-    final dr = await FirebaseFirestore.instance
-        .collection(_room_collection)
-        .doc(roomId)
-        .collection(_players_collection)
-        .doc(player.username);
+    final uid = FirebaseService().auth.currentUser.uid;
+    final dr = await this.firestore.collection(_room_collection).doc(roomId).collection(_players_collection).doc(uid);
 
-    await dr.set(player.toJson()).catchError((error) => log.e('createPlayer | $error'));
+    await dr.set(player.toJson()).catchError((error) => log.e('updatePlayerStatus | $error'));
   }
 
-  getPlayersStream()
+  Stream<QuerySnapshot> getPlayersStream(String roomId) {
+    return this.firestore.collection(_room_collection).doc(roomId).collection(_players_collection).snapshots();
+  }
+
+  Future<void> deleteCurrentPlayer(String roomId) async {
+    final uid = FirebaseService().auth.currentUser.uid;
+    final cr = await this.firestore.collection(_room_collection).doc(roomId).collection(_players_collection);
+
+    await cr.doc(uid).delete().catchError((error) => log.e('deleteCurrentPlayer | $error'));
+  }
 }

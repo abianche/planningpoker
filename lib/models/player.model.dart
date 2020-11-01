@@ -15,7 +15,6 @@ class Player {
   });
 
   Player copyWith({
-    String uid,
     String username,
     String currentCard,
   }) {

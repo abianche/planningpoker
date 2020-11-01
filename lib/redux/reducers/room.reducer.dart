@@ -11,7 +11,6 @@ Room _setRoom(Room room, SetRoomAction action) {
   return room.copyWith(
     uid: action.room.uid,
     name: action.room.name,
-    players: action.room.players,
   );
 }
 

@@ -484,6 +484,16 @@ class L {
       args: [],
     );
   }
+
+  /// `This is you!`
+  String get thisIsYou {
+    return Intl.message(
+      'This is you!',
+      name: 'thisIsYou',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<L> {

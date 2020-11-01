@@ -1,6 +1,4 @@
-import 'package:flutter/foundation.dart';
 import 'package:json_annotation/json_annotation.dart';
-
 import 'package:planningpoker/models/player.model.dart';
 
 part 'room.model.g.dart';
@@ -11,12 +9,10 @@ part 'room.model.g.dart';
 class Room {
   final String uid;
   final String name;
-  final Map<String, Player> players;
 
   Room({
     this.uid,
     this.name,
-    this.players,
   });
 
   Room copyWith({
@@ -27,7 +23,6 @@ class Room {
     return Room(
       uid: uid ?? this.uid,
       name: name ?? this.name,
-      players: players ?? this.players,
     );
   }
 
@@ -37,19 +32,18 @@ class Room {
 
   Room.initialState()
       : uid = null,
-        name = null,
-        players = {};
+        name = null;
 
   @override
-  String toString() => 'Room(uid: $uid, name: $name, players: $players)';
+  String toString() => 'Room(uid: $uid, name: $name)';
 
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is Room && o.uid == uid && o.name == name && mapEquals(o.players, players);
+    return o is Room && o.uid == uid && o.name == name;
   }
 
   @override
-  int get hashCode => uid.hashCode ^ name.hashCode ^ players.hashCode;
+  int get hashCode => uid.hashCode ^ name.hashCode;
 }

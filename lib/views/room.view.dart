@@ -101,7 +101,6 @@ class _RoomViewState extends State<RoomView> {
                     Room room;
                     final player = Player(
                       username: playerName,
-                      uid: FirebaseService().auth.currentUser.uid,
                     );
 
                     if (roomId != null) {
@@ -168,8 +167,6 @@ class _RoomViewState extends State<RoomView> {
         if (user == null) {
           user = await _signIn();
         }
-
-        store.dispatch(SetPlayerAction(player: playerSelector(store.state).copyWith(uid: user.uid)));
       },
       builder: (context, vm) => Container(
         child: vm.room.uid == null

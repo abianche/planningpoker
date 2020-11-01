@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart' show DocumentSnapshot;
+import 'package:cloud_firestore/cloud_firestore.dart' show QuerySnapshot;
 import 'package:planningpoker/models/player.model.dart';
 import 'package:planningpoker/models/room.model.dart';
 import 'package:planningpoker/models/settings.model.dart';
@@ -19,5 +19,5 @@ Player playerSelector(AppState state) => state.player;
 /// Selectes the [Room] portion of the state.
 Room roomSelector(AppState state) => state.room;
 
-/// Selectes the [Stream<DocumentSnapshot>] portion of the state.
-Stream<DocumentSnapshot> playersStreamSelector(AppState state) => state.playersStream;
+/// Selectes the [Stream<QuerySnapshot>] portion of the state.
+Stream<QuerySnapshot> playersStreamSelector(AppState state) => state.playersStream;

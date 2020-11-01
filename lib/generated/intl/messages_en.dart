@@ -65,6 +65,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "showTheIntroInfo" : MessageLookupByLibrary.simpleMessage("Show the intro slides again."),
     "tapToReveal" : MessageLookupByLibrary.simpleMessage("Tap to reveal"),
     "tapToRevealInfo" : MessageLookupByLibrary.simpleMessage("The picked card require an extra tap to be revelead"),
+    "thisIsYou" : MessageLookupByLibrary.simpleMessage("This is you!"),
     "title" : MessageLookupByLibrary.simpleMessage("Planning Poker Online"),
     "username" : MessageLookupByLibrary.simpleMessage("Username"),
     "vibration" : MessageLookupByLibrary.simpleMessage("Vibration"),

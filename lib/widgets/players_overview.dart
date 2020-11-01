@@ -8,6 +8,7 @@ import 'package:planningpoker/redux/actions/player.actions.dart';
 import 'package:planningpoker/redux/actions/room.actions.dart';
 import 'package:planningpoker/redux/selectors/selectors.dart';
 import 'package:planningpoker/redux/states/app_state.dart';
+import 'package:planningpoker/services/firestore.service.dart';
 import 'package:planningpoker/widgets/player_card.dart';
 import 'package:redux/redux.dart';
 
@@ -40,32 +41,32 @@ class PlayersOverview extends StatelessWidget {
                     icon: const Icon(Icons.logout),
                     onPressed: () {
                       vm.logout();
+                      FirestoreService().deleteCurrentPlayer(vm.room.uid);
                     },
                   ),
                 ],
               ),
             ),
             const Divider(),
-            StreamBuilder<DocumentSnapshot>(
+            StreamBuilder<QuerySnapshot>(
               stream: vm.playersStream,
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  final ds = snapshot.data;
-                  final roomData = ds.data();
-                  roomData.putIfAbsent('uid', () => ds.id);
-                  final room = Room.fromJson(roomData);
+                  final qs = snapshot.data;
+                  final playersData = qs.docs;
 
                   return Expanded(
                     child: GridView.count(
                       physics: const ScrollPhysics(),
                       shrinkWrap: true,
                       crossAxisCount: 2,
-                      children: room.players.entries
-                          .map((entry) => PlayerCard(
-                                roomId: room.uid,
-                                userName: vm.player.username,
-                                player: entry.value,
-                              ))
+                      children: playersData
+                          .map((qds) => PlayerCard(
+                              roomId: vm.room.uid,
+                              userName: vm.player.username,
+                              player: Player.fromJson(
+                                (qds.data()),
+                              )))
                           .toList(),
                     ),
                   );
@@ -90,7 +91,7 @@ class PlayersOverview extends StatelessWidget {
 class _ViewModel {
   final Player player;
   final Room room;
-  final Stream<DocumentSnapshot> playersStream;
+  final Stream<QuerySnapshot> playersStream;
 
   final Function() logout;
 

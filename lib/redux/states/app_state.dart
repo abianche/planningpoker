@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart' show DocumentSnapshot;
+import 'package:cloud_firestore/cloud_firestore.dart' show QuerySnapshot;
 import 'package:planningpoker/models/player.model.dart';
 import 'package:planningpoker/models/room.model.dart';
 import 'package:planningpoker/models/settings.model.dart';
@@ -11,7 +11,7 @@ class AppState {
   final Settings settings;
   final Player player;
   final Room room;
-  final Stream<DocumentSnapshot> playersStream;
+  final Stream<QuerySnapshot> playersStream;
 
   AppState({
     this.initialized,
@@ -36,7 +36,7 @@ class AppState {
     Settings settings,
     Player player,
     Room room,
-    Stream<DocumentSnapshot> playersStream,
+    Stream<QuerySnapshot> playersStream,
   }) {
     return AppState(
       initialized: initialized ?? this.initialized,
