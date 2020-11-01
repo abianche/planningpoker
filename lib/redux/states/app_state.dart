@@ -11,7 +11,7 @@ class AppState {
   final Settings settings;
   final Player player;
   final Room room;
-  final Stream<DocumentSnapshot> roomStream;
+  final Stream<DocumentSnapshot> playersStream;
 
   AppState({
     this.initialized,
@@ -19,7 +19,7 @@ class AppState {
     this.settings,
     this.player,
     this.room,
-    this.roomStream,
+    this.playersStream,
   });
 
   AppState.initialState()
@@ -28,7 +28,7 @@ class AppState {
         settings = Settings.initialState(),
         player = Player.initialState(),
         room = Room.initialState(),
-        roomStream = null;
+        playersStream = null;
 
   AppState copyWith({
     bool initialized,
@@ -36,7 +36,7 @@ class AppState {
     Settings settings,
     Player player,
     Room room,
-    Stream<DocumentSnapshot> roomStream,
+    Stream<DocumentSnapshot> playersStream,
   }) {
     return AppState(
       initialized: initialized ?? this.initialized,
@@ -44,13 +44,13 @@ class AppState {
       settings: settings ?? this.settings,
       player: player ?? this.player,
       room: room ?? this.room,
-      roomStream: roomStream ?? this.roomStream,
+      playersStream: playersStream ?? this.playersStream,
     );
   }
 
   @override
   String toString() {
-    return 'AppState(initialized: $initialized, activeTab: $activeTab, settings: $settings, player: $player, room: $room, roomStream: $roomStream)';
+    return 'AppState(initialized: $initialized, activeTab: $activeTab, settings: $settings, player: $player, room: $room, playersStream: $playersStream)';
   }
 
   @override
@@ -63,7 +63,7 @@ class AppState {
         o.settings == settings &&
         o.player == player &&
         o.room == room &&
-        o.roomStream == roomStream;
+        o.playersStream == playersStream;
   }
 
   @override
@@ -73,6 +73,6 @@ class AppState {
         settings.hashCode ^
         player.hashCode ^
         room.hashCode ^
-        roomStream.hashCode;
+        playersStream.hashCode;
   }
 }

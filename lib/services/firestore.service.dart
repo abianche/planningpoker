@@ -84,4 +84,6 @@ class FirestoreService {
 
     await dr.set(player.toJson()).catchError((error) => log.e('createPlayer | $error'));
   }
+
+  getPlayersStream()
 }

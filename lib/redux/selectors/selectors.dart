@@ -20,4 +20,4 @@ Player playerSelector(AppState state) => state.player;
 Room roomSelector(AppState state) => state.room;
 
 /// Selectes the [Stream<DocumentSnapshot>] portion of the state.
-Stream<DocumentSnapshot> roomStreamSelector(AppState state) => state.roomStream;
+Stream<DocumentSnapshot> playersStreamSelector(AppState state) => state.playersStream;

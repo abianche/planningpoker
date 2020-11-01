@@ -47,11 +47,13 @@ class PlayersOverview extends StatelessWidget {
             ),
             const Divider(),
             StreamBuilder<DocumentSnapshot>(
-              stream: vm.roomStream,
+              stream: vm.playersStream,
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   final ds = snapshot.data;
-                  final room = Room.fromJson(ds.data());
+                  final roomData = ds.data();
+                  roomData.putIfAbsent('uid', () => ds.id);
+                  final room = Room.fromJson(roomData);
 
                   return Expanded(
                     child: GridView.count(
@@ -88,14 +90,14 @@ class PlayersOverview extends StatelessWidget {
 class _ViewModel {
   final Player player;
   final Room room;
-  final Stream<DocumentSnapshot> roomStream;
+  final Stream<DocumentSnapshot> playersStream;
 
   final Function() logout;
 
   _ViewModel({
     @required this.player,
     @required this.room,
-    @required this.roomStream,
+    @required this.playersStream,
     @required this.logout,
   });
 
@@ -103,7 +105,7 @@ class _ViewModel {
     return _ViewModel(
       player: playerSelector(store.state),
       room: roomSelector(store.state),
-      roomStream: roomStreamSelector(store.state),
+      playersStream: playersStreamSelector(store.state),
       logout: () {
         store.dispatch(ResetRoomAction());
         store.dispatch(ResetPlayerAction());
@@ -115,11 +117,15 @@ class _ViewModel {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is _ViewModel && o.player == player && o.room == room && o.roomStream == roomStream && o.logout == logout;
+    return o is _ViewModel &&
+        o.player == player &&
+        o.room == room &&
+        o.playersStream == playersStream &&
+        o.logout == logout;
   }
 
   @override
   int get hashCode {
-    return player.hashCode ^ room.hashCode ^ roomStream.hashCode ^ logout.hashCode;
+    return player.hashCode ^ room.hashCode ^ playersStream.hashCode ^ logout.hashCode;
   }
 }
