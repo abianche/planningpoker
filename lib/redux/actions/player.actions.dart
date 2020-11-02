@@ -12,3 +12,5 @@ class SetPlayerAction {
 }
 
 class ResetPlayerAction {}
+
+class LoadPlayerAction {}

@@ -36,8 +36,8 @@ class _RoomViewState extends State<RoomView> {
     roomController.clear();
     playerController.clear();
 
-    roomController.text = "test";
-    playerController.text = "playerone";
+    roomController.text = vm.room.name;
+    playerController.text = vm.player.username;
 
     return showDialog(
         barrierDismissible: false,

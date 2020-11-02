@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:planningpoker/redux/actions/player.actions.dart';
-import 'package:redux/redux.dart';
-
 import 'package:planningpoker/data/decks.dart';
 import 'package:planningpoker/generated/l10n.dart';
 import 'package:planningpoker/models/settings.model.dart';
+import 'package:planningpoker/redux/actions/player.actions.dart';
 import 'package:planningpoker/redux/actions/tab.actions.dart';
 import 'package:planningpoker/redux/selectors/selectors.dart';
 import 'package:planningpoker/redux/states/app_state.dart';
 import 'package:planningpoker/router.dart';
 import 'package:planningpoker/views/deck.view.dart';
 import 'package:planningpoker/views/room.view.dart';
+import 'package:redux/redux.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key key}) : super(key: key);
@@ -104,17 +103,19 @@ class _ViewModel {
       },
       resetCard: () {
         final player = playerSelector(store.state);
-        String resetCard = player.currentCard;
+        if (player.currentCard != null) {
+          String resetCard = player.currentCard;
 
-        if (!player.currentCard.startsWith("_")) {
-          resetCard = '_${resetCard}';
+          if (!player.currentCard.startsWith("_")) {
+            resetCard = '_${resetCard}';
+          }
+
+          store.dispatch(
+            SetPlayerAction(
+              player: player.copyWith(currentCard: resetCard),
+            ),
+          );
         }
-
-        store.dispatch(
-          SetPlayerAction(
-            player: player.copyWith(currentCard: resetCard),
-          ),
-        );
       },
     );
   }

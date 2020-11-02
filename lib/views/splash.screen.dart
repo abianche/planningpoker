@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:planningpoker/redux/actions/player.actions.dart';
+import 'package:planningpoker/redux/actions/room.actions.dart';
 import 'package:redux/redux.dart';
 
 import 'package:planningpoker/redux/actions/settings.actions.dart';
@@ -50,6 +52,8 @@ class _ViewModel {
       seenIntro: settingsSelector(store.state).seenIntro,
       getSettings: () {
         store.dispatch(LoadSettingsAction());
+        store.dispatch(LoadRoomAction());
+        store.dispatch(LoadPlayerAction());
       },
     );
   }

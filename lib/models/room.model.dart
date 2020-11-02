@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:planningpoker/models/player.model.dart';
 
 part 'room.model.g.dart';
 
@@ -18,7 +17,6 @@ class Room {
   Room copyWith({
     String uid,
     String name,
-    Map<String, Player> players,
   }) {
     return Room(
       uid: uid ?? this.uid,

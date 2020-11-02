@@ -12,3 +12,5 @@ class SetRoomAction {
 }
 
 class ResetRoomAction {}
+
+class LoadRoomAction {}
