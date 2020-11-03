@@ -15,7 +15,6 @@ import 'package:planningpoker/redux/states/app_state.dart';
 import 'package:planningpoker/router.dart';
 import 'package:redux/redux.dart';
 import 'package:share/share.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:vibration/vibration.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -174,18 +173,18 @@ class SettingsScreen extends StatelessWidget {
               },
               trailing: const Icon(Icons.share),
             ),
-            ListTile(
-              title: Text(L.of(context).followMe),
-              subtitle: Text(L.of(context).followMeInfo),
-              onTap: () async {
-                if (await canLaunch(PROFILE_URL)) {
-                  await launch(PROFILE_URL);
-                } else {
-                  throw 'Could not launch $PROFILE_URL';
-                }
-              },
-              trailing: const Icon(Icons.sports_bar),
-            ),
+            // ListTile(
+            //   title: Text(L.of(context).followMe),
+            //   subtitle: Text(L.of(context).followMeInfo),
+            //   onTap: () async {
+            //     if (await canLaunch(PROFILE_URL)) {
+            //       await launch(PROFILE_URL);
+            //     } else {
+            //       throw 'Could not launch $PROFILE_URL';
+            //     }
+            //   },
+            //   trailing: const Icon(Icons.sports_bar),
+            // ),
           ],
         ),
       ),
