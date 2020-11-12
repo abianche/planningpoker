@@ -2,11 +2,11 @@
 # following page: https://dart.dev/tools/pub/pubspec
 
 name: planningpoker
-description: A new Flutter project.
+description: Planning Poker Online app for Android and iOS.
 
 publish_to: "none"
 
-version: 3.0.0+21
+version: 3.0.0+22
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
@@ -28,7 +28,7 @@ dependencies:
   redux: ^4.0.0+3
   flutter_redux: ^0.7.0
 
-  vibration: ^1.7.1
+  vibration: ^1.7.2
   package_info: ^0.4.3+2
   launch_review: ^2.0.0
   share: ^0.6.5+4
