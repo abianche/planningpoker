@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:planningpoker/redux/actions/player.actions.dart';
+import 'package:planningpoker/services/firebase.service.dart';
 import 'package:redux/redux.dart';
 
 import 'package:planningpoker/generated/l10n.dart';
@@ -42,7 +43,7 @@ class CardBack extends StatelessWidget {
                 filterQuality: FilterQuality.high,
               ),
               CardContent(data: data),
-              if (vm.room?.uid != null)
+              if (FirebaseService().auth.currentUser != null && vm.room?.uid != null)
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: FlatButton(
