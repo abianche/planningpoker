@@ -9,6 +9,7 @@ import 'package:planningpoker/redux/actions/room.actions.dart';
 import 'package:planningpoker/redux/selectors/selectors.dart';
 import 'package:planningpoker/redux/states/app_state.dart';
 import 'package:planningpoker/services/firestore.service.dart';
+import 'package:planningpoker/utils.dart';
 import 'package:planningpoker/widgets/player_card.dart';
 import 'package:redux/redux.dart';
 
@@ -24,7 +25,7 @@ class PlayersOverview extends StatelessWidget {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 0.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -54,20 +55,28 @@ class PlayersOverview extends StatelessWidget {
                 if (snapshot.hasData) {
                   final qs = snapshot.data;
                   final playersData = qs.docs;
+                  // calc avg
 
                   return Expanded(
-                    child: GridView.count(
-                      physics: const ScrollPhysics(),
-                      shrinkWrap: true,
-                      crossAxisCount: 2,
-                      children: playersData
-                          .map((qds) => PlayerCard(
-                              roomId: vm.room.uid,
-                              userName: vm.player.username,
-                              player: Player.fromJson(
-                                (qds.data()),
-                              )))
-                          .toList(),
+                    child: Column(
+                      children: [
+                        PlayerOverviewAvg(playersData: playersData),
+                        Expanded(
+                          child: GridView.count(
+                            physics: const ScrollPhysics(),
+                            shrinkWrap: true,
+                            crossAxisCount: 2,
+                            children: playersData
+                                .map((qds) => PlayerCard(
+                                    roomId: vm.room.uid,
+                                    userName: vm.player.username,
+                                    player: Player.fromJson(
+                                      (qds.data()),
+                                    )))
+                                .toList(),
+                          ),
+                        ),
+                      ],
                     ),
                   );
                 } else if (snapshot.hasError) {
@@ -82,6 +91,61 @@ class PlayersOverview extends StatelessWidget {
               },
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class PlayerOverviewAvg extends StatelessWidget {
+  final List<QueryDocumentSnapshot> playersData;
+
+  const PlayerOverviewAvg({
+    Key key,
+    @required this.playersData,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    double totalNumber = 0.0;
+    int totalNumberCount = 0;
+    List<String> symbols = [];
+
+    playersData.forEach((qds) {
+      final player = Player.fromJson(qds.data());
+      if (!player.isCardConfirmed()) {
+        return;
+      }
+
+      final data = getTileDataFromName(player.currentCard);
+      if (data is String) {
+        final number = int.tryParse(data);
+
+        if (number != null) {
+          totalNumber += number;
+          totalNumberCount++;
+          return;
+        }
+
+        if (data == "½") {
+          totalNumber += 0.5;
+          totalNumberCount++;
+          return;
+        }
+
+        symbols.add(data);
+        return;
+      }
+
+      symbols.add(player.currentCard[0].toUpperCase());
+    });
+
+    double average = totalNumber / totalNumberCount;
+    return Container(
+      child: Text(
+        '${average.toStringAsFixed(1)} ${symbols.join(" ")}',
+        style: const TextStyle(
+          fontStyle: FontStyle.italic,
         ),
       ),
     );
