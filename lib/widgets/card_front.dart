@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:planningpoker/generated/l10n.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:planningpoker/models/deck.model.dart';
 
 class CardFront extends StatelessWidget {
@@ -26,7 +26,7 @@ class CardFront extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(28.0),
                 child: Text(
-                  L.of(context).title,
+                  AppLocalizations.of(context).title,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: Theme.of(context).textTheme.headline5.fontSize,
@@ -42,7 +42,7 @@ class CardFront extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    L.of(context).tapToReveal,
+                    AppLocalizations.of(context).tapToReveal,
                     style: const TextStyle(
                       fontStyle: FontStyle.italic,
                       color: Colors.white,

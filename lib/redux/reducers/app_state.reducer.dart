@@ -1,7 +1,7 @@
 import 'package:planningpoker/redux/reducers/init.reducer.dart';
 import 'package:planningpoker/redux/reducers/player.reducer.dart';
-import 'package:planningpoker/redux/reducers/room.reducer.dart';
 import 'package:planningpoker/redux/reducers/playersStream.reducer.dart';
+import 'package:planningpoker/redux/reducers/room.reducer.dart';
 import 'package:planningpoker/redux/reducers/settings.reducer.dart';
 import 'package:planningpoker/redux/reducers/tabs.reducer.dart';
 import 'package:planningpoker/redux/states/app_state.dart';

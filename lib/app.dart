@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:planningpoker/generated/l10n.dart';
 import 'package:planningpoker/redux/selectors/selectors.dart';
 import 'package:planningpoker/redux/states/app_state.dart';
 import 'package:planningpoker/router.dart';
@@ -25,14 +24,9 @@ class App extends StatelessWidget {
         distinct: true,
         converter: _ViewModel.fromStore,
         builder: (context, vm) => MaterialApp(
-          onGenerateTitle: (context) => L.of(context).title,
-          localizationsDelegates: [
-            L.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: L.delegate.supportedLocales,
+          onGenerateTitle: (context) => AppLocalizations.of(context).title,
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
           theme: getTheme(context, vm.darkMode),
           initialRoute: Routes.root,
           routes: getRoutes(),

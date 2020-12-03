@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:planningpoker/generated/l10n.dart';
 import 'package:planningpoker/models/player.model.dart';
 import 'package:planningpoker/models/room.model.dart';
 import 'package:planningpoker/redux/actions/player.actions.dart';
@@ -32,13 +32,13 @@ class PlayersOverview extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('${L.of(context).room}: ${vm.room.name}'),
+                      Text('${AppLocalizations.of(context).room}: ${vm.room.name}'),
                       const SizedBox(height: 5),
-                      Text('${L.of(context).username}: ${vm.player.username}'),
+                      Text('${AppLocalizations.of(context).username}: ${vm.player.username}'),
                     ],
                   ),
                   IconButton(
-                    tooltip: L.of(context).logout,
+                    tooltip: AppLocalizations.of(context).logout,
                     icon: const Icon(Icons.logout),
                     onPressed: () {
                       vm.logout();

@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:planningpoker/generated/l10n.dart';
 import 'package:planningpoker/redux/actions/settings.actions.dart';
 import 'package:planningpoker/redux/selectors/selectors.dart';
 import 'package:planningpoker/redux/states/app_state.dart';
@@ -61,43 +61,43 @@ class _CustomDeckSetupState extends State<CustomDeckSetup> {
           return Scaffold(
             key: scaffoldKey,
             appBar: AppBar(
-              title: Text(L.of(context).customDeckSetup),
+              title: Text(AppLocalizations.of(context).customDeckSetup),
               backgroundColor: Colors.black,
               actions: <Widget>[
                 IconButton(
                   icon: const Icon(Icons.save),
-                  tooltip: L.of(context).customDeckSaveTooltip,
+                  tooltip: AppLocalizations.of(context).customDeckSaveTooltip,
                   onPressed: () {
                     vm.setCustomDeck(currentCustomDeck);
 
-                    scaffoldKey.currentState.removeCurrentSnackBar();
+                    ScaffoldMessenger.of(context).removeCurrentSnackBar();
                     final snackBar = SnackBar(
                       content: Text(
-                        L.of(context).customDeckSaveMessage,
+                        AppLocalizations.of(context).customDeckSaveMessage,
                         textAlign: TextAlign.center,
                       ),
                       backgroundColor: Colors.green,
                     );
-                    scaffoldKey.currentState.showSnackBar(snackBar);
+                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
                   },
                 ),
                 IconButton(
                   icon: const Icon(Icons.restore_page),
-                  tooltip: L.of(context).customDeckRestoreTooltip,
+                  tooltip: AppLocalizations.of(context).customDeckRestoreTooltip,
                   onPressed: () {
                     setState(() {
                       currentCustomDeck = originalCustomDeck;
                     });
 
-                    scaffoldKey.currentState.removeCurrentSnackBar();
+                    ScaffoldMessenger.of(context).removeCurrentSnackBar();
                     final snackBar = SnackBar(
                       content: Text(
-                        L.of(context).customDeckRestoreMessage,
+                        AppLocalizations.of(context).customDeckRestoreMessage,
                         textAlign: TextAlign.center,
                       ),
                       backgroundColor: Colors.grey,
                     );
-                    scaffoldKey.currentState.showSnackBar(snackBar);
+                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
                   },
                 ),
               ],

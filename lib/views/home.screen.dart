@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:planningpoker/data/decks.dart';
-import 'package:planningpoker/generated/l10n.dart';
 import 'package:planningpoker/models/settings.model.dart';
 import 'package:planningpoker/redux/actions/player.actions.dart';
 import 'package:planningpoker/redux/actions/tab.actions.dart';
@@ -41,9 +41,9 @@ class _HomeScreenState extends State<HomeScreen> {
             title: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(L.of(context).title),
+                Text(AppLocalizations.of(context).title),
                 Text(
-                  L.of(context).deckName(currentDeck.deckName),
+                  AppLocalizations.of(context).deckName(currentDeck.deckName),
                   textScaleFactor: 0.9,
                 ),
               ],
@@ -65,11 +65,11 @@ class _HomeScreenState extends State<HomeScreen> {
             onTap: (value) => setState(() => vm.setCurrentTab(AppTab.values[value])),
             items: [
               BottomNavigationBarItem(
-                label: L.of(context).deck,
+                label: AppLocalizations.of(context).deck,
                 icon: const Icon(Icons.amp_stories),
               ),
               BottomNavigationBarItem(
-                label: L.of(context).room,
+                label: AppLocalizations.of(context).room,
                 icon: const Icon(Icons.people),
               ),
             ],

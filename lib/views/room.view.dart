@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:planningpoker/generated/l10n.dart';
 import 'package:planningpoker/logger.dart';
 import 'package:planningpoker/models/player.model.dart';
 import 'package:planningpoker/models/room.model.dart';
@@ -44,7 +44,7 @@ class _RoomViewState extends State<RoomView> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text(L.of(context).joinARoom),
+            title: Text(AppLocalizations.of(context).joinARoom),
             content: SingleChildScrollView(
               child: Form(
                 key: _keyJoinRoomForm,
@@ -55,14 +55,14 @@ class _RoomViewState extends State<RoomView> {
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       controller: roomController,
                       decoration: InputDecoration(
-                        labelText: L.of(context).roomName,
+                        labelText: AppLocalizations.of(context).roomName,
                       ),
                       validator: (value) {
                         if (value.isEmpty) {
-                          return L.of(context).enterRoomName;
+                          return AppLocalizations.of(context).enterRoomName;
                         }
                         if (value.length > 16) {
-                          return L.of(context).roomNameIsTooLong;
+                          return AppLocalizations.of(context).roomNameIsTooLong;
                         }
 
                         return null;
@@ -73,14 +73,14 @@ class _RoomViewState extends State<RoomView> {
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       controller: playerController,
                       decoration: InputDecoration(
-                        labelText: L.of(context).playerName,
+                        labelText: AppLocalizations.of(context).playerName,
                       ),
                       validator: (value) {
                         if (value.isEmpty) {
-                          return L.of(context).enterPlayerName;
+                          return AppLocalizations.of(context).enterPlayerName;
                         }
                         if (value.length > 30) {
-                          return L.of(context).playerNameIsTooLong;
+                          return AppLocalizations.of(context).playerNameIsTooLong;
                         }
 
                         return null;
@@ -111,8 +111,8 @@ class _RoomViewState extends State<RoomView> {
                           context: context,
                           barrierColor: Colors.transparent,
                           builder: (context) => AlertDialog(
-                            title: Text(L.of(context).ops),
-                            content: Text(L.of(context).playerAlreadyExistsInRoom(playerName, roomName)),
+                            title: Text(AppLocalizations.of(context).ops),
+                            content: Text(AppLocalizations.of(context).playerAlreadyExistsInRoom(playerName, roomName)),
                             actions: [
                               FlatButton(
                                 onPressed: () {
@@ -174,7 +174,7 @@ class _RoomViewState extends State<RoomView> {
                 child: FlatButton.icon(
                   onPressed: () => joinOrCreateRoom(vm),
                   icon: const Icon(Icons.group_add),
-                  label: Text(L.of(context).joinARoom),
+                  label: Text(AppLocalizations.of(context).joinARoom),
                 ),
               )
             : const PlayersOverview(),

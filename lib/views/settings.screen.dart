@@ -1,12 +1,12 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:launch_review/launch_review.dart';
 import 'package:package_info/package_info.dart';
 import 'package:planningpoker/constants.dart';
 import 'package:planningpoker/data/decks.dart';
-import 'package:planningpoker/generated/l10n.dart';
 import 'package:planningpoker/models/deck.model.dart';
 import 'package:planningpoker/models/settings.model.dart';
 import 'package:planningpoker/redux/actions/settings.actions.dart';
@@ -28,14 +28,14 @@ class SettingsScreen extends StatelessWidget {
       converter: _ViewModel.fromStore,
       builder: (context, vm) => Scaffold(
         appBar: AppBar(
-          title: Text(L.of(context).title),
+          title: Text(AppLocalizations.of(context).title),
           backgroundColor: Colors.black,
         ),
         body: ListView(
           children: [
             ExpansionTile(
-              title: Text(L.of(context).selectDeck),
-              subtitle: Text(L.of(context).selectDeckInfo),
+              title: Text(AppLocalizations.of(context).selectDeck),
+              subtitle: Text(AppLocalizations.of(context).selectDeckInfo),
               children: [
                 RadioListTile(
                   title: Text(standard_deck.deckName),
@@ -87,24 +87,24 @@ class SettingsScreen extends StatelessWidget {
             ),
             const Divider(),
             SwitchListTile(
-              title: Text(L.of(context).tapToReveal),
-              subtitle: Text(L.of(context).tapToRevealInfo),
+              title: Text(AppLocalizations.of(context).tapToReveal),
+              subtitle: Text(AppLocalizations.of(context).tapToRevealInfo),
               value: vm.settings.tapToReveal,
               onChanged: (bool value) => vm.setSettings(
                 vm.settings.copyWith(tapToReveal: value),
               ),
             ),
             SwitchListTile(
-              title: Text(L.of(context).darkMode),
-              subtitle: Text(L.of(context).darkModeInfo),
+              title: Text(AppLocalizations.of(context).darkMode),
+              subtitle: Text(AppLocalizations.of(context).darkModeInfo),
               value: vm.settings.darkMode,
               onChanged: (bool value) => vm.setSettings(
                 vm.settings.copyWith(darkMode: value),
               ),
             ),
             SwitchListTile(
-              title: Text(L.of(context).vibration),
-              subtitle: Text(L.of(context).vibrationInfo),
+              title: Text(AppLocalizations.of(context).vibration),
+              subtitle: Text(AppLocalizations.of(context).vibrationInfo),
               value: vm.settings.vibration,
               onChanged: (bool value) async {
                 vm.setSettings(
@@ -118,8 +118,8 @@ class SettingsScreen extends StatelessWidget {
             ),
             const Divider(),
             ListTile(
-              title: Text(L.of(context).whatIsPlanningPoker),
-              subtitle: Text(L.of(context).instructions),
+              title: Text(AppLocalizations.of(context).whatIsPlanningPoker),
+              subtitle: Text(AppLocalizations.of(context).instructions),
               onTap: () => Navigator.of(context).pushNamed(Routes.settings_info),
             ),
             FutureBuilder(
@@ -133,14 +133,14 @@ class SettingsScreen extends StatelessWidget {
                   );
                 } else if (snapshot.hasError) {
                   return ListTile(
-                    title: Text('${L.of(context).about} ${L.of(context).title}'),
-                    subtitle: Text(L.of(context).error),
+                    title: Text('${AppLocalizations.of(context).about} ${AppLocalizations.of(context).title}'),
+                    subtitle: Text(AppLocalizations.of(context).error),
                     enabled: false,
                   );
                 } else {
                   return ListTile(
-                    title: Text('${L.of(context).about} ${L.of(context).title}'),
-                    subtitle: Text(L.of(context).loading),
+                    title: Text('${AppLocalizations.of(context).about} ${AppLocalizations.of(context).title}'),
+                    subtitle: Text(AppLocalizations.of(context).loading),
                     enabled: false,
                   );
                 }
@@ -148,35 +148,35 @@ class SettingsScreen extends StatelessWidget {
             ),
             const Divider(),
             ListTile(
-              title: Text(L.of(context).showTheIntro),
-              subtitle: Text(L.of(context).showTheIntroInfo),
+              title: Text(AppLocalizations.of(context).showTheIntro),
+              subtitle: Text(AppLocalizations.of(context).showTheIntroInfo),
               onTap: () {
                 Navigator.of(context).pushNamed(Routes.settings_intro);
               },
               trailing: const Icon(Icons.school),
             ),
             ListTile(
-              title: Text(L.of(context).rateThisApp),
-              subtitle: Text(L.of(context).rateThisAppInfo),
+              title: Text(AppLocalizations.of(context).rateThisApp),
+              subtitle: Text(AppLocalizations.of(context).rateThisAppInfo),
               onTap: () {
                 LaunchReview.launch();
               },
               trailing: const Icon(Icons.thumb_up),
             ),
             ListTile(
-              title: Text(L.of(context).shareThisApp),
-              subtitle: Text(L.of(context).shareThisAppInfo),
+              title: Text(AppLocalizations.of(context).shareThisApp),
+              subtitle: Text(AppLocalizations.of(context).shareThisAppInfo),
               onTap: () {
                 Share.share(
                   Platform.isIOS ? APP_STORE_URL : PLAY_STORE_URL,
-                  subject: L.of(context).title,
+                  subject: AppLocalizations.of(context).title,
                 );
               },
               trailing: const Icon(Icons.share),
             ),
             ListTile(
-              title: Text(L.of(context).followMe),
-              subtitle: Text(L.of(context).followMeInfo),
+              title: Text(AppLocalizations.of(context).followMe),
+              subtitle: Text(AppLocalizations.of(context).followMeInfo),
               onTap: () async {
                 if (await canLaunch(PROFILE_URL)) {
                   await launch(PROFILE_URL);

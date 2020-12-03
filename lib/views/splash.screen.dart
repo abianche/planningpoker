@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:planningpoker/redux/actions/player.actions.dart';
 import 'package:planningpoker/redux/actions/room.actions.dart';
-import 'package:redux/redux.dart';
-
 import 'package:planningpoker/redux/actions/settings.actions.dart';
 import 'package:planningpoker/redux/selectors/selectors.dart';
 import 'package:planningpoker/redux/states/app_state.dart';
 import 'package:planningpoker/router.dart';
+import 'package:redux/redux.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({Key key}) : super(key: key);

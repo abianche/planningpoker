@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:planningpoker/data/decks.dart';
-import 'package:planningpoker/generated/l10n.dart';
 import 'package:planningpoker/models/player.model.dart';
 import 'package:planningpoker/models/room.model.dart';
 import 'package:planningpoker/models/settings.model.dart';
@@ -42,7 +42,7 @@ class PlayerCard extends StatelessWidget {
                       textScaleFactor: 1.25,
                     )
                   : Tooltip(
-                      message: L.of(context).thisIsYou,
+                      message: AppLocalizations.of(context).thisIsYou,
                       child: Text(
                         player.username,
                         textScaleFactor: 1.25,
@@ -72,7 +72,7 @@ class PlayerCard extends StatelessWidget {
                                 },
                                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(45.0)),
                                 child: Text(
-                                  L.of(context).confirm.toUpperCase(),
+                                  AppLocalizations.of(context).confirm.toUpperCase(),
                                   style: TextStyle(
                                     color: vm.settings.darkMode ? Colors.black : Colors.white,
                                   ),
@@ -88,7 +88,7 @@ class PlayerCard extends StatelessWidget {
                                 },
                                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(45.0)),
                                 child: Text(
-                                  L.of(context).pickACard.toUpperCase(),
+                                  AppLocalizations.of(context).pickACard.toUpperCase(),
                                   style: TextStyle(
                                     color: vm.settings.darkMode ? Colors.black : Colors.white,
                                   ),

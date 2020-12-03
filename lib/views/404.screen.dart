@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:planningpoker/generated/l10n.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class NotFoundScreen extends StatelessWidget {
   final String name;
@@ -12,7 +12,7 @@ class NotFoundScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(L.of(context).pageNotFound),
+        title: Text(AppLocalizations.of(context).pageNotFound),
       ),
       body: Center(
         child: Text('404 : $name'),

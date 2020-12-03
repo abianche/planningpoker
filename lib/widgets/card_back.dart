@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:planningpoker/redux/actions/player.actions.dart';
-import 'package:planningpoker/services/firebase.service.dart';
-import 'package:redux/redux.dart';
-
-import 'package:planningpoker/generated/l10n.dart';
 import 'package:planningpoker/models/deck.model.dart';
 import 'package:planningpoker/models/room.model.dart';
 import 'package:planningpoker/models/settings.model.dart';
+import 'package:planningpoker/redux/actions/player.actions.dart';
 import 'package:planningpoker/redux/actions/tab.actions.dart';
 import 'package:planningpoker/redux/selectors/selectors.dart';
 import 'package:planningpoker/redux/states/app_state.dart';
+import 'package:planningpoker/services/firebase.service.dart';
 import 'package:planningpoker/widgets/card_content.dart';
+import 'package:redux/redux.dart';
 
 class CardBack extends StatelessWidget {
   final dynamic data;
@@ -55,7 +54,7 @@ class CardBack extends StatelessWidget {
                     },
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(45.0)),
                     child: Text(
-                      L.of(context).confirm.toUpperCase(),
+                      AppLocalizations.of(context).confirm.toUpperCase(),
                       style: TextStyle(
                         color: vm.settings.darkMode ? Colors.black : Colors.white,
                       ),
