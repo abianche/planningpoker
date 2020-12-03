@@ -60,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
           body: _pages[vm.appTab.index],
           bottomNavigationBar: BottomNavigationBar(
             elevation: 0.0,
-            fixedColor: vm.settings.darkMode ? Colors.white : Color(currentDeck.deckColor),
+            fixedColor: Theme.of(context).brightness == Brightness.dark ? Colors.white : Color(currentDeck.deckColor),
             currentIndex: vm.appTab.index,
             onTap: (value) => setState(() => vm.setCurrentTab(AppTab.values[value])),
             items: [

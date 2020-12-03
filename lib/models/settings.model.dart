@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:planningpoker/data/decks.dart';
 import 'package:planningpoker/models/deck.model.dart';
@@ -9,8 +10,8 @@ part 'settings.model.g.dart';
 
 /// Settings model for the application.
 class Settings {
-  /// Enables dark mode theme.
-  final bool darkMode;
+  /// Set theme mode.
+  final ThemeMode themeMode;
 
   /// Whether or not the cards need an extra tapping to be revealed.
   final bool tapToReveal;
@@ -28,7 +29,7 @@ class Settings {
   final bool seenIntro;
 
   const Settings({
-    this.darkMode,
+    this.themeMode,
     this.tapToReveal,
     this.vibration,
     this.selectedDeck,
@@ -42,7 +43,7 @@ class Settings {
 
   /// Creates the initial state of the settings
   Settings.initialState()
-      : darkMode = false,
+      : themeMode = ThemeMode.system,
         tapToReveal = true,
         vibration = true,
         selectedDeck = DeckType.standard,
@@ -50,7 +51,7 @@ class Settings {
         seenIntro = false;
 
   Settings copyWith({
-    bool darkMode,
+    ThemeMode themeMode,
     bool tapToReveal,
     bool vibration,
     DeckType selectedDeck,
@@ -58,7 +59,7 @@ class Settings {
     bool seenIntro,
   }) {
     return Settings(
-      darkMode: darkMode ?? this.darkMode,
+      themeMode: themeMode ?? this.themeMode,
       tapToReveal: tapToReveal ?? this.tapToReveal,
       vibration: vibration ?? this.vibration,
       selectedDeck: selectedDeck ?? this.selectedDeck,
@@ -69,7 +70,7 @@ class Settings {
 
   @override
   String toString() {
-    return 'Settings(darkMode: $darkMode, tapToReveal: $tapToReveal, vibration: $vibration, selectedDeck: $selectedDeck, customDeck: $customDeck, seenIntro: $seenIntro)';
+    return 'Settings(themeMode: $themeMode, tapToReveal: $tapToReveal, vibration: $vibration, selectedDeck: $selectedDeck, customDeck: $customDeck, seenIntro: $seenIntro)';
   }
 
   @override
@@ -77,7 +78,7 @@ class Settings {
     if (identical(this, o)) return true;
 
     return o is Settings &&
-        o.darkMode == darkMode &&
+        o.themeMode == themeMode &&
         o.tapToReveal == tapToReveal &&
         o.vibration == vibration &&
         o.selectedDeck == selectedDeck &&
@@ -87,7 +88,7 @@ class Settings {
 
   @override
   int get hashCode {
-    return darkMode.hashCode ^
+    return themeMode.hashCode ^
         tapToReveal.hashCode ^
         vibration.hashCode ^
         selectedDeck.hashCode ^

@@ -94,13 +94,35 @@ class SettingsScreen extends StatelessWidget {
                 vm.settings.copyWith(tapToReveal: value),
               ),
             ),
-            SwitchListTile(
-              title: Text(AppLocalizations.of(context).darkMode),
-              subtitle: Text(AppLocalizations.of(context).darkModeInfo),
-              value: vm.settings.darkMode,
-              onChanged: (bool value) => vm.setSettings(
-                vm.settings.copyWith(darkMode: value),
-              ),
+            ExpansionTile(
+              title: Text(AppLocalizations.of(context).themeMode),
+              subtitle: Text(AppLocalizations.of(context).themeModeInfo),
+              children: [
+                RadioListTile(
+                  title: Text(AppLocalizations.of(context).themeModeSystem),
+                  value: ThemeMode.system.index,
+                  groupValue: vm.settings.themeMode.index,
+                  onChanged: (int newValue) {
+                    vm.setSettings(vm.settings.copyWith(themeMode: ThemeMode.system));
+                  },
+                ),
+                RadioListTile(
+                  title: Text(AppLocalizations.of(context).themeModeLight),
+                  value: ThemeMode.light.index,
+                  groupValue: vm.settings.themeMode.index,
+                  onChanged: (int newValue) {
+                    vm.setSettings(vm.settings.copyWith(themeMode: ThemeMode.light));
+                  },
+                ),
+                RadioListTile(
+                  title: Text(AppLocalizations.of(context).themeModeDark),
+                  value: ThemeMode.dark.index,
+                  groupValue: vm.settings.themeMode.index,
+                  onChanged: (int newValue) {
+                    vm.setSettings(vm.settings.copyWith(themeMode: ThemeMode.dark));
+                  },
+                ),
+              ],
             ),
             SwitchListTile(
               title: Text(AppLocalizations.of(context).vibration),

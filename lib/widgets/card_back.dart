@@ -56,11 +56,11 @@ class CardBack extends StatelessWidget {
                     child: Text(
                       AppLocalizations.of(context).confirm.toUpperCase(),
                       style: TextStyle(
-                        color: vm.settings.darkMode ? Colors.black : Colors.white,
+                        color: Theme.of(context).brightness == Brightness.dark ? Colors.black : Colors.white,
                       ),
                     ),
                     color: Color(
-                      vm.settings.darkMode ? deck.deckColorDark : deck.deckColor,
+                      Theme.of(context).brightness == Brightness.dark ? deck.deckColorDark : deck.deckColor,
                     ),
                   ),
                 ),

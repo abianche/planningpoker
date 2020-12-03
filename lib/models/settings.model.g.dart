@@ -8,7 +8,7 @@ part of 'settings.model.dart';
 
 Settings _$SettingsFromJson(Map<String, dynamic> json) {
   return Settings(
-    darkMode: json['darkMode'] as bool,
+    themeMode: _$enumDecodeNullable(_$ThemeModeEnumMap, json['themeMode']),
     tapToReveal: json['tapToReveal'] as bool,
     vibration: json['vibration'] as bool,
     selectedDeck: _$enumDecodeNullable(_$DeckTypeEnumMap, json['selectedDeck']),
@@ -18,7 +18,7 @@ Settings _$SettingsFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$SettingsToJson(Settings instance) => <String, dynamic>{
-      'darkMode': instance.darkMode,
+      'themeMode': _$ThemeModeEnumMap[instance.themeMode],
       'tapToReveal': instance.tapToReveal,
       'vibration': instance.vibration,
       'selectedDeck': _$DeckTypeEnumMap[instance.selectedDeck],
@@ -57,6 +57,12 @@ T _$enumDecodeNullable<T>(
   }
   return _$enumDecode<T>(enumValues, source, unknownValue: unknownValue);
 }
+
+const _$ThemeModeEnumMap = {
+  ThemeMode.system: 'system',
+  ThemeMode.light: 'light',
+  ThemeMode.dark: 'dark',
+};
 
 const _$DeckTypeEnumMap = {
   DeckType.standard: 'standard',

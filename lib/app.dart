@@ -27,7 +27,9 @@ class App extends StatelessWidget {
           onGenerateTitle: (context) => AppLocalizations.of(context).title,
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
-          theme: getTheme(context, vm.darkMode),
+          theme: lightTheme(),
+          darkTheme: darkTheme(),
+          themeMode: vm.themeMode,
           initialRoute: Routes.root,
           routes: getRoutes(),
           onUnknownRoute: (settings) => MaterialPageRoute(
@@ -41,15 +43,15 @@ class App extends StatelessWidget {
 }
 
 class _ViewModel {
-  final bool darkMode;
+  final ThemeMode themeMode;
 
   _ViewModel({
-    @required this.darkMode,
+    @required this.themeMode,
   });
 
   static _ViewModel fromStore(Store<AppState> store) {
     return _ViewModel(
-      darkMode: settingsSelector(store.state).darkMode,
+      themeMode: settingsSelector(store.state).themeMode,
     );
   }
 
@@ -57,9 +59,9 @@ class _ViewModel {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is _ViewModel && o.darkMode == darkMode;
+    return o is _ViewModel && o.themeMode == themeMode;
   }
 
   @override
-  int get hashCode => darkMode.hashCode;
+  int get hashCode => themeMode.hashCode;
 }

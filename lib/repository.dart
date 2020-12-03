@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:planningpoker/models/deck.model.dart';
 import 'package:planningpoker/models/player.model.dart';
 import 'package:planningpoker/models/room.model.dart';
@@ -5,7 +6,7 @@ import 'package:planningpoker/models/settings.model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Prefs {
-  static const darkMode = "pp_v3_darkMode";
+  static const themeMode = "pp_v3_themeMode";
   static const tapToReveal = "pp_v3_tapToReveal";
   static const vibration = "pp_v3_vibration";
   static const selectedDeck = "pp_v3_selectedDeck";
@@ -22,8 +23,8 @@ class Repository {
   Future<void> saveSettings(Settings settings) async {
     final prefs = await SharedPreferences.getInstance();
 
-    if (settings.darkMode != null) {
-      await prefs.setBool(Prefs.darkMode, settings.darkMode);
+    if (settings.themeMode != null) {
+      await prefs.setInt(Prefs.themeMode, settings.themeMode.index);
     }
     if (settings.tapToReveal != null) {
       await prefs.setBool(Prefs.tapToReveal, settings.tapToReveal);
@@ -48,7 +49,7 @@ class Repository {
 
     final defaultSettings = Settings.initialState();
 
-    final darkMode = prefs.getBool(Prefs.darkMode);
+    final themeMode = prefs.getInt(Prefs.themeMode);
     final tapToReveal = prefs.getBool(Prefs.tapToReveal);
     final vibration = prefs.getBool(Prefs.vibration);
     final selectedDeckIndex = prefs.getInt(Prefs.selectedDeck);
@@ -60,7 +61,7 @@ class Repository {
     final seenIntro = prefs.getBool(Prefs.seenIntro);
 
     return defaultSettings.copyWith(
-      darkMode: darkMode,
+      themeMode: ThemeMode.values[themeMode],
       tapToReveal: tapToReveal,
       vibration: vibration,
       selectedDeck: selectedDeck,

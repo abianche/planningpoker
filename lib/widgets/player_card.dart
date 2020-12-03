@@ -56,7 +56,9 @@ class PlayerCard extends StatelessWidget {
                           child: CircularProgressIndicator(
                             valueColor: AlwaysStoppedAnimation<Color>(
                               Color(
-                                vm.settings.darkMode ? currentDeck.deckColorDark : currentDeck.deckColor,
+                                Theme.of(context).brightness == Brightness.dark
+                                    ? currentDeck.deckColorDark
+                                    : currentDeck.deckColor,
                               ),
                             ),
                           ),
@@ -74,11 +76,14 @@ class PlayerCard extends StatelessWidget {
                                 child: Text(
                                   AppLocalizations.of(context).confirm.toUpperCase(),
                                   style: TextStyle(
-                                    color: vm.settings.darkMode ? Colors.black : Colors.white,
+                                    color:
+                                        Theme.of(context).brightness == Brightness.dark ? Colors.black : Colors.white,
                                   ),
                                 ),
                                 color: Color(
-                                  vm.settings.darkMode ? currentDeck.deckColorDark : currentDeck.deckColor,
+                                  Theme.of(context).brightness == Brightness.dark
+                                      ? currentDeck.deckColorDark
+                                      : currentDeck.deckColor,
                                 ),
                               )
                             else
@@ -90,11 +95,14 @@ class PlayerCard extends StatelessWidget {
                                 child: Text(
                                   AppLocalizations.of(context).pickACard.toUpperCase(),
                                   style: TextStyle(
-                                    color: vm.settings.darkMode ? Colors.black : Colors.white,
+                                    color:
+                                        Theme.of(context).brightness == Brightness.dark ? Colors.black : Colors.white,
                                   ),
                                 ),
                                 color: Color(
-                                  vm.settings.darkMode ? currentDeck.deckColorDark : currentDeck.deckColor,
+                                  Theme.of(context).brightness == Brightness.dark
+                                      ? currentDeck.deckColorDark
+                                      : currentDeck.deckColor,
                                 ),
                               )
                           ],

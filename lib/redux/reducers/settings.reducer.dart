@@ -9,7 +9,7 @@ final settingsReducer = combineReducers<Settings>([
 
 Settings _setSettings(Settings settings, SetSettingsAction action) {
   return settings.copyWith(
-    darkMode: action.settings.darkMode,
+    themeMode: action.settings.themeMode,
     tapToReveal: action.settings.tapToReveal,
     vibration: action.settings.vibration,
     selectedDeck: action.settings.selectedDeck,
