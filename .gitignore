@@ -39,5 +39,15 @@ app.*.symbols
 
 # Obfuscation related
 app.*.map.json
+
+# Firebase related
 android/app/google-services.json
 ios/Runner/GoogleService-Info.plist
+
+# Fastlane related
+android/fastlane/service-account-secret.json
+**/fastlane/report.xml
+**/fastlane/Preview.html
+**/fastlane/screenshots
+**/fastlane/test_output
+**/fastlane/metadata/
