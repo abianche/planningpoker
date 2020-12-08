@@ -208,6 +208,35 @@ class SettingsScreen extends StatelessWidget {
               },
               trailing: const Icon(Icons.sports_bar),
             ),
+            FutureBuilder(
+              future: PackageInfo.fromPlatform(),
+              builder: (context, AsyncSnapshot<PackageInfo> snapshot) {
+                if (snapshot.hasData) {
+                  final packageInfo = snapshot.data;
+                  final text = StringBuffer()
+                    ..write(AppLocalizations.of(context).title)
+                    ..write(' ')
+                    ..write(packageInfo.version)
+                    ..write('-')
+                    ..write(packageInfo.buildNumber);
+                  return ListTile(
+                    subtitle: Center(child: Text(text.toString())),
+                    enabled: false,
+                  );
+                } else if (snapshot.hasError) {
+                  return ListTile(
+                    subtitle: Center(child: Text(AppLocalizations.of(context).title)),
+                    enabled: false,
+                  );
+                } else {
+                  return ListTile(
+                    title: Text(AppLocalizations.of(context).title),
+                    subtitle: Text(AppLocalizations.of(context).loading),
+                    enabled: false,
+                  );
+                }
+              },
+            ),
           ],
         ),
       ),
