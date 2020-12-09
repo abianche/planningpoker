@@ -15,6 +15,7 @@ class FirebaseService {
 
   /// Sign-in anonymously to Firebase.
   Future<User> signInAnonymously() async {
+    log.d('signInAnonymously');
     final result = await auth.signInAnonymously().catchError((error) {
       log.e('signInAnonymously | $error');
       signOut();

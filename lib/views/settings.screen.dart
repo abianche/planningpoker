@@ -152,6 +152,10 @@ class SettingsScreen extends StatelessWidget {
                   return AboutListTile(
                     applicationLegalese: '© Alessio Bianchetti',
                     applicationVersion: '${packageInfo.version}-${packageInfo.buildNumber}',
+                    applicationIcon: Image.asset(
+                      'assets/icon/android_app_logo.png',
+                      fit: BoxFit.scaleDown,
+                    ),
                   );
                 } else if (snapshot.hasError) {
                   return ListTile(

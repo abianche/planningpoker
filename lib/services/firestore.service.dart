@@ -22,6 +22,7 @@ class FirestoreService {
   Future<Room> createRoom(
     String name,
   ) async {
+    log.d('createRoom | name:$name');
     final rooms = firestore.collection(_room_collection);
 
     final d = await rooms.add(
@@ -37,6 +38,7 @@ class FirestoreService {
 
   /// Returns the `uid` of the room if a room with the given `name` exists. `null` otherwise.
   Future<String> roomExists(String name) async {
+    log.d('roomExists | name:$name');
     final ds = await this
         .firestore
         .collection(_room_collection)
@@ -52,6 +54,7 @@ class FirestoreService {
 
   /// Returns `true` if the a player with username `playerName` exists in room with uid `roomId`. `false` otherwise.
   Future<bool> playerExists(String roomId, String playerName) async {
+    log.d('playerExists | roomId:$roomId playerName:$playerName');
     final uid = FirebaseService().auth.currentUser.uid;
     final ds = await this
         .firestore
@@ -70,6 +73,7 @@ class FirestoreService {
   }
 
   Future<void> createPlayer(String roomId, Player player) async {
+    log.d('createPlayer | roomId:$roomId player:$player');
     final uid = FirebaseService().auth.currentUser.uid;
     final cr = await this.firestore.collection(_room_collection).doc(roomId).collection(_players_collection);
 
@@ -77,6 +81,7 @@ class FirestoreService {
   }
 
   Future<void> updatePlayerStatus(String roomId, Player player) async {
+    log.d('updatePlayerStatus | roomId:$roomId player:$player');
     final uid = FirebaseService().auth.currentUser.uid;
     final dr = await this.firestore.collection(_room_collection).doc(roomId).collection(_players_collection).doc(uid);
 
@@ -84,10 +89,12 @@ class FirestoreService {
   }
 
   Stream<QuerySnapshot> getPlayersStream(String roomId) {
+    log.d('getPlayersStream | roomId:$roomId');
     return this.firestore.collection(_room_collection).doc(roomId).collection(_players_collection).snapshots();
   }
 
   Future<void> deleteCurrentPlayer(String roomId) async {
+    log.d('deleteCurrentPlayer | roomId:$roomId');
     final uid = FirebaseService().auth.currentUser.uid;
     final cr = await this.firestore.collection(_room_collection).doc(roomId).collection(_players_collection);
 

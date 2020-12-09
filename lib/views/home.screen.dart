@@ -30,11 +30,14 @@ class _HomeScreenState extends State<HomeScreen> {
     return StoreConnector<AppState, _ViewModel>(
       distinct: true,
       converter: _ViewModel.fromStore,
+      onWillChange: (previousViewModel, newViewModel) {
+        // from room to deck?
+        if (previousViewModel.appTab == AppTab.room && newViewModel.appTab == AppTab.deck) {
+          newViewModel.resetCard();
+        }
+      },
       builder: (context, vm) {
         final currentDeck = all_decks[vm.settings.selectedDeck];
-        if (vm.appTab == AppTab.deck) {
-          vm.resetCard();
-        }
 
         return Scaffold(
           appBar: AppBar(
