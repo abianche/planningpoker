@@ -23,6 +23,15 @@ platform :android do
     end
   end
 
+  desc "Build a new appbundle"
+  lane :appbundle do
+    Dir.chdir ".." do
+      sh("flutter", "packages", "get")
+      sh("flutter", "clean")
+      sh("flutter", "build", "appbundle", "--obfuscate", "--split-debug-info=build/app/outputs/symbols")
+    end
+  end
+
   desc "Deploy a new beta version to the Google Play"
   lane :beta do
     Dir.chdir ".." do
