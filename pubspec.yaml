@@ -6,7 +6,7 @@ description: Planning Poker Online app for Android and iOS.
 
 publish_to: "none"
 
-version: 3.0.0+24
+version: 3.0.0+25
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
