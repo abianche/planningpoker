@@ -21,6 +21,11 @@ or alternatively using `brew install fastlane`
 fastlane android test
 ```
 Run unit tests
+### android appbundle
+```
+fastlane android appbundle
+```
+Build a new appbundle
 ### android beta
 ```
 fastlane android beta
