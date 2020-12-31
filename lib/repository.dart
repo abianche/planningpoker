@@ -61,7 +61,7 @@ class Repository {
     final seenIntro = prefs.getBool(Prefs.seenIntro);
 
     return defaultSettings.copyWith(
-      themeMode: ThemeMode.values[themeMode],
+      themeMode: ThemeMode.values[themeMode ?? 0],
       tapToReveal: tapToReveal,
       vibration: vibration,
       selectedDeck: selectedDeck,

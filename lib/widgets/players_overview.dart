@@ -143,7 +143,7 @@ class PlayerOverviewAvg extends StatelessWidget {
     double average = totalNumber / totalNumberCount;
     return Container(
       child: Text(
-        '${average.toStringAsFixed(1)} ${symbols.join(" ")}',
+        average.isNaN ? '' : '${average.toStringAsFixed(1)} ${symbols.join(" ")}',
         style: const TextStyle(
           fontStyle: FontStyle.italic,
         ),

@@ -70,7 +70,7 @@ class _CustomDeckSetupState extends State<CustomDeckSetup> {
                   onPressed: () {
                     vm.setCustomDeck(currentCustomDeck);
 
-                    ScaffoldMessenger.of(context).removeCurrentSnackBar();
+                    scaffoldKey.currentState.removeCurrentSnackBar();
                     final snackBar = SnackBar(
                       content: Text(
                         AppLocalizations.of(context).customDeckSaveMessage,
@@ -78,7 +78,7 @@ class _CustomDeckSetupState extends State<CustomDeckSetup> {
                       ),
                       backgroundColor: Colors.green,
                     );
-                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    scaffoldKey.currentState.showSnackBar(snackBar);
                   },
                 ),
                 IconButton(
@@ -89,7 +89,7 @@ class _CustomDeckSetupState extends State<CustomDeckSetup> {
                       currentCustomDeck = originalCustomDeck;
                     });
 
-                    ScaffoldMessenger.of(context).removeCurrentSnackBar();
+                    scaffoldKey.currentState.removeCurrentSnackBar();
                     final snackBar = SnackBar(
                       content: Text(
                         AppLocalizations.of(context).customDeckRestoreMessage,
@@ -97,7 +97,7 @@ class _CustomDeckSetupState extends State<CustomDeckSetup> {
                       ),
                       backgroundColor: Colors.grey,
                     );
-                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    scaffoldKey.currentState.showSnackBar(snackBar);
                   },
                 ),
               ],
