@@ -9,7 +9,7 @@ publish_to: "none"
 version: 3.0.0+25
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.10.5 <3.0.0"
 
 dependencies:
   flutter:
@@ -17,13 +17,13 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   intl: ^0.16.1
-  cloud_firestore: ^0.14.4
+  cloud_firestore: ^0.16.0
   cupertino_icons: ^1.0.0
-  firebase_auth: ^0.18.4+1
-  firebase_core: ^0.5.3
+  firebase_auth: ^0.20.0+1
+  firebase_core: ^0.7.0
   flip_card: ^0.4.4
   flutter_launcher_icons: ^0.8.1
-  flutter_markdown: ^0.5.1
+  flutter_markdown: ^0.5.2
   flutter_redux: ^0.7.0
   intro_slider: ^2.3.3
   json_annotation: ^3.1.1
