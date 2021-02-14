@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:planningpoker/redux/actions/player.actions.dart';
 import 'package:planningpoker/redux/actions/room.actions.dart';
@@ -25,9 +26,9 @@ class SplashScreen extends StatelessWidget {
       },
       distinct: true,
       converter: _ViewModel.fromStore,
-      builder: (context, vm) => const Scaffold(
-        body: const Center(
-          child: CircularProgressIndicator(),
+      builder: (context, vm) => PlatformScaffold(
+        body: Center(
+          child: PlatformCircularProgressIndicator(),
         ),
       ),
     );

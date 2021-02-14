@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:planningpoker/data/decks.dart';
 import 'package:planningpoker/models/settings.model.dart';
@@ -39,10 +40,11 @@ class _HomeScreenState extends State<HomeScreen> {
       builder: (context, vm) {
         final currentDeck = all_decks[vm.settings.selectedDeck];
 
-        return Scaffold(
-          appBar: AppBar(
+        return PlatformScaffold(
+          appBar: PlatformAppBar(
             title: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(AppLocalizations.of(context).title),
                 Text(
@@ -51,21 +53,28 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             ),
-            centerTitle: false,
             backgroundColor: Color(currentDeck.deckColor),
-            actions: [
-              IconButton(
-                icon: const Icon(Icons.settings),
+            trailingActions: [
+              PlatformIconButton(
+                icon: Icon(
+                  PlatformIcons(context).settings,
+                  color: Colors.white,
+                ),
                 onPressed: () => Navigator.of(context).pushNamed(Routes.settings),
               ),
             ],
           ),
           body: _pages[vm.appTab.index],
-          bottomNavigationBar: BottomNavigationBar(
-            elevation: 0.0,
-            fixedColor: Theme.of(context).brightness == Brightness.dark ? Colors.white : Color(currentDeck.deckColor),
+          bottomNavBar: PlatformNavBar(
+            material: (_, __) => MaterialNavBarData(
+              elevation: 0.0,
+              selectedItemColor: Colors.white,
+              unselectedItemColor: Colors.grey,
+            ),
+            backgroundColor:
+                Theme.of(context).brightness == Brightness.dark ? Colors.white : Color(currentDeck.deckColor),
             currentIndex: vm.appTab.index,
-            onTap: (value) => setState(() => vm.setCurrentTab(AppTab.values[value])),
+            itemChanged: (value) => setState(() => vm.setCurrentTab(AppTab.values[value])),
             items: [
               BottomNavigationBarItem(
                 label: AppLocalizations.of(context).deck,
@@ -73,7 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               BottomNavigationBarItem(
                 label: AppLocalizations.of(context).room,
-                icon: const Icon(Icons.people),
+                icon: Icon(PlatformIcons(context).groupSolid),
               ),
             ],
           ),

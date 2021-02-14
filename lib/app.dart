@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:planningpoker/redux/selectors/selectors.dart';
 import 'package:planningpoker/redux/states/app_state.dart';
@@ -23,20 +25,30 @@ class App extends StatelessWidget {
       child: StoreConnector<AppState, _ViewModel>(
         distinct: true,
         converter: _ViewModel.fromStore,
-        builder: (context, vm) => MaterialApp(
-          onGenerateTitle: (context) => AppLocalizations.of(context).title,
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
-          supportedLocales: AppLocalizations.supportedLocales,
-          theme: lightTheme(),
-          darkTheme: darkTheme(),
-          themeMode: vm.themeMode,
-          initialRoute: Routes.root,
-          routes: getRoutes(),
-          onUnknownRoute: (settings) => MaterialPageRoute(
-            settings: settings,
-            builder: (_) => NotFoundScreen(name: settings.name),
-          ),
-        ),
+        builder: (context, vm) {
+          return PlatformProvider(
+            initialPlatform: TargetPlatform.iOS,
+            builder: (_) => PlatformApp(
+              onGenerateTitle: (context) => AppLocalizations.of(context).title,
+              localizationsDelegates: AppLocalizations.localizationsDelegates,
+              supportedLocales: AppLocalizations.supportedLocales,
+              material: (_, __) => MaterialAppData(
+                theme: lightTheme(),
+                darkTheme: darkTheme(),
+                themeMode: vm.themeMode,
+              ),
+              cupertino: (_, __) => CupertinoAppData(
+                theme: cupertinoTheme(),
+              ),
+              initialRoute: Routes.root,
+              routes: getRoutes(),
+              onUnknownRoute: (settings) => MaterialPageRoute(
+                settings: settings,
+                builder: (_) => NotFoundScreen(name: settings.name),
+              ),
+            ),
+          );
+        },
       ),
     );
   }
