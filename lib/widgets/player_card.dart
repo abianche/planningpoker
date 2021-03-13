@@ -68,11 +68,10 @@ class PlayerCard extends StatelessWidget {
                           children: [
                             Opacity(opacity: 0.25, child: CardBackMini(card: player.currentCard?.substring(1))),
                             if (player.currentCard != null)
-                              FlatButton(
+                              TextButton(
                                 onPressed: () {
                                   vm.setPlayerCard(player.currentCard?.substring(1));
                                 },
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(45.0)),
                                 child: Text(
                                   AppLocalizations.of(context).confirm.toUpperCase(),
                                   style: TextStyle(
@@ -80,18 +79,20 @@ class PlayerCard extends StatelessWidget {
                                         Theme.of(context).brightness == Brightness.dark ? Colors.black : Colors.white,
                                   ),
                                 ),
-                                color: Color(
-                                  Theme.of(context).brightness == Brightness.dark
-                                      ? currentDeck.deckColorDark
-                                      : currentDeck.deckColor,
+                                style: TextButton.styleFrom(
+                                  backgroundColor: Color(
+                                    Theme.of(context).brightness == Brightness.dark
+                                        ? currentDeck.deckColorDark
+                                        : currentDeck.deckColor,
+                                  ),
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(45.0)),
                                 ),
                               )
                             else
-                              FlatButton(
+                              TextButton(
                                 onPressed: () {
                                   vm.setCurrentTab(AppTab.deck);
                                 },
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(45.0)),
                                 child: Text(
                                   AppLocalizations.of(context).pickACard.toUpperCase(),
                                   style: TextStyle(
@@ -99,10 +100,13 @@ class PlayerCard extends StatelessWidget {
                                         Theme.of(context).brightness == Brightness.dark ? Colors.black : Colors.white,
                                   ),
                                 ),
-                                color: Color(
-                                  Theme.of(context).brightness == Brightness.dark
-                                      ? currentDeck.deckColorDark
-                                      : currentDeck.deckColor,
+                                style: TextButton.styleFrom(
+                                  primary: Color(
+                                    Theme.of(context).brightness == Brightness.dark
+                                        ? currentDeck.deckColorDark
+                                        : currentDeck.deckColor,
+                                  ),
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(45.0)),
                                 ),
                               )
                           ],

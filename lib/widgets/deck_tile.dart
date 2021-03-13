@@ -34,23 +34,22 @@ class _DeckTileState extends State<DeckTile> {
       return StoreConnector<AppState, _ViewModel>(
         distinct: true,
         converter: _ViewModel.fromStore,
-        builder: (context, vm) => ButtonTheme(
-          height: 60.0,
-          child: OutlineButton(
-            splashColor: Color(widget.deck.deckColor),
-            borderSide: BorderSide(color: Color(widget.deck.deckColor), width: 0.5),
+        builder: (context, vm) => OutlinedButton(
+          style: OutlinedButton.styleFrom(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30.0),
             ),
-            child: Text(
-              widget.data,
-              style: const TextStyle(fontSize: 24.0),
-            ),
-            onPressed: () async {
-              vm.setPlayerCard((widget.tapToReveal ? '_${widget.name}' : widget.name));
-              await showSelection();
-            },
+            primary: Color(
+                Theme.of(context).brightness == Brightness.dark ? widget.deck.deckColorDark : widget.deck.deckColor),
           ),
+          child: Text(
+            widget.data,
+            style: const TextStyle(fontSize: 24.0),
+          ),
+          onPressed: () async {
+            vm.setPlayerCard((widget.tapToReveal ? '_${widget.name}' : widget.name));
+            await showSelection();
+          },
         ),
       );
     }
@@ -59,20 +58,19 @@ class _DeckTileState extends State<DeckTile> {
       return StoreConnector<AppState, _ViewModel>(
         distinct: true,
         converter: _ViewModel.fromStore,
-        builder: (context, vm) => ButtonTheme(
-          height: 60.0,
-          child: OutlineButton(
-            splashColor: Color(widget.deck.deckColor),
-            borderSide: BorderSide(color: Color(widget.deck.deckColor), width: 0.5),
+        builder: (context, vm) => OutlinedButton(
+          style: OutlinedButton.styleFrom(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30.0),
             ),
-            child: Icon(widget.data),
-            onPressed: () async {
-              vm.setPlayerCard((widget.tapToReveal ? '_${widget.name}' : widget.name));
-              await showSelection();
-            },
+            primary: Color(
+                Theme.of(context).brightness == Brightness.dark ? widget.deck.deckColorDark : widget.deck.deckColor),
           ),
+          child: Icon(widget.data),
+          onPressed: () async {
+            vm.setPlayerCard((widget.tapToReveal ? '_${widget.name}' : widget.name));
+            await showSelection();
+          },
         ),
       );
     }
@@ -81,38 +79,34 @@ class _DeckTileState extends State<DeckTile> {
       return StoreConnector<AppState, _ViewModel>(
         distinct: true,
         converter: _ViewModel.fromStore,
-        builder: (context, vm) => ButtonTheme(
-          height: 60.0,
-          child: RaisedButton(
-            splashColor: Color(widget.deck.deckColor),
+        // ignore: missing_required_param
+        builder: (context, vm) => ElevatedButton(
+          style: ElevatedButton.styleFrom(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30.0),
             ),
             padding: const EdgeInsets.all(16.0),
-            onPressed: () async {
-              vm.setPlayerCard((widget.tapToReveal ? '_${widget.name}' : widget.name));
-              await showSelection();
-            },
-            color: widget.data,
+            primary: widget.data,
           ),
+          onPressed: () async {
+            vm.setPlayerCard((widget.tapToReveal ? '_${widget.name}' : widget.name));
+            await showSelection();
+          },
         ),
       );
     }
 
-    return ButtonTheme(
-      height: 60.0,
-      child: OutlineButton(
-        splashColor: Color(widget.deck.deckColor),
-        borderSide: BorderSide(color: Color(widget.deck.deckColor), width: 0.5),
+    return OutlinedButton(
+      style: OutlinedButton.styleFrom(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0),
         ),
-        child: const Text(
-          '',
-          style: const TextStyle(fontSize: 24.0),
-        ),
-        onPressed: null,
       ),
+      child: const Text(
+        '',
+        style: const TextStyle(fontSize: 24.0),
+      ),
+      onPressed: null,
     );
   }
 

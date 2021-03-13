@@ -30,7 +30,10 @@ class FirestoreService {
         'name': name,
         'last_updated': DateTime.now().millisecondsSinceEpoch,
       },
-    ).catchError((error) => log.e('createRoom | $error'));
+    ).catchError((error) {
+      log.e('createRoom | $error');
+      return null;
+    });
 
     final room = Room(name: name, uid: d.id);
     return room;
@@ -43,9 +46,17 @@ class FirestoreService {
         .firestore
         .collection(_room_collection)
         .limit(1)
-        .where('name', isEqualTo: name)
+        .where(
+          'name',
+          isEqualTo: name,
+        )
         .get()
-        .catchError((error) => log.e('roomExists | $error'));
+        .catchError(
+      (error) {
+        log.e('roomExists | $error');
+        return null;
+      },
+    );
 
     if (ds.size == 0) return null;
 
@@ -64,7 +75,10 @@ class FirestoreService {
         .limit(1)
         .where('username', isEqualTo: playerName)
         .get()
-        .catchError((error) => log.e('playerExists | $error'));
+        .catchError((error) {
+      log.e('playerExists | $error');
+      return null;
+    });
 
     if (ds.size == 0) return false;
     if (ds.docs.single.id == uid) return false;

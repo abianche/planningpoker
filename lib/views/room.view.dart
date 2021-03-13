@@ -91,7 +91,7 @@ class _RoomViewState extends State<RoomView> {
               ),
             ),
             actions: <Widget>[
-              FlatButton(
+              TextButton(
                 onPressed: () async {
                   if (_keyJoinRoomForm.currentState.validate()) {
                     final roomName = roomController.text;
@@ -114,7 +114,7 @@ class _RoomViewState extends State<RoomView> {
                             title: Text(AppLocalizations.of(context).ops),
                             content: Text(AppLocalizations.of(context).playerAlreadyExistsInRoom(playerName, roomName)),
                             actions: [
-                              FlatButton(
+                              TextButton(
                                 onPressed: () {
                                   Navigator.pop(context);
                                 },
@@ -146,7 +146,7 @@ class _RoomViewState extends State<RoomView> {
                 },
                 child: Text(MaterialLocalizations.of(context).okButtonLabel),
               ),
-              FlatButton(
+              TextButton(
                 onPressed: () {
                   Navigator.pop(context);
                 },
@@ -171,7 +171,7 @@ class _RoomViewState extends State<RoomView> {
       builder: (context, vm) => Container(
         child: vm.room.uid == null
             ? Center(
-                child: FlatButton.icon(
+                child: TextButton.icon(
                   onPressed: () => joinOrCreateRoom(vm),
                   icon: const Icon(Icons.group_add),
                   label: Text(AppLocalizations.of(context).joinARoom),

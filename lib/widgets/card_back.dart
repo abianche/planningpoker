@@ -45,22 +45,24 @@ class CardBack extends StatelessWidget {
               if (FirebaseService().auth.currentUser != null && vm.room?.uid != null)
                 Align(
                   alignment: Alignment.bottomCenter,
-                  child: FlatButton(
+                  child: TextButton(
                     onPressed: () {
                       Navigator.of(context).pop();
                       vm.setPlayerCard(this.name);
 
                       vm.setCurrentTab(AppTab.room);
                     },
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(45.0)),
+                    style: TextButton.styleFrom(
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(45.0)),
+                      backgroundColor: Color(
+                        Theme.of(context).brightness == Brightness.dark ? deck.deckColorDark : deck.deckColor,
+                      ),
+                    ),
                     child: Text(
                       AppLocalizations.of(context).confirm.toUpperCase(),
                       style: TextStyle(
                         color: Theme.of(context).brightness == Brightness.dark ? Colors.black : Colors.white,
                       ),
-                    ),
-                    color: Color(
-                      Theme.of(context).brightness == Brightness.dark ? deck.deckColorDark : deck.deckColor,
                     ),
                   ),
                 ),

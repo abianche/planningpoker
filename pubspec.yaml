@@ -6,7 +6,7 @@ description: Planning Poker Online app for Android and iOS.
 
 publish_to: "none"
 
-version: 3.0.0+25
+version: 3.0.1+26
 
 environment:
   sdk: ">=2.10.5 <3.0.0"
@@ -16,31 +16,31 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  intl: ^0.16.1
-  cloud_firestore: ^0.16.0
-  cupertino_icons: ^1.0.0
-  firebase_auth: ^0.20.0+1
-  firebase_core: ^0.7.0
+  intl: ^0.17.0
+  cloud_firestore: ^1.0.1
+  cupertino_icons: ^1.0.2
+  firebase_auth: ^1.0.1
+  firebase_core: ^1.0.1
   flip_card: ^0.4.4
-  flutter_launcher_icons: ^0.8.1
-  flutter_markdown: ^0.5.2
+  flutter_launcher_icons: ^0.9.0
+  flutter_markdown: ^0.6.0
   flutter_redux: ^0.7.0
-  intro_slider: ^2.3.3
-  json_annotation: ^3.1.1
-  launch_review: ^2.0.0
+  intro_slider: ^2.3.4
+  json_annotation: ^4.0.0
+  launch_review: ^3.0.1
   logger: ^0.9.4
-  package_info: ^0.4.3+2
-  redux: ^4.0.0+3
-  share: ^0.6.5+4
-  shared_preferences: ^0.5.12+4
-  url_launcher: ^5.7.10
+  package_info: ^2.0.0
+  redux: ^4.0.0
+  share: ^2.0.1
+  shared_preferences: ^2.0.4
+  url_launcher: ^6.0.2
   vibration: ^1.7.3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  build_runner: ^1.10.6
-  json_serializable: ^3.5.0
+  build_runner: ^1.11.5
+  json_serializable: ^4.0.2
 
 flutter:
   uses-material-design: true
