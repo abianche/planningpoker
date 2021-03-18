@@ -36,6 +36,7 @@ class _DeckTileState extends State<DeckTile> {
         converter: _ViewModel.fromStore,
         builder: (context, vm) => OutlinedButton(
           style: OutlinedButton.styleFrom(
+            minimumSize: const Size(85.0, 50.0),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30.0),
             ),
@@ -60,6 +61,7 @@ class _DeckTileState extends State<DeckTile> {
         converter: _ViewModel.fromStore,
         builder: (context, vm) => OutlinedButton(
           style: OutlinedButton.styleFrom(
+            minimumSize: const Size(85.0, 50.0),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30.0),
             ),
@@ -79,19 +81,22 @@ class _DeckTileState extends State<DeckTile> {
       return StoreConnector<AppState, _ViewModel>(
         distinct: true,
         converter: _ViewModel.fromStore,
-        // ignore: missing_required_param
         builder: (context, vm) => ElevatedButton(
           style: ElevatedButton.styleFrom(
+            minimumSize: const Size(85.0, 50.0),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30.0),
             ),
-            padding: const EdgeInsets.all(16.0),
             primary: widget.data,
           ),
           onPressed: () async {
             vm.setPlayerCard((widget.tapToReveal ? '_${widget.name}' : widget.name));
             await showSelection();
           },
+          child: const Text(
+            ' ',
+            style: const TextStyle(fontSize: 24.0),
+          ),
         ),
       );
     }
