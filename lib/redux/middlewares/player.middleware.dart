@@ -12,7 +12,7 @@ Middleware<AppState> createUpdatePlayerStatusMiddleware() {
     next(action);
 
     final Room room = roomSelector(store.state);
-    if (room.uid == null) return;
+    if (room.uid.isEmpty) return;
 
     final Player player = playerSelector(store.state);
     FirestoreService().updatePlayerStatus(room.uid, player);

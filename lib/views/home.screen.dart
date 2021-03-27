@@ -110,7 +110,7 @@ class _ViewModel {
       },
       resetCard: () {
         final player = playerSelector(store.state);
-        if (player.currentCard != null) {
+        if (player.currentCard != '_') {
           String resetCard = player.currentCard;
 
           if (!player.currentCard.startsWith("_")) {

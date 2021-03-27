@@ -218,19 +218,16 @@ class ListItem extends StatefulWidget {
 }
 
 class _ListItemState extends State<ListItem> {
-  bool _checkState = false;
-
   @override
   Widget build(BuildContext context) {
     return Container(
       child: ListTile(
         title: widget.title,
         trailing: Checkbox(
-          value: _checkState ?? widget.checkState,
+          value: widget.checkState,
           onChanged: (bool? state) {
             setState(() {
               widget.toggleCurrentCustomDeckTile(widget.value);
-              _checkState = state!;
             });
           },
         ),

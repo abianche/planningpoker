@@ -32,7 +32,6 @@ class FirestoreService {
       },
     ).catchError((error) {
       log.e('createRoom | $error');
-      return null;
     });
 
     final room = Room(name: name, uid: d.id);
@@ -80,7 +79,6 @@ class FirestoreService {
         .get()
         .catchError((error) {
       log.e('playerExists | $error');
-      return null;
     });
 
     if (ds.size == 0) return false;

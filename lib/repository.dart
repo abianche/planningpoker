@@ -23,24 +23,12 @@ class Repository {
   Future<void> saveSettings(Settings settings) async {
     final prefs = await SharedPreferences.getInstance();
 
-    if (settings.themeMode != null) {
-      await prefs.setInt(Prefs.themeMode, settings.themeMode.index);
-    }
-    if (settings.tapToReveal != null) {
-      await prefs.setBool(Prefs.tapToReveal, settings.tapToReveal);
-    }
-    if (settings.vibration != null) {
-      await prefs.setBool(Prefs.vibration, settings.vibration);
-    }
-    if (settings.selectedDeck != null) {
-      await prefs.setInt(Prefs.selectedDeck, settings.selectedDeck.index);
-    }
-    if (settings.customDeck != null) {
-      await prefs.setStringList(Prefs.customDeck, settings.customDeck);
-    }
-    if (settings.seenIntro != null) {
-      await prefs.setBool(Prefs.seenIntro, settings.seenIntro);
-    }
+    await prefs.setInt(Prefs.themeMode, settings.themeMode.index);
+    await prefs.setBool(Prefs.tapToReveal, settings.tapToReveal);
+    await prefs.setBool(Prefs.vibration, settings.vibration);
+    await prefs.setInt(Prefs.selectedDeck, settings.selectedDeck.index);
+    await prefs.setStringList(Prefs.customDeck, settings.customDeck);
+    await prefs.setBool(Prefs.seenIntro, settings.seenIntro);
   }
 
   /// Load the settings from [SharedPreferences].
@@ -74,10 +62,10 @@ class Repository {
   Future<void> saveRoom(Room room) async {
     final prefs = await SharedPreferences.getInstance();
 
-    if (room.uid != null) {
+    if (room.uid.isNotEmpty) {
       await prefs.setString(Prefs.roomId, room.uid);
     }
-    if (room.name != null) {
+    if (room.name.isNotEmpty) {
       await prefs.setString(Prefs.roomName, room.name);
     }
   }
@@ -101,10 +89,10 @@ class Repository {
   Future<void> savePlayer(Player player) async {
     final prefs = await SharedPreferences.getInstance();
 
-    if (player.username != null) {
+    if (player.username.isNotEmpty) {
       await prefs.setString(Prefs.username, player.username);
     }
-    if (player.currentCard != null) {
+    if (player.currentCard != '_') {
       await prefs.setString(Prefs.currentCard, player.currentCard);
     }
   }

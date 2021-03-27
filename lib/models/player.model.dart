@@ -25,7 +25,7 @@ class Player {
   }
 
   bool isCardConfirmed() {
-    return this.currentCard != null && !this.currentCard.startsWith("_");
+    return this.currentCard != '_' && !this.currentCard.startsWith("_");
   }
 
   factory Player.fromJson(Map<String, dynamic> json) => _$PlayerFromJson(json);

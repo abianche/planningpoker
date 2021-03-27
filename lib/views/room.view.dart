@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:planningpoker/data/decks.dart';
 import 'package:planningpoker/logger.dart';
 import 'package:planningpoker/models/player.model.dart';
 import 'package:planningpoker/models/room.model.dart';
@@ -101,7 +102,7 @@ class _RoomViewState extends State<RoomView> {
                     Room room;
                     final player = Player(
                       username: playerName,
-                      currentCard: '',
+                      currentCard: '_${initial_tile}',
                     );
 
                     if (roomId.isNotEmpty) {
@@ -130,7 +131,7 @@ class _RoomViewState extends State<RoomView> {
                       }
                     }
 
-                    if (roomId != null) {
+                    if (roomId.isNotEmpty) {
                       room = Room.initialState().copyWith(
                         uid: roomId,
                         name: roomName,
@@ -165,13 +166,13 @@ class _RoomViewState extends State<RoomView> {
       distinct: true,
       converter: _ViewModel.fromStore,
       onInit: (store) async {
-        var user = FirebaseService().auth?.currentUser;
+        var user = FirebaseService().auth.currentUser;
         if (user == null) {
           user = await _signIn();
         }
       },
       builder: (context, vm) => Container(
-        child: vm.room.uid == null
+        child: vm.room.uid.isEmpty
             ? Center(
                 child: TextButton.icon(
                   onPressed: () => joinOrCreateRoom(vm),

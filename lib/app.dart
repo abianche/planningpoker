@@ -13,8 +13,7 @@ class App extends StatelessWidget {
   const App({
     Key? key,
     required this.store,
-  })   : assert(store != null),
-        super(key: key);
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

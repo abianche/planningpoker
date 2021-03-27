@@ -42,7 +42,7 @@ class CardBack extends StatelessWidget {
                 filterQuality: FilterQuality.high,
               ),
               CardContent(data: data),
-              if (FirebaseService().auth.currentUser != null && vm.room?.uid != null)
+              if (FirebaseService().auth.currentUser != null && vm.room.uid.isNotEmpty)
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: TextButton(

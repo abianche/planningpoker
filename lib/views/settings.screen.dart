@@ -133,7 +133,8 @@ class SettingsScreen extends StatelessWidget {
                   vm.settings.copyWith(vibration: value),
                 );
 
-                if (value == true && await Vibration.hasVibrator()) {
+                final hasVibrator = await Vibration.hasVibrator() ?? false;
+                if (value == true && hasVibrator) {
                   Vibration.vibrate();
                 }
               },

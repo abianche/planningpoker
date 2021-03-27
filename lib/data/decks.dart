@@ -1,5 +1,7 @@
 import 'package:planningpoker/models/deck.model.dart';
 
+const String initial_tile = "local_cafe";
+
 /// Standard deck.
 const standard_deck = Deck(
   deckName: 'Standard',

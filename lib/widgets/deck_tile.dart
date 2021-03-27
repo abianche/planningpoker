@@ -1,6 +1,6 @@
-import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:planningpoker/flip_card/flip_card.dart';
 import 'package:planningpoker/models/deck.model.dart';
 import 'package:planningpoker/redux/actions/player.actions.dart';
 import 'package:planningpoker/redux/selectors/selectors.dart';
@@ -130,7 +130,7 @@ class _DeckTileState extends State<DeckTile> {
                     deck: widget.deck,
                     name: widget.name,
                   )
-                : null,
+                : Container(),
             front: widget.tapToReveal
                 ? CardFront(
                     deck: widget.deck,
