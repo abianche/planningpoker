@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class NotFoundScreen extends StatelessWidget {
-  final String name;
+  final String? name;
   const NotFoundScreen({
-    Key key,
-    @required this.name,
+    Key? key,
+    required this.name,
   }) : super(key: key);
 
   @override
@@ -16,7 +16,7 @@ class NotFoundScreen extends StatelessWidget {
     return Platform.isIOS
         ? CupertinoPageScaffold(
             navigationBar: CupertinoNavigationBar(
-              middle: Text(AppLocalizations.of(context).pageNotFound),
+              middle: Text(AppLocalizations.of(context)!.pageNotFound),
             ),
             child: Center(
               child: Text('404 : $name'),
@@ -24,7 +24,7 @@ class NotFoundScreen extends StatelessWidget {
           )
         : Scaffold(
             appBar: AppBar(
-              title: Text(AppLocalizations.of(context).pageNotFound),
+              title: Text(AppLocalizations.of(context)!.pageNotFound),
             ),
             body: Center(
               child: Text('404 : $name'),

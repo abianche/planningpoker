@@ -4,8 +4,8 @@ import 'package:planningpoker/models/deck.model.dart';
 
 class CardFront extends StatelessWidget {
   const CardFront({
-    Key key,
-    @required this.deck,
+    Key? key,
+    required this.deck,
   }) : super(key: key);
 
   final Deck deck;
@@ -26,7 +26,7 @@ class CardFront extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(28.0),
                 child: Text(
-                  AppLocalizations.of(context).title,
+                  AppLocalizations.of(context)!.title,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: Theme.of(context).textTheme.headline5.fontSize,
@@ -42,7 +42,7 @@ class CardFront extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    AppLocalizations.of(context).tapToReveal,
+                    AppLocalizations.of(context)!.tapToReveal,
                     style: const TextStyle(
                       fontStyle: FontStyle.italic,
                       color: Colors.white,

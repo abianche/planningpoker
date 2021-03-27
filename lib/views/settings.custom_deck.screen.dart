@@ -9,7 +9,9 @@ import 'package:planningpoker/utils.dart';
 import 'package:redux/redux.dart';
 
 class CustomDeckSetup extends StatefulWidget {
-  const CustomDeckSetup({Key key}) : super(key: key);
+  const CustomDeckSetup({
+    required Key key,
+  }) : super(key: key);
 
   @override
   _CustomDeckSetupState createState() => _CustomDeckSetupState();
@@ -18,9 +20,9 @@ class CustomDeckSetup extends StatefulWidget {
 class _CustomDeckSetupState extends State<CustomDeckSetup> {
   static final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
-  bool isLoading;
-  List<String> currentCustomDeck;
-  List<String> originalCustomDeck;
+  bool isLoading = true;
+  List<String> currentCustomDeck = [];
+  List<String> originalCustomDeck = [];
 
   void _toggleCurrentCustomDeckTile(String name) {
     final index = currentCustomDeck.indexOf(name);
@@ -61,19 +63,19 @@ class _CustomDeckSetupState extends State<CustomDeckSetup> {
           return Scaffold(
             key: scaffoldKey,
             appBar: AppBar(
-              title: Text(AppLocalizations.of(context).customDeckSetup),
+              title: Text(AppLocalizations.of(context)!.customDeckSetup),
               backgroundColor: Colors.black,
               actions: <Widget>[
                 IconButton(
                   icon: const Icon(Icons.save),
-                  tooltip: AppLocalizations.of(context).customDeckSaveTooltip,
+                  tooltip: AppLocalizations.of(context)!.customDeckSaveTooltip,
                   onPressed: () {
                     vm.setCustomDeck(currentCustomDeck);
 
                     ScaffoldMessenger.of(context).removeCurrentSnackBar();
                     final snackBar = SnackBar(
                       content: Text(
-                        AppLocalizations.of(context).customDeckSaveMessage,
+                        AppLocalizations.of(context)!.customDeckSaveMessage,
                         textAlign: TextAlign.center,
                       ),
                       backgroundColor: Colors.green,
@@ -83,7 +85,7 @@ class _CustomDeckSetupState extends State<CustomDeckSetup> {
                 ),
                 IconButton(
                   icon: const Icon(Icons.restore_page),
-                  tooltip: AppLocalizations.of(context).customDeckRestoreTooltip,
+                  tooltip: AppLocalizations.of(context)!.customDeckRestoreTooltip,
                   onPressed: () {
                     setState(() {
                       currentCustomDeck = originalCustomDeck;
@@ -92,7 +94,7 @@ class _CustomDeckSetupState extends State<CustomDeckSetup> {
                     ScaffoldMessenger.of(context).removeCurrentSnackBar();
                     final snackBar = SnackBar(
                       content: Text(
-                        AppLocalizations.of(context).customDeckRestoreMessage,
+                        AppLocalizations.of(context)!.customDeckRestoreMessage,
                         textAlign: TextAlign.center,
                       ),
                       backgroundColor: Colors.grey,
@@ -204,11 +206,11 @@ class ListItem extends StatefulWidget {
   final Function(String) toggleCurrentCustomDeckTile;
 
   ListItem({
-    @required Key key,
-    @required this.title,
-    @required this.value,
-    @required this.checkState,
-    @required this.toggleCurrentCustomDeckTile,
+    required Key key,
+    required this.title,
+    required this.value,
+    required this.checkState,
+    required this.toggleCurrentCustomDeckTile,
   }) : super(key: key);
 
   @override
@@ -244,8 +246,8 @@ class _ViewModel {
   ) setCustomDeck;
 
   _ViewModel({
-    @required this.customDeck,
-    @required this.setCustomDeck,
+    required this.customDeck,
+    required this.setCustomDeck,
   });
 
   static _ViewModel fromStore(Store<AppState> store) {

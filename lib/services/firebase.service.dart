@@ -19,10 +19,9 @@ class FirebaseService {
     final result = await auth.signInAnonymously().catchError((error) {
       log.e('signInAnonymously | $error');
       signOut();
-      return null;
     });
 
-    return result?.user;
+    return result.user!;
   }
 
   Future signOut() async {

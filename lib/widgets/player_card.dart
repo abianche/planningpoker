@@ -14,10 +14,10 @@ import 'package:redux/redux.dart';
 
 class PlayerCard extends StatelessWidget {
   const PlayerCard({
-    Key key,
-    @required this.roomId,
-    @required this.userName,
-    @required this.player,
+    Key? key,
+    required this.roomId,
+    required this.userName,
+    required this.player,
   }) : super(key: key);
 
   final String roomId;
@@ -42,7 +42,7 @@ class PlayerCard extends StatelessWidget {
                       textScaleFactor: 1.25,
                     )
                   : Tooltip(
-                      message: AppLocalizations.of(context).thisIsYou,
+                      message: AppLocalizations.of(context)!.thisIsYou,
                       child: Text(
                         player.username,
                         textScaleFactor: 1.25,
@@ -73,7 +73,7 @@ class PlayerCard extends StatelessWidget {
                                   vm.setPlayerCard(player.currentCard?.substring(1));
                                 },
                                 child: Text(
-                                  AppLocalizations.of(context).confirm.toUpperCase(),
+                                  AppLocalizations.of(context)!.confirm.toUpperCase(),
                                   style: TextStyle(
                                     color:
                                         Theme.of(context).brightness == Brightness.dark ? Colors.black : Colors.white,
@@ -94,7 +94,7 @@ class PlayerCard extends StatelessWidget {
                                   vm.setCurrentTab(AppTab.deck);
                                 },
                                 child: Text(
-                                  AppLocalizations.of(context).pickACard.toUpperCase(),
+                                  AppLocalizations.of(context)!.pickACard.toUpperCase(),
                                   style: TextStyle(
                                     color:
                                         Theme.of(context).brightness == Brightness.dark ? Colors.black : Colors.white,
@@ -128,10 +128,10 @@ class _ViewModel {
   final Function(AppTab) setCurrentTab;
 
   _ViewModel({
-    @required this.settings,
-    @required this.room,
-    @required this.setPlayerCard,
-    @required this.setCurrentTab,
+    required this.settings,
+    required this.room,
+    required this.setPlayerCard,
+    required this.setCurrentTab,
   });
 
   static _ViewModel fromStore(Store<AppState> store) {

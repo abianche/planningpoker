@@ -14,7 +14,7 @@ import 'package:planningpoker/widgets/player_card.dart';
 import 'package:redux/redux.dart';
 
 class PlayersOverview extends StatelessWidget {
-  const PlayersOverview({Key key}) : super(key: key);
+  const PlayersOverview({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,13 +32,13 @@ class PlayersOverview extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('${AppLocalizations.of(context).room}: ${vm.room.name}'),
+                      Text('${AppLocalizations.of(context)!.room}: ${vm.room.name}'),
                       const SizedBox(height: 5),
-                      Text('${AppLocalizations.of(context).username}: ${vm.player.username}'),
+                      Text('${AppLocalizations.of(context)!.username}: ${vm.player.username}'),
                     ],
                   ),
                   IconButton(
-                    tooltip: AppLocalizations.of(context).logout,
+                    tooltip: AppLocalizations.of(context)!.logout,
                     icon: const Icon(Icons.logout),
                     onPressed: () {
                       vm.logout();
@@ -101,8 +101,8 @@ class PlayerOverviewAvg extends StatelessWidget {
   final List<QueryDocumentSnapshot> playersData;
 
   const PlayerOverviewAvg({
-    Key key,
-    @required this.playersData,
+    Key? key,
+    required this.playersData,
   }) : super(key: key);
 
   @override
@@ -160,10 +160,10 @@ class _ViewModel {
   final Function() logout;
 
   _ViewModel({
-    @required this.player,
-    @required this.room,
-    @required this.playersStream,
-    @required this.logout,
+    required this.player,
+    required this.room,
+    required this.playersStream,
+    required this.logout,
   });
 
   static _ViewModel fromStore(Store<AppState> store) {

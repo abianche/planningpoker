@@ -4,13 +4,15 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class InfoScreen extends StatelessWidget {
-  const InfoScreen({Key key}) : super(key: key);
+  const InfoScreen({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context).title),
+        title: Text(AppLocalizations.of(context)!.title),
         backgroundColor: Colors.black,
       ),
       body: Container(

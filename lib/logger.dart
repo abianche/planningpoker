@@ -12,7 +12,7 @@ class MyFilter extends LogFilter {
   bool shouldLog(LogEvent event) {
     var shouldLog = false;
     assert(() {
-      if (event.level.index >= level.index) {
+      if (event.level.index >= level!.index) {
         shouldLog = true;
       }
       return true;
@@ -73,7 +73,7 @@ class SimpleLogPrinter extends LogPrinter {
     final level = getLevelString(event.level);
 
     // see: https://github.com/leisim/logger/issues/1
-    if (Platform.isIOS) {
+    if (Platform.isIOS || color == null) {
       return ['[$level] $time [$className] - ${event.message}'];
     }
 

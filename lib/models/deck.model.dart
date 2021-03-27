@@ -38,11 +38,11 @@ class Deck {
   Map<String, dynamic> toJson() => _$DeckToJson(this);
 
   Deck copyWith({
-    String deckName,
-    String deckImage,
-    int deckColor,
-    int deckColorDark,
-    List<String> deckValues,
+    String? deckName,
+    String? deckImage,
+    int? deckColor,
+    int? deckColorDark,
+    List<String>? deckValues,
   }) {
     return Deck(
       deckName: deckName ?? this.deckName,

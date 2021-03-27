@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class CardContent extends StatelessWidget {
   const CardContent({
-    Key key,
-    @required this.data,
+    Key? key,
+    required this.data,
   }) : super(key: key);
 
   final dynamic data;

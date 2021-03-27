@@ -14,12 +14,12 @@ class AppState {
   final Stream<QuerySnapshot> playersStream;
 
   AppState({
-    this.initialized,
-    this.activeTab,
-    this.settings,
-    this.player,
-    this.room,
-    this.playersStream,
+    required this.initialized,
+    required this.activeTab,
+    required this.settings,
+    required this.player,
+    required this.room,
+    required this.playersStream,
   });
 
   AppState.initialState()
@@ -28,15 +28,15 @@ class AppState {
         settings = Settings.initialState(),
         player = Player.initialState(),
         room = Room.initialState(),
-        playersStream = null;
+        playersStream = const Stream<QuerySnapshot>.empty();
 
   AppState copyWith({
-    bool initialized,
-    AppTab activeTab,
-    Settings settings,
-    Player player,
-    Room room,
-    Stream<QuerySnapshot> playersStream,
+    bool? initialized,
+    AppTab? activeTab,
+    Settings? settings,
+    Player? player,
+    Room? room,
+    Stream<QuerySnapshot>? playersStream,
   }) {
     return AppState(
       initialized: initialized ?? this.initialized,

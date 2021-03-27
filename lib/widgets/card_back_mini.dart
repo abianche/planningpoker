@@ -3,8 +3,8 @@ import 'package:planningpoker/utils.dart';
 
 class CardBackMini extends StatelessWidget {
   const CardBackMini({
-    Key key,
-    @required this.card,
+    Key? key,
+    required this.card,
   }) : super(key: key);
 
   final String card;

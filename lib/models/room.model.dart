@@ -15,8 +15,8 @@ class Room {
   });
 
   Room copyWith({
-    String uid,
-    String name,
+    String? uid,
+    String? name,
   }) {
     return Room(
       uid: uid ?? this.uid,

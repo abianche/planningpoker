@@ -15,8 +15,8 @@ class Player {
   });
 
   Player copyWith({
-    String username,
-    String currentCard,
+    String? username,
+    String? currentCard,
   }) {
     return Player(
       username: username ?? this.username,

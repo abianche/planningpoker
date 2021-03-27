@@ -4,7 +4,7 @@ class SetPlayerAction {
   final Player player;
 
   SetPlayerAction({
-    this.player,
+    required this.player,
   });
 
   @override

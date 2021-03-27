@@ -16,11 +16,11 @@ class DeckTile extends StatefulWidget {
   final bool tapToReveal;
 
   const DeckTile({
-    Key key,
-    @required this.deck,
-    @required this.data,
-    @required this.name,
-    @required this.tapToReveal,
+    Key? key,
+    required this.deck,
+    required this.data,
+    required this.name,
+    required this.tapToReveal,
   }) : super(key: key);
 
   @override
@@ -156,7 +156,7 @@ class _ViewModel {
   final Function(String) setPlayerCard;
 
   _ViewModel({
-    @required this.setPlayerCard,
+    required this.setPlayerCard,
   });
 
   static _ViewModel fromStore(Store<AppState> store) {

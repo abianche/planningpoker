@@ -29,12 +29,12 @@ class Settings {
   final bool seenIntro;
 
   const Settings({
-    this.themeMode,
-    this.tapToReveal,
-    this.vibration,
-    this.selectedDeck,
-    this.customDeck,
-    this.seenIntro,
+    required this.themeMode,
+    required this.tapToReveal,
+    required this.vibration,
+    required this.selectedDeck,
+    required this.customDeck,
+    required this.seenIntro,
   });
 
   factory Settings.fromJson(Map<String, dynamic> json) => _$SettingsFromJson(json);
@@ -51,12 +51,12 @@ class Settings {
         seenIntro = false;
 
   Settings copyWith({
-    ThemeMode themeMode,
-    bool tapToReveal,
-    bool vibration,
-    DeckType selectedDeck,
-    List<String> customDeck,
-    bool seenIntro,
+    ThemeMode? themeMode,
+    bool? tapToReveal,
+    bool? vibration,
+    DeckType? selectedDeck,
+    List<String>? customDeck,
+    bool? seenIntro,
   }) {
     return Settings(
       themeMode: themeMode ?? this.themeMode,

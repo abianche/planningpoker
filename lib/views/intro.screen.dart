@@ -9,7 +9,7 @@ import 'package:planningpoker/router.dart';
 import 'package:redux/redux.dart';
 
 class IntroScreen extends StatefulWidget {
-  const IntroScreen({Key key}) : super(key: key);
+  const IntroScreen({Key? key}) : super(key: key);
 
   @override
   IntroScreenState createState() => IntroScreenState();
@@ -81,8 +81,8 @@ class _ViewModel {
   final Function() completeIntro;
 
   _ViewModel({
-    @required this.seenIntro,
-    @required this.completeIntro,
+    required this.seenIntro,
+    required this.completeIntro,
   });
 
   static _ViewModel fromStore(Store<AppState> store) {

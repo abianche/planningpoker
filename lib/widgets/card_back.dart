@@ -18,10 +18,10 @@ class CardBack extends StatelessWidget {
   final String name;
 
   const CardBack({
-    Key key,
-    @required this.data,
-    @required this.deck,
-    @required this.name,
+    Key? key,
+    required this.data,
+    required this.deck,
+    required this.name,
   }) : super(key: key);
 
   @override
@@ -59,7 +59,7 @@ class CardBack extends StatelessWidget {
                       ),
                     ),
                     child: Text(
-                      AppLocalizations.of(context).confirm.toUpperCase(),
+                      AppLocalizations.of(context)!.confirm.toUpperCase(),
                       style: TextStyle(
                         color: Theme.of(context).brightness == Brightness.dark ? Colors.black : Colors.white,
                       ),
@@ -82,10 +82,10 @@ class _ViewModel {
   final Function(AppTab) setCurrentTab;
 
   _ViewModel({
-    @required this.settings,
-    @required this.room,
-    @required this.setPlayerCard,
-    @required this.setCurrentTab,
+    required this.settings,
+    required this.room,
+    required this.setPlayerCard,
+    required this.setCurrentTab,
   });
 
   static _ViewModel fromStore(Store<AppState> store) {

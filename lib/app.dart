@@ -11,9 +11,9 @@ import 'package:redux/redux.dart';
 class App extends StatelessWidget {
   final Store<AppState> store;
   const App({
-    Key key,
-    @required this.store,
-  })  : assert(store != null),
+    Key? key,
+    required this.store,
+  })   : assert(store != null),
         super(key: key);
 
   @override
@@ -24,7 +24,7 @@ class App extends StatelessWidget {
         distinct: true,
         converter: _ViewModel.fromStore,
         builder: (context, vm) => MaterialApp(
-          onGenerateTitle: (context) => AppLocalizations.of(context).title,
+          onGenerateTitle: (context) => AppLocalizations.of(context)!.title,
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
           theme: lightTheme(),
@@ -46,7 +46,7 @@ class _ViewModel {
   final ThemeMode themeMode;
 
   _ViewModel({
-    @required this.themeMode,
+    required this.themeMode,
   });
 
   static _ViewModel fromStore(Store<AppState> store) {

@@ -10,7 +10,9 @@ import 'package:planningpoker/utils.dart';
 import 'package:redux/redux.dart';
 
 class DeckView extends StatelessWidget {
-  const DeckView({Key key}) : super(key: key);
+  const DeckView({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,7 @@ class DeckView extends StatelessWidget {
       distinct: true,
       converter: _ViewModel.fromStore,
       builder: (context, vm) {
-        var currentDeck = all_decks[vm.settings.selectedDeck];
+        var currentDeck = all_decks[vm.settings.selectedDeck]!;
         if (vm.settings.selectedDeck == DeckType.custom && vm.settings.customDeck != null) {
           // make sure we use the saved configuration for custom deck
           currentDeck = custom_deck.copyWith(deckValues: vm.settings.customDeck);
@@ -41,7 +43,7 @@ class _ViewModel {
   final Settings settings;
 
   _ViewModel({
-    @required this.settings,
+    required this.settings,
   });
 
   static _ViewModel fromStore(Store<AppState> store) {

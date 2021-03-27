@@ -19,7 +19,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:vibration/vibration.dart';
 
 class SettingsScreen extends StatelessWidget {
-  const SettingsScreen({Key key}) : super(key: key);
+  const SettingsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,14 +28,14 @@ class SettingsScreen extends StatelessWidget {
       converter: _ViewModel.fromStore,
       builder: (context, vm) => Scaffold(
         appBar: AppBar(
-          title: Text(AppLocalizations.of(context).title),
+          title: Text(AppLocalizations.of(context)!.title),
           backgroundColor: Colors.black,
         ),
         body: ListView(
           children: [
             ExpansionTile(
-              title: Text(AppLocalizations.of(context).selectDeck),
-              subtitle: Text(AppLocalizations.of(context).selectDeckInfo),
+              title: Text(AppLocalizations.of(context)!.selectDeck),
+              subtitle: Text(AppLocalizations.of(context)!.selectDeckInfo),
               children: [
                 RadioListTile(
                   title: Text(standard_deck.deckName),
@@ -87,19 +87,19 @@ class SettingsScreen extends StatelessWidget {
             ),
             const Divider(),
             SwitchListTile(
-              title: Text(AppLocalizations.of(context).tapToReveal),
-              subtitle: Text(AppLocalizations.of(context).tapToRevealInfo),
+              title: Text(AppLocalizations.of(context)!.tapToReveal),
+              subtitle: Text(AppLocalizations.of(context)!.tapToRevealInfo),
               value: vm.settings.tapToReveal,
               onChanged: (bool value) => vm.setSettings(
                 vm.settings.copyWith(tapToReveal: value),
               ),
             ),
             ExpansionTile(
-              title: Text(AppLocalizations.of(context).themeMode),
-              subtitle: Text(AppLocalizations.of(context).themeModeInfo),
+              title: Text(AppLocalizations.of(context)!.themeMode),
+              subtitle: Text(AppLocalizations.of(context)!.themeModeInfo),
               children: [
                 RadioListTile(
-                  title: Text(AppLocalizations.of(context).themeModeSystem),
+                  title: Text(AppLocalizations.of(context)!.themeModeSystem),
                   value: ThemeMode.system.index,
                   groupValue: vm.settings.themeMode.index,
                   onChanged: (int newValue) {
@@ -107,7 +107,7 @@ class SettingsScreen extends StatelessWidget {
                   },
                 ),
                 RadioListTile(
-                  title: Text(AppLocalizations.of(context).themeModeLight),
+                  title: Text(AppLocalizations.of(context)!.themeModeLight),
                   value: ThemeMode.light.index,
                   groupValue: vm.settings.themeMode.index,
                   onChanged: (int newValue) {
@@ -115,7 +115,7 @@ class SettingsScreen extends StatelessWidget {
                   },
                 ),
                 RadioListTile(
-                  title: Text(AppLocalizations.of(context).themeModeDark),
+                  title: Text(AppLocalizations.of(context)!.themeModeDark),
                   value: ThemeMode.dark.index,
                   groupValue: vm.settings.themeMode.index,
                   onChanged: (int newValue) {
@@ -125,8 +125,8 @@ class SettingsScreen extends StatelessWidget {
               ],
             ),
             SwitchListTile(
-              title: Text(AppLocalizations.of(context).vibration),
-              subtitle: Text(AppLocalizations.of(context).vibrationInfo),
+              title: Text(AppLocalizations.of(context)!.vibration),
+              subtitle: Text(AppLocalizations.of(context)!.vibrationInfo),
               value: vm.settings.vibration,
               onChanged: (bool value) async {
                 vm.setSettings(
@@ -140,8 +140,8 @@ class SettingsScreen extends StatelessWidget {
             ),
             const Divider(),
             ListTile(
-              title: Text(AppLocalizations.of(context).whatIsPlanningPoker),
-              subtitle: Text(AppLocalizations.of(context).instructions),
+              title: Text(AppLocalizations.of(context)!.whatIsPlanningPoker),
+              subtitle: Text(AppLocalizations.of(context)!.instructions),
               onTap: () => Navigator.of(context).pushNamed(Routes.settings_info),
             ),
             FutureBuilder(
@@ -159,14 +159,14 @@ class SettingsScreen extends StatelessWidget {
                   );
                 } else if (snapshot.hasError) {
                   return ListTile(
-                    title: Text('${AppLocalizations.of(context).about} ${AppLocalizations.of(context).title}'),
-                    subtitle: Text(AppLocalizations.of(context).error),
+                    title: Text('${AppLocalizations.of(context)!.about} ${AppLocalizations.of(context)!.title}'),
+                    subtitle: Text(AppLocalizations.of(context)!.error),
                     enabled: false,
                   );
                 } else {
                   return ListTile(
-                    title: Text('${AppLocalizations.of(context).about} ${AppLocalizations.of(context).title}'),
-                    subtitle: Text(AppLocalizations.of(context).loading),
+                    title: Text('${AppLocalizations.of(context)!.about} ${AppLocalizations.of(context)!.title}'),
+                    subtitle: Text(AppLocalizations.of(context)!.loading),
                     enabled: false,
                   );
                 }
@@ -174,35 +174,35 @@ class SettingsScreen extends StatelessWidget {
             ),
             const Divider(),
             ListTile(
-              title: Text(AppLocalizations.of(context).showTheIntro),
-              subtitle: Text(AppLocalizations.of(context).showTheIntroInfo),
+              title: Text(AppLocalizations.of(context)!.showTheIntro),
+              subtitle: Text(AppLocalizations.of(context)!.showTheIntroInfo),
               onTap: () {
                 Navigator.of(context).pushNamed(Routes.settings_intro);
               },
               trailing: const Icon(Icons.school),
             ),
             ListTile(
-              title: Text(AppLocalizations.of(context).rateThisApp),
-              subtitle: Text(AppLocalizations.of(context).rateThisAppInfo),
+              title: Text(AppLocalizations.of(context)!.rateThisApp),
+              subtitle: Text(AppLocalizations.of(context)!.rateThisAppInfo),
               onTap: () {
                 LaunchReview.launch();
               },
               trailing: const Icon(Icons.thumb_up),
             ),
             ListTile(
-              title: Text(AppLocalizations.of(context).shareThisApp),
-              subtitle: Text(AppLocalizations.of(context).shareThisAppInfo),
+              title: Text(AppLocalizations.of(context)!.shareThisApp),
+              subtitle: Text(AppLocalizations.of(context)!.shareThisAppInfo),
               onTap: () {
                 Share.share(
                   Platform.isIOS ? APP_STORE_URL : PLAY_STORE_URL,
-                  subject: AppLocalizations.of(context).title,
+                  subject: AppLocalizations.of(context)!.title,
                 );
               },
               trailing: const Icon(Icons.share),
             ),
             ListTile(
-              title: Text(AppLocalizations.of(context).followMe),
-              subtitle: Text(AppLocalizations.of(context).followMeInfo),
+              title: Text(AppLocalizations.of(context)!.followMe),
+              subtitle: Text(AppLocalizations.of(context)!.followMeInfo),
               onTap: () async {
                 if (await canLaunch(PROFILE_URL)) {
                   await launch(PROFILE_URL);
@@ -218,7 +218,7 @@ class SettingsScreen extends StatelessWidget {
                 if (snapshot.hasData) {
                   final packageInfo = snapshot.data;
                   final text = StringBuffer()
-                    ..write(AppLocalizations.of(context).title)
+                    ..write(AppLocalizations.of(context)!.title)
                     ..write(' ')
                     ..write(packageInfo.version)
                     ..write('-')
@@ -229,13 +229,13 @@ class SettingsScreen extends StatelessWidget {
                   );
                 } else if (snapshot.hasError) {
                   return ListTile(
-                    subtitle: Center(child: Text(AppLocalizations.of(context).title)),
+                    subtitle: Center(child: Text(AppLocalizations.of(context)!.title)),
                     enabled: false,
                   );
                 } else {
                   return ListTile(
-                    title: Text(AppLocalizations.of(context).title),
-                    subtitle: Text(AppLocalizations.of(context).loading),
+                    title: Text(AppLocalizations.of(context)!.title),
+                    subtitle: Text(AppLocalizations.of(context)!.loading),
                     enabled: false,
                   );
                 }
@@ -253,8 +253,8 @@ class _ViewModel {
   final Function(Settings) setSettings;
 
   _ViewModel({
-    @required this.settings,
-    @required this.setSettings,
+    required this.settings,
+    required this.setSettings,
   });
 
   static _ViewModel fromStore(Store<AppState> store) {

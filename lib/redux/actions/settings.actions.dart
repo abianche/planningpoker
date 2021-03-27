@@ -4,7 +4,7 @@ class SetSettingsAction {
   final Settings settings;
 
   SetSettingsAction({
-    this.settings,
+    required this.settings,
   });
 
   @override

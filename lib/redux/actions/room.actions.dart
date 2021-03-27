@@ -4,7 +4,7 @@ class SetRoomAction {
   final Room room;
 
   SetRoomAction({
-    this.room,
+    required this.room,
   });
 
   @override

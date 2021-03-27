@@ -13,7 +13,9 @@ import 'package:planningpoker/views/room.view.dart';
 import 'package:redux/redux.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key key}) : super(key: key);
+  const HomeScreen({
+    Key? key,
+  }) : super(key: key);
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -44,9 +46,9 @@ class _HomeScreenState extends State<HomeScreen> {
             title: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(AppLocalizations.of(context).title),
+                Text(AppLocalizations.of(context)!.title),
                 Text(
-                  AppLocalizations.of(context).deckName(currentDeck.deckName),
+                  AppLocalizations.of(context)!.deckName(currentDeck.deckName),
                   textScaleFactor: 0.9,
                 ),
               ],
@@ -68,11 +70,11 @@ class _HomeScreenState extends State<HomeScreen> {
             onTap: (value) => setState(() => vm.setCurrentTab(AppTab.values[value])),
             items: [
               BottomNavigationBarItem(
-                label: AppLocalizations.of(context).deck,
+                label: AppLocalizations.of(context)!.deck,
                 icon: const Icon(Icons.amp_stories),
               ),
               BottomNavigationBarItem(
-                label: AppLocalizations.of(context).room,
+                label: AppLocalizations.of(context)!.room,
                 icon: const Icon(Icons.people),
               ),
             ],
@@ -91,10 +93,10 @@ class _ViewModel {
   final Function() resetCard;
 
   _ViewModel({
-    @required this.appTab,
-    @required this.settings,
-    @required this.setCurrentTab,
-    @required this.resetCard,
+    required this.appTab,
+    required this.settings,
+    required this.setCurrentTab,
+    required this.resetCard,
   });
 
   static _ViewModel fromStore(Store<AppState> store) {

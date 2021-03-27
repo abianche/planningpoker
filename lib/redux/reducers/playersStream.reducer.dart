@@ -13,5 +13,5 @@ Stream<QuerySnapshot> _setPlayersStream(Stream<QuerySnapshot> playersStream, Set
 }
 
 Stream<QuerySnapshot> _resetPlayersStream(Stream<QuerySnapshot> playersStream, ResetRoomAction action) {
-  return null;
+  return const Stream<QuerySnapshot>.empty();
 }

@@ -9,7 +9,7 @@ import 'package:planningpoker/router.dart';
 import 'package:redux/redux.dart';
 
 class SplashScreen extends StatelessWidget {
-  const SplashScreen({Key key}) : super(key: key);
+  const SplashScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,9 +40,9 @@ class _ViewModel {
   final Function getSettings;
 
   _ViewModel({
-    @required this.initialized,
-    @required this.seenIntro,
-    @required this.getSettings,
+    required this.initialized,
+    required this.seenIntro,
+    required this.getSettings,
   });
 
   static _ViewModel fromStore(Store<AppState> store) {
