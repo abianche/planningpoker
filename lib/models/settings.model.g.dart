@@ -8,11 +8,12 @@ part of 'settings.model.dart';
 
 Settings _$SettingsFromJson(Map<String, dynamic> json) {
   return Settings(
-    themeMode: _$enumDecodeNullable(_$ThemeModeEnumMap, json['themeMode']),
+    themeMode: _$enumDecode(_$ThemeModeEnumMap, json['themeMode']),
     tapToReveal: json['tapToReveal'] as bool,
     vibration: json['vibration'] as bool,
-    selectedDeck: _$enumDecodeNullable(_$DeckTypeEnumMap, json['selectedDeck']),
-    customDeck: (json['customDeck'] as List)?.map((e) => e as String)?.toList(),
+    selectedDeck: _$enumDecode(_$DeckTypeEnumMap, json['selectedDeck']),
+    customDeck:
+        (json['customDeck'] as List<dynamic>).map((e) => e as String).toList(),
     seenIntro: json['seenIntro'] as bool,
   );
 }
@@ -26,36 +27,30 @@ Map<String, dynamic> _$SettingsToJson(Settings instance) => <String, dynamic>{
       'seenIntro': instance.seenIntro,
     };
 
-T _$enumDecode<T>(
-  Map<T, dynamic> enumValues,
-  dynamic source, {
-  T unknownValue,
+K _$enumDecode<K, V>(
+  Map<K, V> enumValues,
+  Object? source, {
+  K? unknownValue,
 }) {
   if (source == null) {
-    throw ArgumentError('A value must be provided. Supported values: '
-        '${enumValues.values.join(', ')}');
+    throw ArgumentError(
+      'A value must be provided. Supported values: '
+      '${enumValues.values.join(', ')}',
+    );
   }
 
-  final value = enumValues.entries
-      .singleWhere((e) => e.value == source, orElse: () => null)
-      ?.key;
-
-  if (value == null && unknownValue == null) {
-    throw ArgumentError('`$source` is not one of the supported values: '
-        '${enumValues.values.join(', ')}');
-  }
-  return value ?? unknownValue;
-}
-
-T _$enumDecodeNullable<T>(
-  Map<T, dynamic> enumValues,
-  dynamic source, {
-  T unknownValue,
-}) {
-  if (source == null) {
-    return null;
-  }
-  return _$enumDecode<T>(enumValues, source, unknownValue: unknownValue);
+  return enumValues.entries.singleWhere(
+    (e) => e.value == source,
+    orElse: () {
+      if (unknownValue == null) {
+        throw ArgumentError(
+          '`$source` is not one of the supported values: '
+          '${enumValues.values.join(', ')}',
+        );
+      }
+      return MapEntry(unknownValue, enumValues.values.first);
+    },
+  ).key;
 }
 
 const _$ThemeModeEnumMap = {

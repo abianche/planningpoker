@@ -12,7 +12,8 @@ Deck _$DeckFromJson(Map<String, dynamic> json) {
     deckImage: json['deckImage'] as String,
     deckColor: json['deckColor'] as int,
     deckColorDark: json['deckColorDark'] as int,
-    deckValues: (json['deckValues'] as List)?.map((e) => e as String)?.toList(),
+    deckValues:
+        (json['deckValues'] as List<dynamic>).map((e) => e as String).toList(),
   );
 }
 
