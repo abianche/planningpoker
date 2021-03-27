@@ -10,8 +10,8 @@ class Player {
   final String currentCard;
 
   Player({
-    this.username,
-    this.currentCard,
+    required this.username,
+    required this.currentCard,
   });
 
   Player copyWith({
@@ -33,8 +33,8 @@ class Player {
   Map<String, dynamic> toJson() => _$PlayerToJson(this);
 
   Player.initialState()
-      : username = null,
-        currentCard = null;
+      : username = '',
+        currentCard = '_';
 
   @override
   String toString() => 'Player(username: $username, currentCard: $currentCard)';

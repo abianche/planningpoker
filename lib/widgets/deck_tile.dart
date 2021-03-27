@@ -115,7 +115,7 @@ class _DeckTileState extends State<DeckTile> {
     );
   }
 
-  void showSelection() async {
+  Future showSelection() async {
     await showDialog<bool>(
       context: context,
       builder: (context) => Dialog(

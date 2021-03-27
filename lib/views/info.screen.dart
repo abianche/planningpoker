@@ -18,8 +18,8 @@ class InfoScreen extends StatelessWidget {
       body: Container(
         child: Markdown(
           data: INFOTEXT,
-          onTapLink: (_, String href, __) async {
-            if (await canLaunch(href)) {
+          onTapLink: (_, String? href, __) async {
+            if (href != null && await canLaunch(href)) {
               await launch(href);
             } else {
               throw 'Could not launch $href';

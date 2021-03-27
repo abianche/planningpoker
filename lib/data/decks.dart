@@ -127,11 +127,19 @@ const custom_deck = Deck(
   ],
 );
 
-/// All decks.
-const Map<DeckType, Deck> all_decks = {
-  DeckType.standard: standard_deck,
-  DeckType.tshirt: tshirt_deck,
-  DeckType.fibonacci: fibonacci_deck,
-  DeckType.risk: risk_deck,
-  DeckType.custom: custom_deck,
-};
+getDeck(DeckType deckType) {
+  switch (deckType) {
+    case DeckType.standard:
+      return standard_deck;
+    case DeckType.tshirt:
+      return tshirt_deck;
+    case DeckType.fibonacci:
+      return fibonacci_deck;
+    case DeckType.risk:
+      return risk_deck;
+    case DeckType.custom:
+      return custom_deck;
+    default:
+      return standard_deck;
+  }
+}

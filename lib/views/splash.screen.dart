@@ -18,7 +18,7 @@ class SplashScreen extends StatelessWidget {
       ignoreChange: (state) => state.initialized == false,
       onWillChange: (prevVm, newVm) {
         if (newVm.initialized == true) {
-          return newVm.seenIntro == true
+          newVm.seenIntro == true
               ? Navigator.of(context).pushReplacementNamed(Routes.home)
               : Navigator.of(context).pushReplacementNamed(Routes.intro);
         }

@@ -30,7 +30,7 @@ class PlayerCard extends StatelessWidget {
       distinct: true,
       converter: _ViewModel.fromStore,
       builder: (context, vm) {
-        var currentDeck = all_decks[vm.settings.selectedDeck];
+        var currentDeck = getDeck(vm.settings.selectedDeck);
 
         return Card(
           child: Column(
@@ -66,11 +66,11 @@ class PlayerCard extends StatelessWidget {
                       : Stack(
                           alignment: AlignmentDirectional.bottomCenter,
                           children: [
-                            Opacity(opacity: 0.25, child: CardBackMini(card: player.currentCard?.substring(1))),
-                            if (player.currentCard != null)
+                            Opacity(opacity: 0.25, child: CardBackMini(card: player.currentCard.substring(1))),
+                            if (player.currentCard.isNotEmpty)
                               TextButton(
                                 onPressed: () {
-                                  vm.setPlayerCard(player.currentCard?.substring(1));
+                                  vm.setPlayerCard(player.currentCard.substring(1));
                                 },
                                 child: Text(
                                   AppLocalizations.of(context)!.confirm.toUpperCase(),

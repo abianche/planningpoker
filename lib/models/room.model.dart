@@ -10,8 +10,8 @@ class Room {
   final String name;
 
   Room({
-    this.uid,
-    this.name,
+    required this.uid,
+    required this.name,
   });
 
   Room copyWith({
@@ -29,8 +29,8 @@ class Room {
   Map<String, dynamic> toJson() => _$RoomToJson(this);
 
   Room.initialState()
-      : uid = null,
-        name = null;
+      : uid = '',
+        name = '';
 
   @override
   String toString() => 'Room(uid: $uid, name: $name)';

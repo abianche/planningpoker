@@ -57,8 +57,8 @@ class _RoomViewState extends State<RoomView> {
                       decoration: InputDecoration(
                         labelText: AppLocalizations.of(context)!.roomName,
                       ),
-                      validator: (value) {
-                        if (value.isEmpty) {
+                      validator: (String? value) {
+                        if (value == null || value.isEmpty) {
                           return AppLocalizations.of(context)!.enterRoomName;
                         }
                         if (value.length > 16) {
@@ -75,8 +75,8 @@ class _RoomViewState extends State<RoomView> {
                       decoration: InputDecoration(
                         labelText: AppLocalizations.of(context)!.playerName,
                       ),
-                      validator: (value) {
-                        if (value.isEmpty) {
+                      validator: (String? value) {
+                        if (value == null || value.isEmpty) {
                           return AppLocalizations.of(context)!.enterPlayerName;
                         }
                         if (value.length > 30) {
@@ -93,7 +93,7 @@ class _RoomViewState extends State<RoomView> {
             actions: <Widget>[
               TextButton(
                 onPressed: () async {
-                  if (_keyJoinRoomForm.currentState.validate()) {
+                  if (_keyJoinRoomForm.currentState!.validate()) {
                     final roomName = roomController.text;
                     final playerName = playerController.text;
 
@@ -101,9 +101,10 @@ class _RoomViewState extends State<RoomView> {
                     Room room;
                     final player = Player(
                       username: playerName,
+                      currentCard: '',
                     );
 
-                    if (roomId != null) {
+                    if (roomId.isNotEmpty) {
                       // check if player with the same name exists
                       final playerExists = await FirestoreService().playerExists(roomId, playerName);
                       if (playerExists) {

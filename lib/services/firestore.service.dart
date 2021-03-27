@@ -39,7 +39,7 @@ class FirestoreService {
     return room;
   }
 
-  /// Returns the `uid` of the room if a room with the given `name` exists. `null` otherwise.
+  /// Returns the `uid` of the room if a room with the given `name` exists. An empty string otherwise.
   Future<String> roomExists(String name) async {
     log.d('roomExists | name:$name');
     final ds = await this
@@ -54,11 +54,10 @@ class FirestoreService {
         .catchError(
       (error) {
         log.e('roomExists | $error');
-        return null;
       },
     );
 
-    if (ds.size == 0) return null;
+    if (ds.size == 0) return '';
 
     return ds.docs.single.id;
   }
@@ -66,7 +65,11 @@ class FirestoreService {
   /// Returns `true` if the a player with username `playerName` exists in room with uid `roomId`. `false` otherwise.
   Future<bool> playerExists(String roomId, String playerName) async {
     log.d('playerExists | roomId:$roomId playerName:$playerName');
-    final uid = FirebaseService().auth.currentUser.uid;
+    final user = FirebaseService().auth.currentUser;
+    if (user == null) {
+      return false;
+    }
+    final uid = user.uid;
     final ds = await this
         .firestore
         .collection(_room_collection)
@@ -88,16 +91,23 @@ class FirestoreService {
 
   Future<void> createPlayer(String roomId, Player player) async {
     log.d('createPlayer | roomId:$roomId player:$player');
-    final uid = FirebaseService().auth.currentUser.uid;
+    final user = FirebaseService().auth.currentUser;
+    if (user == null) {
+      throw ('User is null');
+    }
     final cr = await this.firestore.collection(_room_collection).doc(roomId).collection(_players_collection);
 
-    await cr.doc(uid).set(player.toJson()).catchError((error) => log.e('createPlayer | $error'));
+    await cr.doc(user.uid).set(player.toJson()).catchError((error) => log.e('createPlayer | $error'));
   }
 
   Future<void> updatePlayerStatus(String roomId, Player player) async {
     log.d('updatePlayerStatus | roomId:$roomId player:$player');
-    final uid = FirebaseService().auth.currentUser.uid;
-    final dr = await this.firestore.collection(_room_collection).doc(roomId).collection(_players_collection).doc(uid);
+    final user = FirebaseService().auth.currentUser;
+    if (user == null) {
+      throw ('User is null');
+    }
+    final dr =
+        await this.firestore.collection(_room_collection).doc(roomId).collection(_players_collection).doc(user.uid);
 
     await dr.set(player.toJson()).catchError((error) => log.e('updatePlayerStatus | $error'));
   }
@@ -109,9 +119,12 @@ class FirestoreService {
 
   Future<void> deleteCurrentPlayer(String roomId) async {
     log.d('deleteCurrentPlayer | roomId:$roomId');
-    final uid = FirebaseService().auth.currentUser.uid;
+    final user = FirebaseService().auth.currentUser;
+    if (user == null) {
+      throw ('User is null');
+    }
     final cr = await this.firestore.collection(_room_collection).doc(roomId).collection(_players_collection);
 
-    await cr.doc(uid).delete().catchError((error) => log.e('deleteCurrentPlayer | $error'));
+    await cr.doc(user.uid).delete().catchError((error) => log.e('deleteCurrentPlayer | $error'));
   }
 }

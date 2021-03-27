@@ -15,7 +15,7 @@ class CardContent extends StatelessWidget {
       return Center(
         child: Text(
           data,
-          style: TextStyle(fontSize: Theme.of(context).textTheme.headline1.fontSize, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: Theme.of(context).textTheme.headline1!.fontSize, fontWeight: FontWeight.bold),
         ),
       );
     } else if (data is Color) {

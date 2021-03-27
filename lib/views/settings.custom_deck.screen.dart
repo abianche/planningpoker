@@ -10,7 +10,7 @@ import 'package:redux/redux.dart';
 
 class CustomDeckSetup extends StatefulWidget {
   const CustomDeckSetup({
-    required Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -218,7 +218,7 @@ class ListItem extends StatefulWidget {
 }
 
 class _ListItemState extends State<ListItem> {
-  bool _checkState;
+  bool _checkState = false;
 
   @override
   Widget build(BuildContext context) {
@@ -227,10 +227,10 @@ class _ListItemState extends State<ListItem> {
         title: widget.title,
         trailing: Checkbox(
           value: _checkState ?? widget.checkState,
-          onChanged: (bool state) {
+          onChanged: (bool? state) {
             setState(() {
               widget.toggleCurrentCustomDeckTile(widget.value);
-              _checkState = state;
+              _checkState = state!;
             });
           },
         ),

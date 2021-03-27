@@ -20,7 +20,7 @@ class DeckView extends StatelessWidget {
       distinct: true,
       converter: _ViewModel.fromStore,
       builder: (context, vm) {
-        var currentDeck = all_decks[vm.settings.selectedDeck]!;
+        var currentDeck = getDeck(vm.settings.selectedDeck);
         if (vm.settings.selectedDeck == DeckType.custom && vm.settings.customDeck != null) {
           // make sure we use the saved configuration for custom deck
           currentDeck = custom_deck.copyWith(deckValues: vm.settings.customDeck);

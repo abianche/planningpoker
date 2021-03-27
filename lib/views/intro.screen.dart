@@ -64,7 +64,7 @@ class IntroScreenState extends State<IntroScreen> {
         slides: slides,
         onDonePress: () {
           vm.completeIntro();
-          final routeName = ModalRoute.of(context).settings.name;
+          final routeName = ModalRoute.of(context)!.settings.name;
           if (routeName == Routes.settings_intro) {
             Navigator.of(context).maybePop();
           } else {

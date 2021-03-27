@@ -26,11 +26,11 @@ class Deck {
   final List<String> deckValues;
 
   const Deck({
-    this.deckName,
-    this.deckImage,
-    this.deckColor,
-    this.deckColorDark,
-    this.deckValues,
+    required this.deckName,
+    required this.deckImage,
+    required this.deckColor,
+    required this.deckColorDark,
+    required this.deckValues,
   });
 
   factory Deck.fromJson(Map<String, dynamic> json) => _$DeckFromJson(json);

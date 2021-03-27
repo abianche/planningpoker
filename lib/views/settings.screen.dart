@@ -41,7 +41,7 @@ class SettingsScreen extends StatelessWidget {
                   title: Text(standard_deck.deckName),
                   value: DeckType.standard.index,
                   groupValue: vm.settings.selectedDeck.index,
-                  onChanged: (int newValue) {
+                  onChanged: (int? newValue) {
                     vm.setSettings(vm.settings.copyWith(selectedDeck: DeckType.standard));
                   },
                 ),
@@ -49,7 +49,7 @@ class SettingsScreen extends StatelessWidget {
                   title: Text(tshirt_deck.deckName),
                   value: DeckType.tshirt.index,
                   groupValue: vm.settings.selectedDeck.index,
-                  onChanged: (int newValue) {
+                  onChanged: (int? newValue) {
                     vm.setSettings(vm.settings.copyWith(selectedDeck: DeckType.tshirt));
                   },
                 ),
@@ -57,7 +57,7 @@ class SettingsScreen extends StatelessWidget {
                   title: Text(fibonacci_deck.deckName),
                   value: DeckType.fibonacci.index,
                   groupValue: vm.settings.selectedDeck.index,
-                  onChanged: (int newValue) {
+                  onChanged: (int? newValue) {
                     vm.setSettings(vm.settings.copyWith(selectedDeck: DeckType.fibonacci));
                   },
                 ),
@@ -65,7 +65,7 @@ class SettingsScreen extends StatelessWidget {
                   title: Text(risk_deck.deckName),
                   value: DeckType.risk.index,
                   groupValue: vm.settings.selectedDeck.index,
-                  onChanged: (int newValue) {
+                  onChanged: (int? newValue) {
                     vm.setSettings(vm.settings.copyWith(selectedDeck: DeckType.risk));
                   },
                 ),
@@ -73,7 +73,7 @@ class SettingsScreen extends StatelessWidget {
                   title: Text(custom_deck.deckName),
                   value: DeckType.custom.index,
                   groupValue: vm.settings.selectedDeck.index,
-                  onChanged: (int newValue) {
+                  onChanged: (int? newValue) {
                     vm.setSettings(vm.settings.copyWith(selectedDeck: DeckType.custom));
                   },
                   secondary: IconButton(
@@ -102,7 +102,7 @@ class SettingsScreen extends StatelessWidget {
                   title: Text(AppLocalizations.of(context)!.themeModeSystem),
                   value: ThemeMode.system.index,
                   groupValue: vm.settings.themeMode.index,
-                  onChanged: (int newValue) {
+                  onChanged: (int? newValue) {
                     vm.setSettings(vm.settings.copyWith(themeMode: ThemeMode.system));
                   },
                 ),
@@ -110,7 +110,7 @@ class SettingsScreen extends StatelessWidget {
                   title: Text(AppLocalizations.of(context)!.themeModeLight),
                   value: ThemeMode.light.index,
                   groupValue: vm.settings.themeMode.index,
-                  onChanged: (int newValue) {
+                  onChanged: (int? newValue) {
                     vm.setSettings(vm.settings.copyWith(themeMode: ThemeMode.light));
                   },
                 ),
@@ -118,7 +118,7 @@ class SettingsScreen extends StatelessWidget {
                   title: Text(AppLocalizations.of(context)!.themeModeDark),
                   value: ThemeMode.dark.index,
                   groupValue: vm.settings.themeMode.index,
-                  onChanged: (int newValue) {
+                  onChanged: (int? newValue) {
                     vm.setSettings(vm.settings.copyWith(themeMode: ThemeMode.dark));
                   },
                 ),
@@ -148,7 +148,7 @@ class SettingsScreen extends StatelessWidget {
               future: PackageInfo.fromPlatform(),
               builder: (context, AsyncSnapshot<PackageInfo> snapshot) {
                 if (snapshot.hasData) {
-                  final packageInfo = snapshot.data;
+                  final packageInfo = snapshot.data!;
                   return AboutListTile(
                     applicationLegalese: '© Alessio Bianchetti',
                     applicationVersion: '${packageInfo.version}-${packageInfo.buildNumber}',
@@ -216,7 +216,7 @@ class SettingsScreen extends StatelessWidget {
               future: PackageInfo.fromPlatform(),
               builder: (context, AsyncSnapshot<PackageInfo> snapshot) {
                 if (snapshot.hasData) {
-                  final packageInfo = snapshot.data;
+                  final packageInfo = snapshot.data!;
                   final text = StringBuffer()
                     ..write(AppLocalizations.of(context)!.title)
                     ..write(' ')

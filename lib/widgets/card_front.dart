@@ -29,7 +29,7 @@ class CardFront extends StatelessWidget {
                   AppLocalizations.of(context)!.title,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: Theme.of(context).textTheme.headline5.fontSize,
+                    fontSize: Theme.of(context).textTheme.headline5!.fontSize,
                     color: Colors.white,
                   ),
                   textAlign: TextAlign.center,

@@ -53,7 +53,7 @@ class PlayersOverview extends StatelessWidget {
               stream: vm.playersStream,
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  final qs = snapshot.data;
+                  final qs = snapshot.data!;
                   final playersData = qs.docs;
                   // calc avg
 
@@ -71,7 +71,7 @@ class PlayersOverview extends StatelessWidget {
                                     roomId: vm.room.uid,
                                     userName: vm.player.username,
                                     player: Player.fromJson(
-                                      (qds.data()),
+                                      qds.data()!,
                                     )))
                                 .toList(),
                           ),
@@ -112,7 +112,7 @@ class PlayerOverviewAvg extends StatelessWidget {
     List<String> symbols = [];
 
     playersData.forEach((qds) {
-      final player = Player.fromJson(qds.data());
+      final player = Player.fromJson(qds.data()!);
       if (!player.isCardConfirmed()) {
         return;
       }
