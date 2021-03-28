@@ -180,7 +180,7 @@ class _RoomViewState extends State<RoomView> {
                   label: Text(AppLocalizations.of(context)!.joinARoom),
                 ),
               )
-            : const PlayersOverview(),
+            : PlayersOverview(key: UniqueKey()),
       ),
     );
   }

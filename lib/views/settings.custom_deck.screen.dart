@@ -50,6 +50,7 @@ class _CustomDeckSetupState extends State<CustomDeckSetup> {
   @override
   Widget build(BuildContext context) {
     return StoreConnector<AppState, _ViewModel>(
+        distinct: true,
         onInitialBuild: (vm) {
           setState(() {
             currentCustomDeck = vm.customDeck;
@@ -57,7 +58,6 @@ class _CustomDeckSetupState extends State<CustomDeckSetup> {
             isLoading = false;
           });
         },
-        distinct: true,
         converter: _ViewModel.fromStore,
         builder: (context, vm) {
           return Scaffold(

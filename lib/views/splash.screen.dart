@@ -14,6 +14,7 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StoreConnector<AppState, _ViewModel>(
+      distinct: true,
       onInitialBuild: (vm) => vm.getSettings(),
       ignoreChange: (state) => state.initialized == false,
       onWillChange: (prevVm, newVm) {
@@ -23,7 +24,6 @@ class SplashScreen extends StatelessWidget {
               : Navigator.of(context).pushReplacementNamed(Routes.intro);
         }
       },
-      distinct: true,
       converter: _ViewModel.fromStore,
       builder: (context, vm) => const Scaffold(
         body: const Center(

@@ -4,7 +4,7 @@ import 'package:logger/logger.dart';
 
 /// Get a logger for the given `className`.
 Logger getLogger(String className) {
-  return Logger(printer: SimpleLogPrinter(className), filter: MyFilter());
+  return Logger(printer: null, filter: MyFilter());
 }
 
 class MyFilter extends LogFilter {

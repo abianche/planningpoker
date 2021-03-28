@@ -112,7 +112,13 @@ class FirestoreService {
 
   Stream<QuerySnapshot> getPlayersStream(String roomId) {
     log.d('getPlayersStream | roomId:$roomId');
-    return this.firestore.collection(_room_collection).doc(roomId).collection(_players_collection).snapshots();
+    return this
+        .firestore
+        .collection(_room_collection)
+        .doc(roomId)
+        .collection(_players_collection)
+        .snapshots()
+        .distinct();
   }
 
   Future<void> deleteCurrentPlayer(String roomId) async {

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_redux/flutter_redux.dart';
@@ -83,6 +84,13 @@ class PlayersOverview extends StatelessWidget {
                   return const Center(
                     child: Text('Ops! An error occurred!'),
                   );
+                } else if (snapshot.connectionState == ConnectionState.done && !snapshot.hasData && kIsWeb == true) {
+                  return Builder(builder: (context) {
+                    vm.forceResetRoom();
+                    return const Center(
+                      child: Text('Ops! An error occurred!'),
+                    );
+                  });
                 } else {
                   return const Center(
                     child: CircularProgressIndicator(),
@@ -156,12 +164,14 @@ class _ViewModel {
   final Player player;
   final Room room;
   final Stream<QuerySnapshot> playersStream;
+  final Function forceResetRoom;
 
   final Function() logout;
 
   _ViewModel({
     required this.player,
     required this.room,
+    required this.forceResetRoom,
     required this.playersStream,
     required this.logout,
   });
@@ -174,6 +184,9 @@ class _ViewModel {
       logout: () {
         store.dispatch(ResetRoomAction());
         store.dispatch(ResetPlayerAction());
+      },
+      forceResetRoom: () {
+        store.dispatch(SetRoomAction(room: roomSelector(store.state)));
       },
     );
   }
