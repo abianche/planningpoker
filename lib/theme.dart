@@ -7,6 +7,9 @@ ThemeData lightTheme() => ThemeData.light().copyWith(
           fontSize: 16.0,
         ),
       ),
+      appBarTheme: const AppBarTheme(
+        color: Colors.black,
+      ),
     );
 
 ThemeData darkTheme() => ThemeData.dark().copyWith(
@@ -16,5 +19,8 @@ ThemeData darkTheme() => ThemeData.dark().copyWith(
           fontSize: 16.0,
           color: Colors.white,
         ),
+      ),
+      appBarTheme: const AppBarTheme(
+        color: Colors.black,
       ),
     );
