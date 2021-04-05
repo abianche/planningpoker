@@ -156,6 +156,7 @@ class SettingsScreen extends StatelessWidget {
                     applicationIcon: Image.asset(
                       'assets/icon/android_app_logo.png',
                       fit: BoxFit.scaleDown,
+                      width: 36.0,
                     ),
                   );
                 } else if (snapshot.hasError) {
