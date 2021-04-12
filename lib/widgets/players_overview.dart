@@ -71,9 +71,7 @@ class PlayersOverview extends StatelessWidget {
                                 .map((qds) => PlayerCard(
                                     roomId: vm.room.uid,
                                     userName: vm.player.username,
-                                    player: Player.fromJson(
-                                      qds.data()!,
-                                    )))
+                                    player: Player.fromJson(qds.data())))
                                 .toList(),
                           ),
                         ),
@@ -120,7 +118,7 @@ class PlayerOverviewAvg extends StatelessWidget {
     List<String> symbols = [];
 
     playersData.forEach((qds) {
-      final player = Player.fromJson(qds.data()!);
+      final player = Player.fromJson(qds.data());
       if (!player.isCardConfirmed()) {
         return;
       }
