@@ -108,5 +108,7 @@
   "thisIsYou": "This is you!",
   "@thisIsYou":{},
   "pickACard": "Pick a card",
-  "@pickACard":{}
+  "@pickACard":{},
+  "recentRooms": "Recent rooms",
+  "@recentRooms": {}
 }

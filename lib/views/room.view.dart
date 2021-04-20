@@ -190,7 +190,7 @@ class _RoomViewState extends State<RoomView> {
                       Column(
                         children: [
                           const SizedBox(height: 30),
-                          const Text("Recent rooms"),
+                          Text(AppLocalizations.of(context)!.recentRooms),
                           Column(
                             children: vm.recentRooms
                                 .map(
