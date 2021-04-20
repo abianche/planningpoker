@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_redux/flutter_redux.dart';
@@ -7,6 +8,7 @@ import 'package:planningpoker/logger.dart';
 import 'package:planningpoker/models/player.model.dart';
 import 'package:planningpoker/models/room.model.dart';
 import 'package:planningpoker/redux/actions/player.actions.dart';
+import 'package:planningpoker/redux/actions/recentRoom.action.dart';
 import 'package:planningpoker/redux/actions/room.actions.dart';
 import 'package:planningpoker/redux/selectors/selectors.dart';
 import 'package:planningpoker/redux/states/app_state.dart';
@@ -33,11 +35,11 @@ class _RoomViewState extends State<RoomView> {
     return await FirebaseService().signInAnonymously();
   }
 
-  Future joinOrCreateRoom(_ViewModel vm) async {
+  Future joinOrCreateRoom(_ViewModel vm, {String? roomName}) async {
     roomController.clear();
     playerController.clear();
 
-    roomController.text = vm.room.name;
+    roomController.text = roomName ?? vm.room.name;
     playerController.text = vm.player.username;
 
     return showDialog(
@@ -143,6 +145,7 @@ class _RoomViewState extends State<RoomView> {
 
                     vm.setRoom(room);
                     vm.setPlayer(player);
+                    vm.addRecentRoom(room);
 
                     Navigator.pop(context);
                   }
@@ -174,10 +177,33 @@ class _RoomViewState extends State<RoomView> {
       builder: (context, vm) => Container(
         child: vm.room.uid.isEmpty
             ? Center(
-                child: TextButton.icon(
-                  onPressed: () => joinOrCreateRoom(vm),
-                  icon: const Icon(Icons.group_add),
-                  label: Text(AppLocalizations.of(context)!.joinARoom),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    TextButton.icon(
+                      onPressed: () => joinOrCreateRoom(vm),
+                      icon: const Icon(Icons.group_add),
+                      label: Text(AppLocalizations.of(context)!.joinARoom),
+                    ),
+                    if (vm.recentRooms.isNotEmpty)
+                      Column(
+                        children: [
+                          const SizedBox(height: 30),
+                          const Text("Recent rooms"),
+                          Column(
+                            children: vm.recentRooms
+                                .map(
+                                  (roomName) => TextButton(
+                                    child: Text(roomName),
+                                    onPressed: () => joinOrCreateRoom(vm, roomName: roomName),
+                                  ),
+                                )
+                                .toList(),
+                          ),
+                        ],
+                      )
+                  ],
                 ),
               )
             : PlayersOverview(key: UniqueKey()),
@@ -189,39 +215,51 @@ class _RoomViewState extends State<RoomView> {
 class _ViewModel {
   final Player player;
   final Room room;
+  final List<String> recentRooms;
 
   final Function(Room) setRoom;
   final Function(Player) setPlayer;
+  final Function(Room) addRecentRoom;
 
   _ViewModel({
     required this.player,
     required this.room,
+    required this.recentRooms,
     required this.setRoom,
     required this.setPlayer,
+    required this.addRecentRoom,
   });
 
   static _ViewModel fromStore(Store<AppState> store) {
     return _ViewModel(
-      player: playerSelector(store.state),
-      room: roomSelector(store.state),
-      setRoom: (Room room) {
-        store.dispatch(SetRoomAction(room: room));
-      },
-      setPlayer: (Player player) {
-        store.dispatch(SetPlayerAction(player: player));
-      },
-    );
+        player: playerSelector(store.state),
+        room: roomSelector(store.state),
+        recentRooms: recentRoomsSelector(store.state),
+        setRoom: (Room room) {
+          store.dispatch(SetRoomAction(room: room));
+        },
+        setPlayer: (Player player) {
+          store.dispatch(SetPlayerAction(player: player));
+        },
+        addRecentRoom: (Room room) {
+          store.dispatch(AddRecentRoom(room: room));
+        });
   }
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
 
-    return o is _ViewModel && o.player == player && o.room == room && o.setRoom == setRoom && o.setPlayer == setPlayer;
+    return other is _ViewModel &&
+        other.player == player &&
+        other.room == room &&
+        listEquals(other.recentRooms, recentRooms) &&
+        other.setRoom == setRoom &&
+        other.setPlayer == setPlayer;
   }
 
   @override
   int get hashCode {
-    return player.hashCode ^ room.hashCode ^ setRoom.hashCode ^ setPlayer.hashCode;
+    return player.hashCode ^ room.hashCode ^ recentRooms.hashCode ^ setRoom.hashCode ^ setPlayer.hashCode;
   }
 }

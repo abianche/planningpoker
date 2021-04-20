@@ -14,6 +14,7 @@ class Prefs {
   static const seenIntro = "pp_v3_seenIntro";
   static const roomId = "pp_v3_roomId";
   static const roomName = "pp_v3_roomName";
+  static const recentRooms = "pp_v3_recentRooms";
   static const username = "pp_v3_username";
   static const currentCard = "pp_v3_currentCard";
 }
@@ -83,6 +84,20 @@ class Repository {
       uid: roomId,
       name: roomName,
     );
+  }
+
+  /// Save the recent rooms to [SharedPreferences].
+  Future<void> saveRecentRooms(List<String> recentRooms) async {
+    final prefs = await SharedPreferences.getInstance();
+
+    await prefs.setStringList(Prefs.recentRooms, recentRooms);
+  }
+
+  /// Load the recent rooms from [SharedPreferences].
+  Future<List<String>> loadRecentRooms() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    return prefs.getStringList(Prefs.recentRooms) ?? <String>[];
   }
 
   /// Save the player to [SharedPreferences]. Only non-null values are considered.

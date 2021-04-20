@@ -21,3 +21,6 @@ Room roomSelector(AppState state) => state.room;
 
 /// Selectes the [Stream<QuerySnapshot>] portion of the state.
 Stream<QuerySnapshot> playersStreamSelector(AppState state) => state.playersStream;
+
+/// Selectes the [recentRooms] portion of the state.
+List<String> recentRoomsSelector(AppState state) => state.recentRooms;

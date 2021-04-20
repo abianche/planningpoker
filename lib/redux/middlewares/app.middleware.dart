@@ -1,8 +1,10 @@
 import 'package:planningpoker/redux/actions/player.actions.dart';
+import 'package:planningpoker/redux/actions/recentRoom.action.dart';
 import 'package:planningpoker/redux/actions/room.actions.dart';
 import 'package:planningpoker/redux/actions/settings.actions.dart';
 import 'package:planningpoker/redux/middlewares/logger.middleware.dart';
 import 'package:planningpoker/redux/middlewares/player.middleware.dart';
+import 'package:planningpoker/redux/middlewares/recentRooms.middleware.dart';
 import 'package:planningpoker/redux/middlewares/room.middleware.dart';
 import 'package:planningpoker/redux/middlewares/settings.middleware.dart';
 import 'package:planningpoker/redux/states/app_state.dart';
@@ -18,6 +20,8 @@ List<Middleware<AppState>> createAppMiddleware(
 
   final saveRoom = createSaveRoom(repository);
   final loadRoom = createLoadRoom(repository);
+  final saveRecentRooms = createSaveRecentRooms(repository);
+  final loadRecentRooms = createLoadRecentRooms(repository);
 
   final savePlayer = createSavePlayer(repository);
   final loadPlayer = createLoadPlayer(repository);
@@ -30,7 +34,9 @@ List<Middleware<AppState>> createAppMiddleware(
     TypedMiddleware<AppState, SetSettingsAction>(saveSettings),
     TypedMiddleware<AppState, ClearSettingsAction>(saveSettings),
     TypedMiddleware<AppState, LoadSettingsAction>(loadSettings),
+    TypedMiddleware<AppState, LoadSettingsAction>(loadRecentRooms),
     TypedMiddleware<AppState, SetRoomAction>(saveRoom),
+    TypedMiddleware<AppState, AddRecentRoom>(saveRecentRooms),
     TypedMiddleware<AppState, ResetRoomAction>(resetRoomAndPlayer),
     TypedMiddleware<AppState, LoadRoomAction>(loadRoom),
     TypedMiddleware<AppState, SetPlayerAction>(updatePlayer),

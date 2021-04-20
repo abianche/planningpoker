@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart' show QuerySnapshot;
+import 'package:flutter/foundation.dart';
 import 'package:planningpoker/models/player.model.dart';
 import 'package:planningpoker/models/room.model.dart';
 import 'package:planningpoker/models/settings.model.dart';
@@ -12,6 +13,7 @@ class AppState {
   final Player player;
   final Room room;
   final Stream<QuerySnapshot> playersStream;
+  final List<String> recentRooms;
 
   AppState({
     required this.initialized,
@@ -20,6 +22,7 @@ class AppState {
     required this.player,
     required this.room,
     required this.playersStream,
+    required this.recentRooms,
   });
 
   AppState.initialState()
@@ -28,7 +31,8 @@ class AppState {
         settings = Settings.initialState(),
         player = Player.initialState(),
         room = Room.initialState(),
-        playersStream = const Stream<QuerySnapshot>.empty();
+        playersStream = const Stream<QuerySnapshot>.empty(),
+        recentRooms = [];
 
   AppState copyWith({
     bool? initialized,
@@ -37,6 +41,7 @@ class AppState {
     Player? player,
     Room? room,
     Stream<QuerySnapshot>? playersStream,
+    List<String>? recentRooms,
   }) {
     return AppState(
       initialized: initialized ?? this.initialized,
@@ -45,25 +50,27 @@ class AppState {
       player: player ?? this.player,
       room: room ?? this.room,
       playersStream: playersStream ?? this.playersStream,
+      recentRooms: recentRooms ?? this.recentRooms,
     );
   }
 
   @override
   String toString() {
-    return 'AppState(initialized: $initialized, activeTab: $activeTab, settings: $settings, player: $player, room: $room, playersStream: $playersStream)';
+    return 'AppState(initialized: $initialized, activeTab: $activeTab, settings: $settings, player: $player, room: $room, playersStream: $playersStream, recentRooms: $recentRooms)';
   }
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
 
-    return o is AppState &&
-        o.initialized == initialized &&
-        o.activeTab == activeTab &&
-        o.settings == settings &&
-        o.player == player &&
-        o.room == room &&
-        o.playersStream == playersStream;
+    return other is AppState &&
+        other.initialized == initialized &&
+        other.activeTab == activeTab &&
+        other.settings == settings &&
+        other.player == player &&
+        other.room == room &&
+        other.playersStream == playersStream &&
+        listEquals(other.recentRooms, recentRooms);
   }
 
   @override
@@ -73,6 +80,7 @@ class AppState {
         settings.hashCode ^
         player.hashCode ^
         room.hashCode ^
-        playersStream.hashCode;
+        playersStream.hashCode ^
+        recentRooms.hashCode;
   }
 }
