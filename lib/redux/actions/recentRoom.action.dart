@@ -1,4 +1,3 @@
-import 'package:planningpoker/models/player.model.dart';
 import 'package:planningpoker/models/room.model.dart';
 
 class AddRecentRoom {
