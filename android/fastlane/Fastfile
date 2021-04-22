@@ -23,6 +23,15 @@ platform :android do
     end
   end
 
+  desc "Build a new apk"
+  lane :apk do
+    Dir.chdir ".." do
+      sh("flutter", "packages", "get")
+      sh("flutter", "clean")
+      sh("flutter", "build", "apk", "--release")
+    end
+  end
+
   desc "Build a new appbundle"
   lane :appbundle do
     Dir.chdir ".." do
