@@ -53,47 +53,43 @@ class PlayersOverview extends StatelessWidget {
             StreamBuilder<QuerySnapshot>(
               stream: vm.playersStream,
               builder: (context, snapshot) {
+                List<QueryDocumentSnapshot> playersData = [];
+
+                try {
+                  playersData = snapshot.requireData.docs;
+                } catch (e) {}
+
                 if (snapshot.hasData) {
                   final qs = snapshot.data!;
-                  final playersData = qs.docs;
-                  // calc avg
-
-                  return Expanded(
-                    child: Column(
-                      children: [
-                        PlayerOverviewAvg(playersData: playersData),
-                        Expanded(
-                          child: GridView.count(
-                            physics: const ScrollPhysics(),
-                            shrinkWrap: true,
-                            crossAxisCount: 2,
-                            children: playersData
-                                .map((qds) => PlayerCard(
-                                    roomId: vm.room.uid,
-                                    userName: vm.player.username,
-                                    player: Player.fromJson(qds.data())))
-                                .toList(),
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
+                  playersData = qs.docs;
                 } else if (snapshot.hasError) {
                   return const Center(
                     child: Text('Ops! An error occurred!'),
                   );
                 } else if (snapshot.connectionState == ConnectionState.done && !snapshot.hasData && kIsWeb == true) {
-                  return Builder(builder: (context) {
-                    vm.forceResetRoom();
-                    return const Center(
-                      child: Text('Ops! An error occurred!'),
-                    );
-                  });
-                } else {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
+                  vm.forceResetRoom();
                 }
+
+                return Expanded(
+                  child: Column(
+                    children: [
+                      PlayerOverviewAvg(playersData: playersData),
+                      Expanded(
+                        child: GridView.count(
+                          physics: const ScrollPhysics(),
+                          shrinkWrap: true,
+                          crossAxisCount: playersData.length >= 6 ? 3 : 2,
+                          children: playersData
+                              .map((qds) => PlayerCard(
+                                  roomId: vm.room.uid,
+                                  userName: vm.player.username,
+                                  player: Player.fromJson(qds.data())))
+                              .toList(),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
               },
             ),
           ],

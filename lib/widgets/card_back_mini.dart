@@ -18,7 +18,7 @@ class CardBackMini extends StatelessWidget {
         child: Text(
           cardToShow,
           style: const TextStyle(fontWeight: FontWeight.bold),
-          textScaleFactor: 5.5,
+          textScaleFactor: 3.5,
         ),
       );
     } else if (cardToShow is Color) {

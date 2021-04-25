@@ -10,6 +10,7 @@ import 'package:planningpoker/redux/actions/tab.actions.dart';
 import 'package:planningpoker/redux/selectors/selectors.dart';
 import 'package:planningpoker/redux/states/app_state.dart';
 import 'package:planningpoker/widgets/card_back_mini.dart';
+import 'package:progress_indicators/progress_indicators.dart';
 import 'package:redux/redux.dart';
 
 class PlayerCard extends StatelessWidget {
@@ -53,13 +54,12 @@ class PlayerCard extends StatelessWidget {
                   ? CardBackMini(card: player.currentCard)
                   : userName != player.username
                       ? Center(
-                          child: CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation<Color>(
-                              Color(
-                                Theme.of(context).brightness == Brightness.dark
-                                    ? currentDeck.deckColorDark
-                                    : currentDeck.deckColor,
-                              ),
+                          child: JumpingDotsProgressIndicator(
+                            fontSize: 40.0,
+                            color: Color(
+                              Theme.of(context).brightness == Brightness.dark
+                                  ? currentDeck.deckColorDark
+                                  : currentDeck.deckColor,
                             ),
                           ),
                         )
