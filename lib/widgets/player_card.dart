@@ -101,7 +101,7 @@ class PlayerCard extends StatelessWidget {
                                   ),
                                 ),
                                 style: TextButton.styleFrom(
-                                  primary: Color(
+                                  backgroundColor: Color(
                                     Theme.of(context).brightness == Brightness.dark
                                         ? currentDeck.deckColorDark
                                         : currentDeck.deckColor,
