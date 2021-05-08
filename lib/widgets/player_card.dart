@@ -71,6 +71,7 @@ class PlayerCard extends StatelessWidget {
                               TextButton(
                                 onPressed: () {
                                   vm.setPlayerCard(player.currentCard.substring(1));
+                                  vm.setCurrentTab(AppTab.room);
                                 },
                                 child: Text(
                                   AppLocalizations.of(context)!.confirm.toUpperCase(),
