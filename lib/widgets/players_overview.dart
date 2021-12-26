@@ -70,6 +70,14 @@ class PlayersOverview extends StatelessWidget {
                   vm.forceResetRoom();
                 }
 
+                // sort current player first
+                if (playersData.isNotEmpty) {
+                  final currentPlayerPos = playersData.indexWhere(
+                      (qds) => Player.fromJson(qds.data() as Map<String, dynamic>).username == vm.player.username);
+                  final currentPlayer = playersData.removeAt(currentPlayerPos);
+                  playersData.insert(0, currentPlayer);
+                }
+
                 return Expanded(
                   child: Column(
                     children: [
