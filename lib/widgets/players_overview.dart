@@ -174,7 +174,7 @@ class _ViewModel {
     return _ViewModel(
       player: playerSelector(store.state),
       room: roomSelector(store.state),
-      playersStream: playersStreamSelector(store.state),
+      playersStream: FirestoreService().getPlayersStream(store.state.room.uid),
       logout: () {
         store.dispatch(ResetRoomAction());
         store.dispatch(ResetPlayerAction());

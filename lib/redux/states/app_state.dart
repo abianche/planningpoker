@@ -12,7 +12,6 @@ class AppState {
   final Settings settings;
   final Player player;
   final Room room;
-  final Stream<QuerySnapshot> playersStream;
   final List<String> recentRooms;
 
   AppState({
@@ -21,7 +20,6 @@ class AppState {
     required this.settings,
     required this.player,
     required this.room,
-    required this.playersStream,
     required this.recentRooms,
   });
 
@@ -31,7 +29,6 @@ class AppState {
         settings = Settings.initialState(),
         player = Player.initialState(),
         room = Room.initialState(),
-        playersStream = const Stream<QuerySnapshot>.empty(),
         recentRooms = [];
 
   AppState copyWith({
@@ -49,14 +46,13 @@ class AppState {
       settings: settings ?? this.settings,
       player: player ?? this.player,
       room: room ?? this.room,
-      playersStream: playersStream ?? this.playersStream,
       recentRooms: recentRooms ?? this.recentRooms,
     );
   }
 
   @override
   String toString() {
-    return 'AppState(initialized: $initialized, activeTab: $activeTab, settings: $settings, player: $player, room: $room, playersStream: $playersStream, recentRooms: $recentRooms)';
+    return 'AppState(initialized: $initialized, activeTab: $activeTab, settings: $settings, player: $player, room: $room, recentRooms: $recentRooms)';
   }
 
   @override
@@ -69,7 +65,6 @@ class AppState {
         other.settings == settings &&
         other.player == player &&
         other.room == room &&
-        other.playersStream == playersStream &&
         listEquals(other.recentRooms, recentRooms);
   }
 
@@ -80,7 +75,6 @@ class AppState {
         settings.hashCode ^
         player.hashCode ^
         room.hashCode ^
-        playersStream.hashCode ^
         recentRooms.hashCode;
   }
 }

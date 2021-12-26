@@ -17,7 +17,7 @@ Middleware<AppState> createSaveRoom(Repository repository) {
 Middleware<AppState> createLoadRoom(Repository repository) {
   return (Store<AppState> store, action, NextDispatcher next) {
     repository.loadRoom().then((loadedRoom) {
-      store.dispatch(SetRoomAction(room: loadedRoom));
+      if (loadedRoom.uid.isNotEmpty) store.dispatch(SetRoomAction(room: loadedRoom));
     });
 
     next(action);
