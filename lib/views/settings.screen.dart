@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:launch_review/launch_review.dart';
-import 'package:package_info/package_info.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:planningpoker/constants.dart';
 import 'package:planningpoker/data/decks.dart';
 import 'package:planningpoker/models/deck.model.dart';
