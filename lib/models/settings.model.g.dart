@@ -6,17 +6,16 @@ part of 'settings.model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Settings _$SettingsFromJson(Map<String, dynamic> json) {
-  return Settings(
-    themeMode: _$enumDecode(_$ThemeModeEnumMap, json['themeMode']),
-    tapToReveal: json['tapToReveal'] as bool,
-    vibration: json['vibration'] as bool,
-    selectedDeck: _$enumDecode(_$DeckTypeEnumMap, json['selectedDeck']),
-    customDeck:
-        (json['customDeck'] as List<dynamic>).map((e) => e as String).toList(),
-    seenIntro: json['seenIntro'] as bool,
-  );
-}
+Settings _$SettingsFromJson(Map<String, dynamic> json) => Settings(
+      themeMode: $enumDecode(_$ThemeModeEnumMap, json['themeMode']),
+      tapToReveal: json['tapToReveal'] as bool,
+      vibration: json['vibration'] as bool,
+      selectedDeck: $enumDecode(_$DeckTypeEnumMap, json['selectedDeck']),
+      customDeck: (json['customDeck'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
+      seenIntro: json['seenIntro'] as bool,
+    );
 
 Map<String, dynamic> _$SettingsToJson(Settings instance) => <String, dynamic>{
       'themeMode': _$ThemeModeEnumMap[instance.themeMode],
@@ -26,32 +25,6 @@ Map<String, dynamic> _$SettingsToJson(Settings instance) => <String, dynamic>{
       'customDeck': instance.customDeck,
       'seenIntro': instance.seenIntro,
     };
-
-K _$enumDecode<K, V>(
-  Map<K, V> enumValues,
-  Object? source, {
-  K? unknownValue,
-}) {
-  if (source == null) {
-    throw ArgumentError(
-      'A value must be provided. Supported values: '
-      '${enumValues.values.join(', ')}',
-    );
-  }
-
-  return enumValues.entries.singleWhere(
-    (e) => e.value == source,
-    orElse: () {
-      if (unknownValue == null) {
-        throw ArgumentError(
-          '`$source` is not one of the supported values: '
-          '${enumValues.values.join(', ')}',
-        );
-      }
-      return MapEntry(unknownValue, enumValues.values.first);
-    },
-  ).key;
-}
 
 const _$ThemeModeEnumMap = {
   ThemeMode.system: 'system',
