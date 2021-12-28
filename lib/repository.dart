@@ -14,6 +14,7 @@ class Prefs {
   static const seenIntro = "pp_v3_seenIntro";
   static const roomId = "pp_v3_roomId";
   static const roomName = "pp_v3_roomName";
+  static const roomOwner = "pp_v3_roomOwner";
   static const recentRooms = "pp_v3_recentRooms";
   static const username = "pp_v3_username";
   static const currentCard = "pp_v3_currentCard";
@@ -69,6 +70,9 @@ class Repository {
     if (room.name.isNotEmpty) {
       await prefs.setString(Prefs.roomName, room.name);
     }
+    if (room.owner.isNotEmpty) {
+      await prefs.setString(Prefs.roomOwner, room.owner);
+    }
   }
 
   /// Load the room from [SharedPreferences].
@@ -79,10 +83,12 @@ class Repository {
 
     final roomId = prefs.getString(Prefs.roomId);
     final roomName = prefs.getString(Prefs.roomName);
+    final roomOwner = prefs.getString(Prefs.roomOwner);
 
     return defaultRoom.copyWith(
       uid: roomId,
       name: roomName,
+      owner: roomOwner,
     );
   }
 

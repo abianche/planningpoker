@@ -42,7 +42,7 @@ class FirestoreService {
   }
 
   /// Returns the `uid` of the room if a room with the given `name` exists. An empty string otherwise.
-  Future<String> roomExists(String name) async {
+  Future<Room> roomExists(String name) async {
     log.d('roomExists | name:$name');
     final ds = await this
         .firestore
@@ -59,9 +59,9 @@ class FirestoreService {
       },
     );
 
-    if (ds.size == 0) return '';
+    if (ds.size == 0) return Room.initialState();
 
-    return ds.docs.single.id;
+    return Room(uid: ds.docs.single.id, name: name, owner: ds.docs.single.data()["owner"] ?? "");
   }
 
   /// Returns `true` if the a player with username `playerName` exists in room with uid `roomId`. `false` otherwise.
@@ -127,5 +127,21 @@ class FirestoreService {
     final cr = await this.firestore.collection(_room_collection).doc(roomId).collection(_players_collection);
 
     await cr.doc(user.uid).delete().catchError((error) => log.e('deleteCurrentPlayer | $error'));
+  }
+
+  Future<void> clearAllPlayerCards(String roomId) async {
+    log.d('clearAllPlayerCards | roomId:$roomId');
+    final user = FirebaseService().auth.currentUser;
+    if (user == null) {
+      throw ('User is null');
+    }
+    final cr = await this.firestore.collection(_room_collection).doc(roomId).collection(_players_collection);
+    final qs = await cr.get();
+
+    for (final doc in qs.docs) {
+      await doc.reference.update({
+        'currentCard': '_',
+      });
+    }
   }
 }

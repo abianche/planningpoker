@@ -110,5 +110,9 @@
   "pickACard": "Pick a card",
   "@pickACard":{},
   "recentRooms": "Recent rooms",
-  "@recentRooms": {}
+  "@recentRooms": {},
+  "clearAll": "Clear all",
+  "@clearAll": {},
+  "owner": "Owner",
+  "@owner": {}
 }

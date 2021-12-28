@@ -100,16 +100,15 @@ class _RoomViewState extends State<RoomView> {
                     final roomName = roomController.text;
                     final playerName = playerController.text;
 
-                    final roomId = await FirestoreService().roomExists(roomName);
-                    Room room;
+                    Room room = await FirestoreService().roomExists(roomName);
                     final player = Player(
                       username: playerName,
                       currentCard: '_${initial_tile}',
                     );
 
-                    if (roomId.isNotEmpty) {
+                    if (room.uid.isNotEmpty) {
                       // check if player with the same name exists
-                      final playerExists = await FirestoreService().playerExists(roomId, playerName);
+                      final playerExists = await FirestoreService().playerExists(room.uid, playerName);
                       if (playerExists) {
                         return await showDialog(
                           context: context,
@@ -129,16 +128,11 @@ class _RoomViewState extends State<RoomView> {
                           ),
                         );
                       } else {
-                        await FirestoreService().createPlayer(roomId, player);
+                        await FirestoreService().createPlayer(room.uid, player);
                       }
                     }
 
-                    if (roomId.isNotEmpty) {
-                      room = Room.initialState().copyWith(
-                        uid: roomId,
-                        name: roomName,
-                      );
-                    } else {
+                    if (room.uid.isEmpty) {
                       room = await FirestoreService().createRoom(roomName, player);
                       await FirestoreService().createPlayer(room.uid, player);
                     }
