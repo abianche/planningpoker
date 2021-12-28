@@ -23,11 +23,12 @@ Middleware<AppState> createLoadRoom(Repository repository) {
       final remoteRoom = await FirestoreService().roomExists(room.name);
 
       store.dispatch(SetRoomAction(
-          room: room.copyWith(
-        uid: remoteRoom.uid,
-        name: remoteRoom.name,
-        owner: remoteRoom.owner,
-      )));
+        room: room.copyWith(
+          uid: remoteRoom.uid,
+          name: remoteRoom.name,
+          owner: remoteRoom.owner,
+        ),
+      ));
     }
 
     next(action);

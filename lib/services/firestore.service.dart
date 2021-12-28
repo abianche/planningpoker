@@ -140,7 +140,7 @@ class FirestoreService {
 
     for (final doc in qs.docs) {
       await doc.reference.update({
-        'currentCard': '_',
+        'currentCard': '_?',
       });
     }
   }
