@@ -38,3 +38,15 @@ Middleware<AppState> createLoadPlayer(Repository repository) {
     next(action);
   };
 }
+
+/// Clear all player cards middleware which clears all card selections.
+Middleware<AppState> createClearAllPlayerCards() {
+  return (Store<AppState> store, action, NextDispatcher next) {
+    final Room room = roomSelector(store.state);
+    if (room.uid.isEmpty) return;
+
+    FirestoreService().clearAllPlayerCards(room.uid);
+
+    next(action);
+  };
+}

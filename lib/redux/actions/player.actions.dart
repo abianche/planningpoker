@@ -14,3 +14,5 @@ class SetPlayerAction {
 class ResetPlayerAction {}
 
 class LoadPlayerAction {}
+
+class ClearAllPlayerCardsAction {}

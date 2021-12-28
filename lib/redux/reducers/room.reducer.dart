@@ -11,6 +11,7 @@ Room _setRoom(Room room, SetRoomAction action) {
   return room.copyWith(
     uid: action.room.uid,
     name: action.room.name,
+    owner: action.room.owner,
   );
 }
 

@@ -26,6 +26,7 @@ List<Middleware<AppState>> createAppMiddleware(
   final savePlayer = createSavePlayer(repository);
   final loadPlayer = createLoadPlayer(repository);
   final updatePlayer = createUpdatePlayerStatusMiddleware();
+  final clearAllPlayerCards = createClearAllPlayerCards();
 
   final resetRoomAndPlayer = createResetRoomAndPlayer(repository);
 
@@ -43,6 +44,7 @@ List<Middleware<AppState>> createAppMiddleware(
     TypedMiddleware<AppState, SetPlayerAction>(savePlayer),
     TypedMiddleware<AppState, ResetPlayerAction>(resetRoomAndPlayer),
     TypedMiddleware<AppState, LoadPlayerAction>(loadPlayer),
+    TypedMiddleware<AppState, ClearAllPlayerCardsAction>(clearAllPlayerCards),
   ];
 }
 

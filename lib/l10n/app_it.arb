@@ -110,5 +110,9 @@
   "pickACard": "Seleziona una carta",
   "@pickACard":{},
   "recentRooms": "Stanze recenti",
-  "@recentRooms": {}
+  "@recentRooms": {},
+  "clearAll": "Rimuovi tutto",
+  "@clearAll": {},
+  "owner": "Owner",
+  "@owner": {}
 }

@@ -33,7 +33,8 @@ class PlayersOverview extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('${AppLocalizations.of(context)!.room}: ${vm.room.name}'),
+                      Text(
+                          '${AppLocalizations.of(context)!.room}: ${vm.room.name} | ${AppLocalizations.of(context)!.owner}: ${vm.room.owner}'),
                       const SizedBox(height: 5),
                       Text('${AppLocalizations.of(context)!.username}: ${vm.player.username}'),
                     ],
@@ -100,6 +101,13 @@ class PlayersOverview extends StatelessWidget {
                 );
               },
             ),
+            if (vm.room.owner == vm.player.username)
+              TextButton(
+                onPressed: () {
+                  vm.clearAllPlayerCards();
+                },
+                child: Text(AppLocalizations.of(context)!.clearAll),
+              ),
           ],
         ),
       ),
@@ -167,6 +175,7 @@ class _ViewModel {
   final Room room;
   final Stream<QuerySnapshot> playersStream;
   final Function forceResetRoom;
+  final Function clearAllPlayerCards;
 
   final Function() logout;
 
@@ -174,6 +183,7 @@ class _ViewModel {
     required this.player,
     required this.room,
     required this.forceResetRoom,
+    required this.clearAllPlayerCards,
     required this.playersStream,
     required this.logout,
   });
@@ -189,6 +199,9 @@ class _ViewModel {
       },
       forceResetRoom: () {
         store.dispatch(SetRoomAction(room: roomSelector(store.state)));
+      },
+      clearAllPlayerCards: () {
+        store.dispatch(ClearAllPlayerCardsAction());
       },
     );
   }
