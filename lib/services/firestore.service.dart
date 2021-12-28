@@ -19,9 +19,7 @@ class FirestoreService {
   static const _room_collection = "rooms";
   static const _players_collection = "players";
 
-  Future<Room> createRoom(
-    String name,
-  ) async {
+  Future<Room> createRoom(String name, Player player) async {
     log.d('createRoom | name:$name');
     final rooms = firestore.collection(_room_collection);
 
@@ -29,12 +27,17 @@ class FirestoreService {
       {
         'name': name,
         'last_updated': DateTime.now().millisecondsSinceEpoch,
+        'owner': player.username,
       },
     ).catchError((error) {
       log.e('createRoom | $error');
     });
 
-    final room = Room(name: name, uid: d.id);
+    final room = Room(
+      name: name,
+      uid: d.id,
+      owner: player.username,
+    );
     return room;
   }
 

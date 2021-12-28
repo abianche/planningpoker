@@ -8,19 +8,23 @@ part 'room.model.g.dart';
 class Room {
   final String uid;
   final String name;
+  final String owner;
 
   Room({
     required this.uid,
     required this.name,
+    required this.owner,
   });
 
   Room copyWith({
     String? uid,
     String? name,
+    String? owner,
   }) {
     return Room(
       uid: uid ?? this.uid,
       name: name ?? this.name,
+      owner: owner ?? this.owner,
     );
   }
 
@@ -30,18 +34,19 @@ class Room {
 
   Room.initialState()
       : uid = '',
-        name = '';
+        name = '',
+        owner = '';
 
   @override
-  String toString() => 'Room(uid: $uid, name: $name)';
+  String toString() => 'Room(uid: $uid, name: $name, owner: $owner)';
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
 
-    return o is Room && o.uid == uid && o.name == name;
+    return other is Room && other.uid == uid && other.name == name && other.owner == owner;
   }
 
   @override
-  int get hashCode => uid.hashCode ^ name.hashCode;
+  int get hashCode => uid.hashCode ^ name.hashCode ^ owner.hashCode;
 }

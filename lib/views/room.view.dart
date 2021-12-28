@@ -139,7 +139,7 @@ class _RoomViewState extends State<RoomView> {
                         name: roomName,
                       );
                     } else {
-                      room = await FirestoreService().createRoom(roomName);
+                      room = await FirestoreService().createRoom(roomName, player);
                       await FirestoreService().createPlayer(room.uid, player);
                     }
 
