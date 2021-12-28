@@ -26,6 +26,9 @@ def flutterVersionName = localProperties.getProperty('flutter.versionName')
 if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
+def flutterMinSdkVersion = localProperties.getProperty('flutter.minSdkVersion')
+def flutterTargetSdkVersion = localProperties.getProperty('flutter.targetSdkVersion')
+def flutterCompileSdkVersion = localProperties.getProperty('flutter.compileSdkVersion')
 
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
@@ -33,21 +36,26 @@ apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion flutterCompileSdkVersion.toInteger()
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
 
-    lintOptions {
-        disable 'InvalidPackage'
-    }
-
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.abianche.planningpoker"
-        minSdkVersion 21
-        targetSdkVersion 29
+        minSdkVersion flutterMinSdkVersion.toInteger()
+        targetSdkVersion flutterTargetSdkVersion.toInteger()
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         multiDexEnabled true
