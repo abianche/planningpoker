@@ -55,6 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             ),
+            automaticallyImplyLeading: false,
             centerTitle: false,
             backgroundColor: Color(currentDeck.deckColor),
             actions: [
