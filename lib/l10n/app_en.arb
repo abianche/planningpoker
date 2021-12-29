@@ -114,5 +114,7 @@
   "clearAll": "Clear all",
   "@clearAll": {},
   "owner": "Owner",
-  "@owner": {}
+  "@owner": {},
+  "linkCopied": "Link copied to your clipboard",
+  "@linkCopied": {}
 }

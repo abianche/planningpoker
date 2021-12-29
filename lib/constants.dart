@@ -6,3 +6,6 @@ const String APP_STORE_URL = 'https://apps.apple.com/us/app/planning-poker-scrum
 
 /// Link to the Website.
 const String PROFILE_URL = 'https://abianche.github.io/';
+
+/// Link to Firbase hosted app
+const String FIREBASE_HOSTED_URL = 'https://planning-poker-1337.web.app/';

@@ -1,6 +1,8 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:launch_review/launch_review.dart';
@@ -124,21 +126,22 @@ class SettingsScreen extends StatelessWidget {
                 ),
               ],
             ),
-            SwitchListTile(
-              title: Text(AppLocalizations.of(context)!.vibration),
-              subtitle: Text(AppLocalizations.of(context)!.vibrationInfo),
-              value: vm.settings.vibration,
-              onChanged: (bool value) async {
-                vm.setSettings(
-                  vm.settings.copyWith(vibration: value),
-                );
+            if (!kIsWeb)
+              SwitchListTile(
+                title: Text(AppLocalizations.of(context)!.vibration),
+                subtitle: Text(AppLocalizations.of(context)!.vibrationInfo),
+                value: vm.settings.vibration,
+                onChanged: (bool value) async {
+                  vm.setSettings(
+                    vm.settings.copyWith(vibration: value),
+                  );
 
-                final hasVibrator = await Vibration.hasVibrator() ?? false;
-                if (value == true && hasVibrator) {
-                  Vibration.vibrate();
-                }
-              },
-            ),
+                  final hasVibrator = await Vibration.hasVibrator() ?? false;
+                  if (value == true && hasVibrator) {
+                    Vibration.vibrate();
+                  }
+                },
+              ),
             const Divider(),
             ListTile(
               title: Text(AppLocalizations.of(context)!.whatIsPlanningPoker),
@@ -183,18 +186,33 @@ class SettingsScreen extends StatelessWidget {
               },
               trailing: const Icon(Icons.school),
             ),
-            ListTile(
-              title: Text(AppLocalizations.of(context)!.rateThisApp),
-              subtitle: Text(AppLocalizations.of(context)!.rateThisAppInfo),
-              onTap: () {
-                LaunchReview.launch();
-              },
-              trailing: const Icon(Icons.thumb_up),
-            ),
+            if (!kIsWeb)
+              ListTile(
+                title: Text(AppLocalizations.of(context)!.rateThisApp),
+                subtitle: Text(AppLocalizations.of(context)!.rateThisAppInfo),
+                onTap: () {
+                  LaunchReview.launch();
+                },
+                trailing: const Icon(Icons.thumb_up),
+              ),
             ListTile(
               title: Text(AppLocalizations.of(context)!.shareThisApp),
               subtitle: Text(AppLocalizations.of(context)!.shareThisAppInfo),
-              onTap: () {
+              onTap: () async {
+                if (kIsWeb) {
+                  await Clipboard.setData(const ClipboardData(text: FIREBASE_HOSTED_URL));
+                  ScaffoldMessenger.of(context).removeCurrentSnackBar();
+                  final snackBar = SnackBar(
+                    content: Text(
+                      AppLocalizations.of(context)!.linkCopied,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(color: Colors.white),
+                    ),
+                    backgroundColor: Colors.black,
+                  );
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                  return;
+                }
                 Share.share(
                   Platform.isIOS ? APP_STORE_URL : PLAY_STORE_URL,
                   subject: AppLocalizations.of(context)!.title,
