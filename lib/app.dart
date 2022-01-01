@@ -30,7 +30,7 @@ class App extends StatelessWidget {
           darkTheme: darkTheme(),
           themeMode: vm.themeMode,
           initialRoute: Routes.root,
-          routes: getRoutes(),
+          onGenerateRoute: Routes.generateRoute,
           onUnknownRoute: (settings) => MaterialPageRoute(
             settings: settings,
             builder: (_) => NotFoundScreen(name: settings.name),
